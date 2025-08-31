@@ -15,8 +15,8 @@ public class MiroReaderTest {
     public void setUp() {miroReader = new MiroReader();}
 
     @Test
-    public void MiroReader_should_read_example() {
-        Optional<JsonArray> datas = miroReader.readBoardData("example.json");
+    public void MiroReader_can_read_file() {
+        Optional<JsonArray> datas = miroReader.readBoardData("./src/test/example.json");
         assertTrue(datas.isPresent());
     }
 }

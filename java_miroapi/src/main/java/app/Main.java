@@ -1,7 +1,6 @@
 package app;
 
 import auth.MiroOAuthClient;
-import core.FrameService;
 import core.MiroApiClient;
 
 public class Main {
@@ -30,14 +29,11 @@ public class Main {
 
         // 2) Build API client & services
         MiroApiClient api = new MiroApiClient(token.accessToken);
-        FrameService frames = new FrameService(api, boardId);
 
         // 3) Router: if arg present and equals "dump", run board dump; else run frame example
         if (args != null && args.length > 0 && "dump".equalsIgnoreCase(args[0])) {
             String out = args.length > 1 ? args[1] : null; // optional output path
             BoardDump.run(api, boardId, out);
-        } else {
-            FrameExample.run(frames);
         }
     }
 
