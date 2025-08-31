@@ -1,0 +1,31 @@
+{
+    "data": [
+        {
+            "id": "3458764593818956782",
+            "type": "sticky_note",
+            "data": { "content": "Hello", "shape": "square" },
+            "style": { "fillColor": "yellow" },
+            "geometry": { "width": 212.93, "height": 243.96, "rotation": 0 },
+            "position": { "x": 1013.98, "y": -433.90, "origin": "center" },
+            "parent": { "id": "uXj_frame_1", "type": "frame" },
+            "createdAt": "2024-07-10T16:04:51Z",
+            "createdBy": { "id": "30744...", "type": "user", "name": "Jane Doe" },
+            "modifiedAt": "2024-07-10T16:04:51Z",
+            "modifiedBy": { "id": "30744...", "type": "user", "name": "Jane Doe" },
+            "links": {
+                "self": "https://api.miro.com/v2/boards/{board_id}/sticky_notes/{item_id}",
+                "board": "https://api.miro.com/v2/boards/{board_id}"
+            }
+        },
+        {
+            "id": "3458764593818956799",
+            "type": "text",
+            "data": { "content": "A text item" },
+            "style": {},
+            "geometry": { "width": 276.5, "height": 24, "rotation": 0 },
+            "position": { "x": 200, "y": 100, "origin": "center" }
+        }
+    ],
+    "cursor": "eyJwYWdlIjoyfQ",
+    "limit": 10
+}
