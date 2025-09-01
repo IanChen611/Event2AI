@@ -3,14 +3,14 @@ package event2ai.stickynote;
 import java.awt.geom.Point2D;
 
 public final class StickyNote {
-    private final long id;
+    private final String id;
     private Point2D pos; // the position of Card
     private Point2D geo; // the geometry of Card
     private String description;
     private String color;
     private String tag = null;
 
-    public StickyNote(long id, String description,  Point2D pos, Point2D geo,  String color) {
+    public StickyNote(String id, String description,  Point2D pos, Point2D geo,  String color) {
         this.id = id;
         this.description = description;
         this.pos = pos;
@@ -18,7 +18,7 @@ public final class StickyNote {
         this.color = color;
     }
 
-    public StickyNote(long id, String description,  Point2D pos, Point2D geo,  String color, String tag) {
+    public StickyNote(String id, String description,  Point2D pos, Point2D geo,  String color, String tag) {
         this.id = id;
         this.description = description;
         this.pos = pos;
@@ -27,7 +27,7 @@ public final class StickyNote {
         this.tag = tag;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

@@ -13,7 +13,7 @@ public class StickyNoteTest {
     @Test
     public void construct_StickyNote_without_tag() {
         // ---Given a StickyNote without tag---
-        long id = 101L;
+        String id = "001A";
         String desc = "demo StickyNote";
         Point2D pos = new Point2D.Double(10.5, 20.5);
         Point2D geo = new Point2D.Double(100, 50);
@@ -33,7 +33,7 @@ public class StickyNoteTest {
     @Test
     public void construct_StickyNote_with_tag() {
         // ---Given a StickyNote with tag---
-        long id = 7L;
+        String id = "002A";
         String desc = "has tag";
         Point2D pos = new Point2D.Double(0, 0);
         Point2D geo = new Point2D.Double(300, 200);
