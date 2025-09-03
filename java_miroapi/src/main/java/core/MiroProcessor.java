@@ -2,7 +2,6 @@ package core;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import model.MiroItem;
 import java.util.ArrayList;
 import java.util.Optional;
 

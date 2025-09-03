@@ -72,5 +72,6 @@
     <modules>
         <module>java_miroapi</module>
         <module>classify_stickynote</module>
+        <module>archive</module>
     </modules>
 </project>

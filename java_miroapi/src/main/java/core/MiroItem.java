@@ -1,4 +1,4 @@
-package model;
+package core;
 
 import com.google.gson.JsonObject;
 
