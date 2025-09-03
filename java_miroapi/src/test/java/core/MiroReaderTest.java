@@ -1,4 +1,4 @@
-package common;
+package core;
 
 import com.google.gson.JsonArray;
 import org.junit.jupiter.api.Test;
