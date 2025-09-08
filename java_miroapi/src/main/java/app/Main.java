@@ -1,7 +1,6 @@
 package app;
 
 import auth.MiroOAuthClient;
-import core.FrameService;
 import core.MiroApiClient;
 
 public class Main {
@@ -11,7 +10,7 @@ public class Main {
         String clientSecret = getenvOr("MIRO_CLIENT_SECRET", "YOUR_CLIENT_SECRET");
         String redirectUri = getenvOr("MIRO_REDIRECT_URI", "http://localhost:8000/callback");
         String scopes = getenvOr("MIRO_SCOPES", "boards:read boards:write account:read");
-        String boardId = getenvOr("MIRO_BOARD_ID", "YOUR_BOARD_ID");
+        String boardId = "uXjVJVDZJb0=";
         String envAccessToken = getenvOr("MIRO_ACCESS_TOKEN", "");
         String envRefreshToken = getenvOr("MIRO_REFRESH_TOKEN", "");
 
@@ -35,15 +34,17 @@ public class Main {
 
         // 2) Build API client & services
         MiroApiClient api = new MiroApiClient(token.accessToken);
-        FrameService frames = new FrameService(api, boardId);
-
+//        FrameService frames = new FrameService(api, boardId);
+//
         // 3) Router: if arg present and equals "dump", run board dump; else run frame example
-        if (args != null && args.length > 0 && "dump".equalsIgnoreCase(args[0])) {
-            String out = args.length > 1 ? args[1] : null; // optional output path
-            BoardDump.run(api, boardId, out);
-        } else {
-            FrameExample.run(frames);
-        }
+//        if (args != null && args.length > 0 && "dump".equalsIgnoreCase(args[0])) {
+//            String out = args.length > 1 ? args[1] : null; // optional output path
+//            BoardDump.run(api, boardId, out);
+//        } else {
+//            FrameExample.run(frames);
+//        }
+        String out = null; // optional output path
+        BoardDump.run(api, boardId, out);
     }
 
     private static String getenvOr(String key, String def) {

@@ -12,7 +12,7 @@ public class MiroItemsArchive {
     public MiroItemsArchive() {}
 
     public ArrayList<MiroItem> load() {
-        return miroItems;
+        return this.miroItems;
     }
 
     public void save(ArrayList<MiroItem> miroItems) {

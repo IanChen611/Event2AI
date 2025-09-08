@@ -186,5 +186,8 @@ public class MiroOAuthClient {
         @Override public String toString() {
             return "TokenResponse{access_token=***, expires_in=" + expiresIn + ", scope='" + scope + "'}";
         }
+        public String Get_Access_token() {
+            return this.accessToken;
+        }
     }
 }

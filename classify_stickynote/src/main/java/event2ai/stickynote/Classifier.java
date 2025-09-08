@@ -14,7 +14,7 @@ public class Classifier {
     }
 
     public int getGroupAmount() {
-        return groupAmount;
+        return this.groupAmount;
     }
 
     public List<StickyNote> getGroupByGroupIdx(int groupIdx) {
