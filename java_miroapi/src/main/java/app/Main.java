@@ -1,14 +1,16 @@
 package app;
 
 import auth.MiroOAuthClient;
+import core.FrameService;
 import core.MiroApiClient;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String clientId = "3458764636903400125"; //暫時
+//        String clientId = getenvOr("MIRO_CLIENT_ID", "YOUR_CLIENT_ID");
+        String clientId = "3458764636903400125";
         String clientSecret = getenvOr("MIRO_CLIENT_SECRET", "YOUR_CLIENT_SECRET");
         String redirectUri = getenvOr("MIRO_REDIRECT_URI", "http://localhost:8000/callback");
-        String scopes = getenvOr("MIRO_SCOPES", "boards:read boards:write");
+        String scopes = getenvOr("MIRO_SCOPES", "boards:read boards:write account:read");
         String boardId = getenvOr("MIRO_BOARD_ID", "YOUR_BOARD_ID");
         String envAccessToken = getenvOr("MIRO_ACCESS_TOKEN", "");
         String envRefreshToken = getenvOr("MIRO_REFRESH_TOKEN", "");
@@ -24,16 +26,23 @@ public class Main {
         } else {
             MiroOAuthClient oauth = new MiroOAuthClient(clientId, clientSecret, redirectUri, scopes);
             token = oauth.authorizeAndGetToken();
-            System.out.println("Token: " + token);
+            if (token.accessToken != null) {
+                String preview = token.accessToken.length() > 12 ? token.accessToken.substring(0, 12) + "..." : token.accessToken;
+                System.out.println("Access token acquired (preview): " + preview);
+            }
+            System.out.println("Token meta: " + token);
         }
 
         // 2) Build API client & services
         MiroApiClient api = new MiroApiClient(token.accessToken);
+        FrameService frames = new FrameService(api, boardId);
 
         // 3) Router: if arg present and equals "dump", run board dump; else run frame example
         if (args != null && args.length > 0 && "dump".equalsIgnoreCase(args[0])) {
             String out = args.length > 1 ? args[1] : null; // optional output path
             BoardDump.run(api, boardId, out);
+        } else {
+            FrameExample.run(frames);
         }
     }
 

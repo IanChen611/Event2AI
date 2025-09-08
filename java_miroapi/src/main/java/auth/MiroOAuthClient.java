@@ -38,8 +38,11 @@ public class MiroOAuthClient {
     }
 
     public TokenResponse authorizeAndGetToken() throws Exception {
+    // Debug: show which redirect URI is actually used (helps when mismatch with Miro app settings)
+    System.out.println("[OAuth] Using redirect URI: " + redirectUri);
         String state = UUID.randomUUID().toString();
         String authUrl = buildAuthorizeUrl(state);
+    System.out.println("[OAuth] Authorization URL: " + authUrl);
 
         // 1) Start local server to capture the authorization code
         URI cb = URI.create(redirectUri);
@@ -50,23 +53,27 @@ public class MiroOAuthClient {
         StringBuilder stateHolder = new StringBuilder();
 
         HttpServer server = HttpServer.create(new InetSocketAddress(cb.getHost(), port), 0);
+        java.util.concurrent.ExecutorService executor = Executors.newSingleThreadExecutor();
+        server.setExecutor(executor);
         server.createContext(path, new HttpHandler() {
             @Override
             public void handle(HttpExchange exchange) throws IOException {
-                String query = exchange.getRequestURI().getQuery();
-                Map<String, String> params = parseQuery(query);
-                codeHolder.append(params.getOrDefault("code", ""));
-                stateHolder.append(params.getOrDefault("state", ""));
+                try {
+                    String query = exchange.getRequestURI().getQuery();
+                    Map<String, String> params = parseQuery(query);
+                    codeHolder.append(params.getOrDefault("code", ""));
+                    stateHolder.append(params.getOrDefault("state", ""));
 
-                String html = "<html><body><h2>Miro auth complete.</h2>You can close this window.</body></html>";
-                exchange.sendResponseHeaders(200, html.getBytes(StandardCharsets.UTF_8).length);
-                try (OutputStream os = exchange.getResponseBody()) {
-                    os.write(html.getBytes(StandardCharsets.UTF_8));
+                    String html = "<html><body><h2>Miro auth complete.</h2>You can close this window.</body></html>";
+                    exchange.sendResponseHeaders(200, html.getBytes(StandardCharsets.UTF_8).length);
+                    try (OutputStream os = exchange.getResponseBody()) {
+                        os.write(html.getBytes(StandardCharsets.UTF_8));
+                    }
+                } finally {
+                    latch.countDown();
                 }
-                latch.countDown();
             }
         });
-        server.setExecutor(Executors.newSingleThreadExecutor());
         server.start();
 
         // 2) Open browser to authorize
@@ -77,8 +84,9 @@ public class MiroOAuthClient {
         }
 
         // 3) Wait for callback
-        latch.await();
-        server.stop(0);
+    latch.await();
+    server.stop(0); // stop accepting
+    executor.shutdown(); // allow JVM to exit
 
         if (!state.equals(stateHolder.toString())) {
             throw new IllegalStateException("State mismatch, potential CSRF detected");
