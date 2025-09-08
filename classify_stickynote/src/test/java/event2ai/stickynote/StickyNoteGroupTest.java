@@ -57,10 +57,11 @@ public class StickyNoteGroupTest {
         Classifier classifier = new Classifier(stickyNotes);
         int groupAmount = classifier.getGroupAmount();
         assertEquals(1, groupAmount);
+        int count = 0;
         for(int i = 0; i < groupAmount; i++) {
             List<StickyNote> group = classifier.getGroupByGroupIdx(i);
-            for(int j = 0; j < group.size(); j++) {
-                assertEquals(stickyNotes.get(j).getId(), group.get(j).getId());
+            for (StickyNote stickyNote : group) {
+                assertEquals(stickyNotes.get(count++).getId(), stickyNote.getId());
             }
         }
     }
@@ -105,10 +106,11 @@ public class StickyNoteGroupTest {
         Classifier classifier = new Classifier(stickyNotes);
         int groupAmount = classifier.getGroupAmount();
         assertEquals(2, groupAmount);
+        int count = 0;
         for(int i = 0; i < groupAmount; i++) {
             List<StickyNote> group = classifier.getGroupByGroupIdx(i);
-            for(int j = 0; j < group.size(); j++) {
-                assertEquals(stickyNotes.get(j).getId(), group.get(j).getId());
+            for (StickyNote stickyNote : group) {
+                assertEquals(stickyNotes.get(count++).getId(), stickyNote.getId());
             }
         }
     }
@@ -152,11 +154,12 @@ public class StickyNoteGroupTest {
 
         Classifier classifier = new Classifier(stickyNotes);
         int groupAmount = classifier.getGroupAmount();
-        assertEquals(2, groupAmount);
+        assertEquals(1, groupAmount);
+        int count = 0;
         for(int i = 0; i < groupAmount; i++) {
             List<StickyNote> group = classifier.getGroupByGroupIdx(i);
-            for(int j = 0; j < group.size(); j++) {
-                assertEquals(stickyNotes.get(j).getId(), group.get(j).getId());
+            for (StickyNote stickyNote : group) {
+                assertEquals(stickyNotes.get(count++).getId(), stickyNote.getId());
             }
         }
     }
@@ -191,11 +194,12 @@ public class StickyNoteGroupTest {
 
         Classifier classifier = new Classifier(stickyNotes);
         int groupAmount = classifier.getGroupAmount();
-        assertEquals(2, groupAmount);
+        assertEquals(1, groupAmount);
+        int count = 0;
         for(int i = 0; i < groupAmount; i++) {
             List<StickyNote> group = classifier.getGroupByGroupIdx(i);
-            for(int j = 0; j < group.size(); j++) {
-                assertEquals(stickyNotes.get(j).getId(), group.get(j).getId());
+            for (StickyNote stickyNote : group) {
+                assertEquals(stickyNotes.get(count++).getId(), stickyNote.getId());
             }
         }
     }
@@ -230,11 +234,12 @@ public class StickyNoteGroupTest {
 
         Classifier classifier = new Classifier(stickyNotes);
         int groupAmount = classifier.getGroupAmount();
-        assertEquals(2, groupAmount);
+        assertEquals(1, groupAmount);
+        int count = 0;
         for(int i = 0; i < groupAmount; i++) {
             List<StickyNote> group = classifier.getGroupByGroupIdx(i);
-            for(int j = 0; j < group.size(); j++) {
-                assertEquals(stickyNotes.get(j).getId(), group.get(j).getId());
+            for (StickyNote stickyNote : group) {
+                assertEquals(stickyNotes.get(count++).getId(), stickyNote.getId());
             }
         }
     }
