@@ -35,7 +35,7 @@
   - `POST https://api.miro.com/v2/boards/{board_id}/frames`
 - **Scopes (最少需求)**: `boards:read boards:write`
 
-> 註：`redirect_uri` 必須在 Miro App 設定中登錄，例如：`http://127.0.0.1:51789/callback`。
+> 註：`redirect_uri` 必須在 Miro App 設定中登錄，例如：`http://localhost:8000/callback`。
 
 ---
 
@@ -239,7 +239,7 @@ import java.util.concurrent.Executors;
 public class MiroOAuthClient {
     private final String clientId;
     private final String clientSecret;
-    private final String redirectUri; // e.g. http://127.0.0.1:51789/callback
+    private final String redirectUri; // e.g. http://localhost:8000/callback
     private final String scopes;      // e.g. "boards:read boards:write"
 
     private final HttpClient http = HttpClient.newBuilder()
@@ -421,7 +421,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         String clientId = getenvOr("MIRO_CLIENT_ID", "YOUR_CLIENT_ID");
         String clientSecret = getenvOr("MIRO_CLIENT_SECRET", "YOUR_CLIENT_SECRET");
-        String redirectUri = getenvOr("MIRO_REDIRECT_URI", "http://127.0.0.1:51789/callback");
+        String redirectUri = getenvOr("MIRO_REDIRECT_URI", "http://localhost:8000/callback");
         String scopes = getenvOr("MIRO_SCOPES", "boards:read boards:write");
         String boardId = getenvOr("MIRO_BOARD_ID", "YOUR_BOARD_ID");
 
@@ -454,7 +454,7 @@ public class Main {
 ## 9) How to run / 執行方式
 
 1. Configure your **Miro app** with:
-   - `redirect_uri`: `http://127.0.0.1:51789/callback` (or your choice)
+   - `redirect_uri`: `http://localhost:8000/callback` (or your choice)
    - Scopes: `boards:read boards:write`
 2. Set environment variables / 設定環境變數：
    - `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET`, `MIRO_REDIRECT_URI`, `MIRO_SCOPES`, `MIRO_BOARD_ID`

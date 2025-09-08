@@ -20,7 +20,7 @@ src/main/java/
 ```powershell
 $env:MIRO_CLIENT_ID = "<your_client_id>"
 $env:MIRO_CLIENT_SECRET = "<your_client_secret>"
-$env:MIRO_REDIRECT_URI = "http://127.0.0.1:51789/callback"
+$env:MIRO_REDIRECT_URI = "http://localhost:8000/callback"
 $env:MIRO_SCOPES = "boards:read boards:write"
 $env:MIRO_BOARD_ID = "<your_board_id>"
 ```
@@ -63,7 +63,7 @@ mvn -q -DskipTests exec:java
 ```powershell
 $env:MIRO_CLIENT_ID = "<your_client_id>"
 $env:MIRO_CLIENT_SECRET = "<your_client_secret>"
-$env:MIRO_REDIRECT_URI = "http://127.0.0.1:51789/callback"
+$env:MIRO_REDIRECT_URI = "http://localhost:8000/callback"
 $env:MIRO_SCOPES = "boards:read boards:write"
 $env:MIRO_BOARD_ID = "<your_board_id>"
 mvn -q -DskipTests package

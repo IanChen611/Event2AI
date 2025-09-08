@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
 public class MiroOAuthClient {
     private final String clientId;
     private final String clientSecret;
-    private final String redirectUri; // e.g. http://127.0.0.1:51789/callback
+    private final String redirectUri; // e.g. http://localhost:8000/callback
     private final String scopes;      // e.g. "boards:read boards:write"
 
     private final HttpClient http = HttpClient.newBuilder()

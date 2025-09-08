@@ -5,9 +5,9 @@ import core.MiroApiClient;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String clientId = getenvOr("MIRO_CLIENT_ID", "YOUR_CLIENT_ID");
+        String clientId = "3458764636903400125"; //暫時
         String clientSecret = getenvOr("MIRO_CLIENT_SECRET", "YOUR_CLIENT_SECRET");
-        String redirectUri = getenvOr("MIRO_REDIRECT_URI", "http://127.0.0.1:51789/callback");
+        String redirectUri = getenvOr("MIRO_REDIRECT_URI", "http://localhost:8000/callback");
         String scopes = getenvOr("MIRO_SCOPES", "boards:read boards:write");
         String boardId = getenvOr("MIRO_BOARD_ID", "YOUR_BOARD_ID");
         String envAccessToken = getenvOr("MIRO_ACCESS_TOKEN", "");
