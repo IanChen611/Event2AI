@@ -8,7 +8,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MiroReaderTest {
+public class
+MiroReaderTest {
     private MiroReader miroReader;
 
     @BeforeEach
