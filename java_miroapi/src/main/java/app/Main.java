@@ -1,18 +1,24 @@
 package app;
 
 import auth.MiroOAuthClient;
+//import core.FrameService;
 import core.MiroApiClient;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-//        String clientId = getenvOr("MIRO_CLIENT_ID", "YOUR_CLIENT_ID");
-        String clientId = "3458764636903400125";
-        String clientSecret = getenvOr("MIRO_CLIENT_SECRET", "YOUR_CLIENT_SECRET");
-        String redirectUri = getenvOr("MIRO_REDIRECT_URI", "http://localhost:8000/callback");
-        String scopes = getenvOr("MIRO_SCOPES", "boards:read boards:write account:read");
-        String boardId = "uXjVJVDZJb0=";
-        String envAccessToken = getenvOr("MIRO_ACCESS_TOKEN", "");
-        String envRefreshToken = getenvOr("MIRO_REFRESH_TOKEN", "");
+    Dotenv envFile = Dotenv.load();
+    String clientId = firstNonBlank(
+        envFile.get("MIRO_CLIENT_ID"),
+        System.getenv("MIRO_CLIENT_ID"),
+        "YOUR_CLIENT_ID"
+    );
+    String clientSecret = firstNonBlank(envFile.get("MIRO_CLIENT_SECRET"), System.getenv("MIRO_CLIENT_SECRET"), "YOUR_CLIENT_SECRET");
+    String redirectUri = firstNonBlank(envFile.get("MIRO_REDIRECT_URI"), System.getenv("MIRO_REDIRECT_URI"), "http://localhost:8000/callback");
+    String scopes = firstNonBlank(envFile.get("MIRO_SCOPES"), System.getenv("MIRO_SCOPES"), "boards:read boards:write account:read");
+    String boardId = firstNonBlank(envFile.get("MIRO_BOARD_ID"), System.getenv("MIRO_BOARD_ID"), "YOUR_BOARD_ID");
+    String envAccessToken = firstNonBlank(envFile.get("MIRO_ACCESS_TOKEN"), System.getenv("MIRO_ACCESS_TOKEN"), "");
+    String envRefreshToken = firstNonBlank(envFile.get("MIRO_REFRESH_TOKEN"), System.getenv("MIRO_REFRESH_TOKEN"), "");
+    System.out.println("[config] clientId=" + mask(clientId) + ", boardId=" + boardId + ", redirect=" + redirectUri);
 
         // 1) Get token — prefer provided access token, otherwise run OAuth flow
         MiroOAuthClient.TokenResponse token;
@@ -35,20 +41,23 @@ public class Main {
         // 2) Build API client & services
         MiroApiClient api = new MiroApiClient(token.accessToken);
 //        FrameService frames = new FrameService(api, boardId);
-//
+
         // 3) Router: if arg present and equals "dump", run board dump; else run frame example
-//        if (args != null && args.length > 0 && "dump".equalsIgnoreCase(args[0])) {
-//            String out = args.length > 1 ? args[1] : null; // optional output path
-//            BoardDump.run(api, boardId, out);
-//        } else {
-//            FrameExample.run(frames);
-//        }
         String out = null; // optional output path
         BoardDump.run(api, boardId, out);
     }
 
-    private static String getenvOr(String key, String def) {
-        String v = System.getenv(key);
-        return (v == null || v.isBlank()) ? def : v;
+    private static String firstNonBlank(String... vals) {
+        if (vals == null) return null;
+        for (String v : vals) {
+            if (v != null && !v.isBlank()) return v;
+        }
+        return null;
+    }
+
+    private static String mask(String v) {
+        if (v == null) return "null";
+        if (v.length() <= 6) return "***";
+        return v.substring(0, 3) + "***" + v.substring(v.length()-3);
     }
 }
