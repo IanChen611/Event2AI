@@ -243,4 +243,43 @@ public class StickyNoteGroupTest {
             }
         }
     }
+    @Test
+    public void three_StickyNote_whose_geo_are_different_should_be_a_group_which_has_three_members() {
+        String id_1 = "001A";
+        String desc_1 = "This is 001A";
+        Point2D pos_1 = new Point2D.Double(0, 0);
+        Point2D geo_1 = new Point2D.Double(100, 100);
+        String color_1 = "#FFAA00";
+        StickyNote stickyNote_1 = new StickyNote(id_1, desc_1, pos_1, geo_1, color_1);
+
+        String id_2 = "001B";
+        String desc_2 = "This is 001B";
+        Point2D pos_2 = new Point2D.Double(70, 0);
+        Point2D geo_2 = new Point2D.Double(40, 40);
+        String color_2 = "#FFAA01";
+        StickyNote stickyNote_2 = new StickyNote(id_2, desc_2, pos_2, geo_2, color_2);
+
+        String id_3 = "001C";
+        String desc_3 = "This is 001C";
+        Point2D pos_3 = new Point2D.Double(0, 65);
+        Point2D geo_3 = new Point2D.Double(100, 30);
+        String color_3 = "#FFAA02";
+        StickyNote stickyNote_3 = new StickyNote(id_3, desc_3, pos_3, geo_3, color_3);
+
+        List<StickyNote> stickyNotes = new ArrayList<>();
+        stickyNotes.add(stickyNote_1);
+        stickyNotes.add(stickyNote_2);
+        stickyNotes.add(stickyNote_3);
+
+        Classifier classifier = new Classifier(stickyNotes);
+        int groupAmount = classifier.getGroupAmount();
+        assertEquals(1, groupAmount);
+        int count = 0;
+        for(int i = 0; i < groupAmount; i++) {
+            List<StickyNote> group = classifier.getGroupByGroupIdx(i);
+            for (StickyNote stickyNote : group) {
+                assertEquals(stickyNotes.get(count++).getId(), stickyNote.getId());
+            }
+        }
+    }
 }
