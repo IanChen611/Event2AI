@@ -15,7 +15,7 @@ public class MiroProcessorTest {
 
     @Test
     public void MiroProcessor_can_process_file() {
-        ArrayList<MiroItem> miroItems = miroProcessor.processFile("./src/test/example.json");
-        assertEquals(2, miroItems.size());
+        ArrayList<MiroJsonItem> miroJsonItems = miroProcessor.processFile("./src/test/example.json");
+        assertEquals(2, miroJsonItems.size());
     }
 }

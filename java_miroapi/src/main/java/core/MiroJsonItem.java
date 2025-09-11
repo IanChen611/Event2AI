@@ -2,7 +2,7 @@ package core;
 
 import com.google.gson.JsonObject;
 
-public class MiroItem {
+public class MiroJsonItem {
     private final String id;
     private final String type;
     private final JsonObject data;
@@ -10,12 +10,12 @@ public class MiroItem {
     private final JsonObject geometry;
     private final JsonObject position;
 
-    public MiroItem(String id,
-                    String type,
-                    JsonObject data,
-                    JsonObject style,
-                    JsonObject geometry,
-                    JsonObject position
+    public MiroJsonItem(String id,
+                        String type,
+                        JsonObject data,
+                        JsonObject style,
+                        JsonObject geometry,
+                        JsonObject position
     ) {
         this.id = id;
         this.type = type;

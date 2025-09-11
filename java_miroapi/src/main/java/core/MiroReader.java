@@ -11,12 +11,12 @@ import java.util.Optional;
 public class MiroReader {
     public MiroReader() {}
 
-    public Optional<JsonArray> readBoardItem(String filePath) {
+    public JsonArray readBoardItem(String filePath) {
         try (Reader reader = new FileReader(filePath)) {
-            return Optional.of(JsonParser.parseReader(reader).getAsJsonObject().get("items").getAsJsonArray());
+            return JsonParser.parseReader(reader).getAsJsonObject().get("items").getAsJsonArray();
         } catch (IOException e) {
             System.out.println("reading file error: " + e.getMessage());
+            return new JsonArray();
         }
-        return Optional.empty();
     }
 }

@@ -3,7 +3,7 @@ package archive;
 import app.BoardDump;
 import auth.MiroOAuthClient;
 import core.MiroApiClient;
-import core.MiroItem;
+import core.MiroJsonItem;
 import core.MiroProcessor;
 import event2ai.stickynote.Classifier;
 import event2ai.stickynote.StickyNote;
@@ -48,9 +48,9 @@ public class Integration {
 
         // 3. Processing JSON
         MiroProcessor miroProcessor = new MiroProcessor();
-        ArrayList<MiroItem> miroItems = miroProcessor.processFile(MIRO_BOARD_OUTPUT_PATH);
+        ArrayList<MiroJsonItem> miroJsonItems = miroProcessor.processFile(MIRO_BOARD_OUTPUT_PATH);
         MiroItemsArchive miroItemsArchive = new MiroItemsArchive();
-        miroItemsArchive.save(miroItems);
+        miroItemsArchive.save(miroJsonItems);
 
         // 4. Group
         ArrayList<StickyNote> stickyNotes = miroItemsArchive.getItemsWith("StickyNote");
@@ -61,8 +61,10 @@ public class Integration {
             List<StickyNote> group = classifier.getGroupByGroupIdx(i);
             for(int j = 0; j < group.size(); j++){
                 System.out.println("Group " + i + ", index = " + j + "'s Description:" + group.get(j).getDescription());
+                System.out.println("Group " + i + ", index = " + j + "'s color:" + group.get(j).getColor());
+                System.out.println("Group " + i + ", index = " + j + "'s tag:" + group.get(j).getTag());
+                System.out.println("----------------");
             }
         }
     }
-
 }

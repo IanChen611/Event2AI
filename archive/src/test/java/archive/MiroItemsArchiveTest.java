@@ -22,15 +22,15 @@ public class MiroItemsArchiveTest {
 
     @Test
     public void MiroItemsArchive_can_save() {
-        ArrayList<MiroItem> miroItems = miroProcessor.processFile("./src/test/example.json");
-        miroItemsArchive.save(miroItems);
-        assertEquals(miroItems,  miroItemsArchive.load());
+        ArrayList<MiroJsonItem> miroJsonItems = miroProcessor.processFile("./src/test/example.json");
+        miroItemsArchive.save(miroJsonItems);
+        assertEquals(miroJsonItems,  miroItemsArchive.load());
     }
 
     @Test
     public void MiroItemsArchive_can_getItemWith_stickyNote() {
-        ArrayList<MiroItem> miroItems = miroProcessor.processFile("./src/test/example.json");
-        miroItemsArchive.save(miroItems);
+        ArrayList<MiroJsonItem> miroJsonItems = miroProcessor.processFile("./src/test/example.json");
+        miroItemsArchive.save(miroJsonItems);
         ArrayList<StickyNote> stickyNotes = miroItemsArchive.getItemsWith("StickyNote");
         assertEquals("3458764638678469633",  stickyNotes.get(0).getId());
         assertEquals("測試",  stickyNotes.get(0).getDescription());

@@ -1,22 +1,22 @@
 package archive;
 
-import core.MiroItem;
+import core.MiroJsonItem;
 import event2ai.stickynote.StickyNote;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public class MiroItemsArchive {
-    private ArrayList<MiroItem> miroItems;
+    private ArrayList<MiroJsonItem> miroJsonItems;
 
     public MiroItemsArchive() {}
 
-    public ArrayList<MiroItem> load() {
-        return this.miroItems;
+    public ArrayList<MiroJsonItem> load() {
+        return this.miroJsonItems;
     }
 
-    public void save(ArrayList<MiroItem> miroItems) {
-        this.miroItems = miroItems;
+    public void save(ArrayList<MiroJsonItem> miroJsonItems) {
+        this.miroJsonItems = miroJsonItems;
     }
 
     public <T> ArrayList<T> getItemsWith(String type) {
@@ -24,14 +24,14 @@ public class MiroItemsArchive {
 
         switch(type) {
             case "StickyNote":
-                for(MiroItem miroItem : miroItems) {
-                    if(miroItem.getType().equals("sticky_note")) {
+                for(MiroJsonItem miroJsonItem : miroJsonItems) {
+                    if(miroJsonItem.getType().equals("sticky_note")) {
                         StickyNote stickyNote = new StickyNote(
-                                miroItem.getId(),
-                                miroItem.getData().get("content").getAsString().replaceAll("<[^>]+>", "").trim(),
-                                new Point2D.Double(miroItem.getPosition().get("x").getAsDouble(), miroItem.getPosition().get("y").getAsDouble()),
-                                new Point2D.Double(miroItem.getGeometry().get("width").getAsDouble(), miroItem.getGeometry().get("height").getAsDouble()),
-                                miroItem.getStyle().get("fillColor").getAsString()
+                                miroJsonItem.getId(),
+                                miroJsonItem.getData().get("content").getAsString().replaceAll("<[^>]+>", "").trim(),
+                                new Point2D.Double(miroJsonItem.getPosition().get("x").getAsDouble(), miroJsonItem.getPosition().get("y").getAsDouble()),
+                                new Point2D.Double(miroJsonItem.getGeometry().get("width").getAsDouble(), miroJsonItem.getGeometry().get("height").getAsDouble()),
+                                miroJsonItem.getStyle().get("fillColor").getAsString()
                         );
 
                         specificItems.add((T) stickyNote);
