@@ -1,0 +1,116 @@
+{
+  "useCase": "CreateProduct",
+  "behavior": "Create a new product",
+  "input": [
+    { "name": "productId", "type": "String", "note": "Product 的唯一識別碼" },
+    { "name": "name", "type": "String", "note": "Product 的顯示名稱" },
+    { "name": "userId", "type": "String", "note": "建立 Product 的使用者 ID, 紀錄在領域事件中" }
+  ],
+  "aggregate": "Product",
+  "aggregateId": "ProductId",
+  "method": "Product constructor",
+  "domainEvent": "ProductEvents.ProductCreated",
+  "repository": "ProductRepository",
+  "output": "CqrsOutput with productId",
+  "domainModelNotes": [
+    "Product 是 Aggregate Root",
+    "Product 使用建構函數建立新實例"
+  ],
+  "constructorPreconditions": [
+    {
+      "rule": "Required fields validation",
+      "description": "Product id 和 name 都必須通過 requireNotNull() 檢查",
+      "fields": ["id", "name"]
+    }
+  ],
+  "constructorPostconditions": [
+    {
+      "rule": "Field assignment verification",
+      "description": "使用 ensure() 檢查所有欄位都正確設定",
+      "checks": [
+        "Product id is set correctly",
+        "Product name is set correctly", 
+        "Product state is DRAFT initially"
+      ]
+    },
+    {
+      "rule": "Domain event verification",
+      "description": "確保 ProductCreated 領域事件正確產生",
+      "validation": "最後一個領域事件必須是 ProductCreated 且包含正確的 id, name, state"
+    }
+  ],
+  "aggregates": [
+    {
+      "name": "Product",
+      "description": "產品",
+      "attributes": [
+        { "name": "id", "type": "ProductId",  "constraint": "non-null" },
+        { "name": "product", "type": "ProductName","constraint": "non-null" },
+        { "name": "goal", "type": "ProductGoal",  "constraint": "default = null" },
+        { "name": "note", "type": "String", "constraint": "default = null" },
+        { "name": "extension", "type": "String", "constraint": "default = null" },
+        { "name": "state", "type": "ProductLifecycleState", "constraint": "default = DRAFT"}
+      ]
+    }
+  ],
+  "domainEvents": [
+    {
+      "name": "ProductEvents.ProductCreated",
+      "description": "產品建立",
+      "attributes": [
+        { "name": "productId", "type": "ProductId" },
+        { "name": "name", "type": "ProductName" },
+        { "name": "goal", "type": "ProductGoal" },
+        { "name": "note", "type": "String" },
+        { "name": "extension", "type": "String" },
+        { "name": "state", "type": "ProductLifecycleState"}
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "name": "ProductGoal",
+      "description": "產品目標",
+      "attributes": [
+        { "name": "id", "type": "ProductGoalId" },
+        { "name": "title", "type": "String" },
+        { "name": "description", "type": "String" },
+        { "name": "metrics", "type": "final List<GoalMetric>" },
+        { "name": "definedAt", "type": "final Instant" },
+        { "name": "revisedAt", "type": "Instant" },
+        { "name": "state", "type": "ProductGoalState" }
+      ]
+    }
+  ],
+  "valueObjects": [
+    {
+      "name": "GoalMetric",
+      "description": "Product Gaol 指標",
+      "fields": [
+        { "name": "name", "type": "String" },
+        { "name": "unit", "type": "String" },
+        { "name": "targetValue", "type": "BigDecimal" },
+        { "name": "currentValue", "type": "BigDecimal" },
+        { "name": "isKey", "type": "boolean" }
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "name": "ProductLifecycleState",
+      "description": "產品生命週期狀態",
+      "values": ["DRAFT","ACTIVE","SUSPENDED","DEPRECATED","EOL","ARCHIVED"]
+    },
+    {
+      "name": "ProductGoalState",
+      "description": "產品目標狀態",
+      "values": [
+        "PLANNED",
+        "ACTIVE",
+        "ACHIEVED",
+        "SUPERSEDED",
+        "CANCELLED"
+      ]
+    }
+  ]
+}
