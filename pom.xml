@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>idk.what.to.called</groupId>
+    <groupId>Event2AI</groupId>
     <artifactId>Event2AI</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -70,8 +70,9 @@
     </build>
 
     <modules>
-        <module>java_miroapi</module>
-        <module>classify_stickynote</module>
-        <module>archive</module>
+        <module>Event2AI-Drivers</module>
+        <module>Event2AI-Adapter</module>
+        <module>Event2AI-UseCase</module>
+        <module>Event2AI-Entity</module>
     </modules>
 </project>
