@@ -1,152 +1,24 @@
 {
-  "fetchedAt": "2025-08-29T04:58:18.402927500Z",
-  "board": {
-    "id": "uXjVJVDZJb0\u003d",
-    "type": "board",
-    "name": "My First Board",
-    "description": "",
-    "links": {
-      "self": "https://api.miro.com/v2/boards/uXjVJVDZJb0%3D",
-      "related": "https://api.miro.com/v2/boards/uXjVJVDZJb0%3D/members?limit\u003d20\u0026offset\u003d0"
-    },
-    "createdAt": "2025-08-10T11:15:39Z",
-    "createdBy": {
-      "id": "3458764636902296750",
-      "type": "user",
-      "name": "BR Du"
-    },
-    "currentUserMembership": {
-      "id": "3458764636902296750",
-      "type": "board_member",
-      "name": "BR Du",
-      "role": "owner"
-    },
-    "lastOpenedAt": "2025-08-29T04:53:18Z",
-    "lastOpenedBy": {
-      "id": "3458764636902296750",
-      "type": "user",
-      "name": "BR Du"
-    },
-    "modifiedAt": "2025-08-29T04:55:51Z",
-    "modifiedBy": {
-      "id": "3458764636902296750",
-      "type": "user",
-      "name": "BR Du"
-    },
-    "owner": {
-      "id": "3458764636902296750",
-      "type": "user",
-      "name": "BR Du"
-    },
-    "permissionsPolicy": {
-      "collaborationToolsStartAccess": "all_editors",
-      "copyAccess": "anyone",
-      "copyAccessLevel": "anyone",
-      "sharingAccess": "team_members_with_editing_rights"
-    },
-    "picture": {
-      "id": 3458764517079444014,
-      "type": "picture",
-      "imageURL": "https://mirostatic.com/board-image-assets/20250319/540x540/board_icon_22.png?etag\u003d20250319"
-    },
-    "policy": {
-      "permissionsPolicy": {
-        "collaborationToolsStartAccess": "all_editors",
-        "copyAccess": "anyone",
-        "copyAccessLevel": "anyone",
-        "sharingAccess": "team_members_with_editing_rights"
-      },
-      "sharingPolicy": {
-        "access": "private",
-        "inviteToAccountAndBoardLinkAccess": "no_access",
-        "organizationAccess": "private",
-        "teamAccess": "edit"
-      }
-    },
-    "sharingPolicy": {
-      "access": "private",
-      "inviteToAccountAndBoardLinkAccess": "no_access",
-      "organizationAccess": "private",
-      "teamAccess": "edit"
-    },
-    "team": {
-      "id": "3458764636903149985",
-      "type": "team",
-      "name": "Dev team"
-    },
-    "viewLink": "https://miro.com/app/board/uXjVJVDZJb0\u003d"
-  },
-  "items": [
+  "schemaVersion": "1.0.0",
+  "fetchedAt": "2025-09-18T05:26:11.771664700Z",
+  "stickyNotes": [
     {
-      "id": "3458764638677414093",
-      "type": "frame",
-      "data": {
-        "format": "custom",
-        "showContent": true,
-        "title": "Java Frame",
-        "type": "freeform"
-      },
-      "geometry": {
-        "width": 896.0,
-        "height": 508.0
-      },
-      "position": {
-        "x": 2368.2358665340817,
-        "y": -114.16007239930929,
-        "origin": "center",
-        "relativeTo": "canvas_center"
-      },
-      "links": {
-        "self": "https://api.miro.com/v2/boards/uXjVJVDZJb0%3D/frames/3458764638677414093",
-        "related": "https://api.miro.com/v2/boards/uXjVJVDZJb0%3D/items?parent_item_id\u003d3458764638677414093\u0026limit\u003d10\u0026cursor\u003d"
-      },
-      "createdAt": "2025-08-28T16:29:06Z",
-      "createdBy": {
-        "id": "3458764636902296750",
-        "type": "user"
-      },
-      "modifiedAt": "2025-08-28T16:40:26Z",
-      "modifiedBy": {
-        "id": "3458764636902296750",
-        "type": "user"
-      }
-    },
-    {
-      "id": "3458764638678469633",
-      "type": "sticky_note",
-      "data": {
-        "content": "\u003cp\u003e測試\u003c/p\u003e\u003cp\u003e\u003cbr /\u003e\u003c/p\u003e",
-        "shape": "square"
-      },
-      "style": {
-        "fillColor": "light_yellow",
-        "textAlign": "center",
-        "textAlignVertical": "middle"
-      },
-      "geometry": {
-        "width": 368.15000000000003,
-        "height": 421.8
-      },
-      "position": {
-        "x": 1186.1195941727892,
-        "y": -314.73606314892874,
-        "origin": "center",
-        "relativeTo": "canvas_center"
-      },
-      "links": {
-        "self": "https://api.miro.com/v2/boards/uXjVJVDZJb0%3D/sticky_notes/3458764638678469633"
-      },
-      "createdAt": "2025-08-28T16:40:20Z",
-      "createdBy": {
-        "id": "3458764636902296750",
-        "type": "user"
-      },
-      "modifiedAt": "2025-08-29T04:55:51Z",
-      "modifiedBy": {
-        "id": "3458764636902296750",
-        "type": "user"
-      }
+      "id": "3458764639701211551",
+      "html": "\u003cp\u003e測試5\u003c/p\u003e",
+      "text": "測試5",
+      "color": "light_yellow",
+      "width": 368.15000000000003,
+      "height": 421.8,
+      "x": 3364.4755148009413,
+      "y": -2124.19073862342,
+      "tags": [
+        {
+          "id": "3458764639777565487",
+          "name": "Done",
+          "color": "red"
+        }
+      ]
     }
   ],
-  "itemCount": 2
+  "tags": []
 }
