@@ -5,14 +5,15 @@ import entity.StickyNote;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class JsonToStickyNote {
     public static ArrayList<StickyNote> convert(JsonArray jsonItems) {
         ArrayList<StickyNote> items =  new ArrayList<>();
         if(!jsonItems.isEmpty()){
             for (int i = 0; i < jsonItems.size(); i++) {
-                String text = jsonItems.get(i).getAsJsonObject().get("text").getAsString();
+                String text = jsonItems.get(i).getAsJsonObject().get("html").getAsString();
+                text = text.replace("<p>","").replace("</p>","\n");
+
                 String tag = "";
                 JsonArray tags = jsonItems.get(i).getAsJsonObject().get("tags").getAsJsonArray();
                 if(!tags.isEmpty()){

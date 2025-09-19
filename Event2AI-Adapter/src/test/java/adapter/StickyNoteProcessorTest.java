@@ -43,7 +43,7 @@ public class StickyNoteProcessorTest {
         ArrayList<StickyNote> processedItems = stickyNoteProcessor.processFile("./src/test/example.json");
 
         assertEquals("3458764639701211551", processedItems.get(0).getId());
-        assertEquals("測試5", processedItems.get(0).getDescription());
+        assertEquals("測試5\n", processedItems.get(0).getDescription());
         assertEquals("light_yellow", processedItems.get(0).getColor());
         assertEquals(new Point2D.Double(3364.4755148009413, -2124.19073862342), processedItems.get(0).getPos());
         assertEquals(new Point2D.Double(368.15000000000003, 421.8), processedItems.get(0).getGeo());
