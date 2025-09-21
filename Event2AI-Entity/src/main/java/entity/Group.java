@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
-    // groupId as the Id of UseCase
+    // groupId is the Id of UseCase
     private String groupId;
     private String useCaseName;
     private List<String> input;
@@ -15,10 +15,6 @@ public class Group {
     private List<String> comment;
     private List<PublishEvent> publishEvents;
 
-    private final String USECASE_COLOR = "blue";
-    private final String EVENT_COLOR = "orange";
-    private final String NOTIFIER = "red";
-    private final String BEHAVIOR = "violate";
     public Group(){
 
     }

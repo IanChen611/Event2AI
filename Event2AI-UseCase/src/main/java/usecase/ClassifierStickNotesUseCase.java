@@ -45,7 +45,7 @@ public class ClassifierStickNotesUseCase {
         // Process comments
         List<StickyNote> comment_stickyNotes = findByType("comment", stickyNotes);
         List<String> commentDescriptions = comment_stickyNotes.stream()
-                .map(StickyNote::getDescription) // 每個 int 轉成 String
+                .map(StickyNote::getDescription) // every integer change to String
                 .collect(Collectors.toList());
         group.setComment(commentDescriptions);
 
@@ -106,7 +106,6 @@ public class ClassifierStickNotesUseCase {
                             stickyNote.getColor().equals("light blue") ||
                             stickyNote.getColor().equals("violet")){
                         result.add(stickyNote);
-                        break;
                     }
                 }
                 break;

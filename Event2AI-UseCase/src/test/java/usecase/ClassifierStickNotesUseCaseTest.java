@@ -4,9 +4,11 @@ import entity.Group;
 import entity.StickyNote;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import valueobject.PublishEvent;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,7 +49,7 @@ public class ClassifierStickNotesUseCaseTest {
 
         StickyNote stickyNote_5 = createStickyNote(
                 "001E",
-                "Board Member Joined",
+                "BoardMemberJoined",
                 new Point2D.Double(110, 0),
                 new Point2D.Double(100, 100),
                 "orange");
@@ -71,7 +73,7 @@ public class ClassifierStickNotesUseCaseTest {
                 "comment",
                 new Point2D.Double(100, 100),
                 new Point2D.Double(200, 170),
-                "violet");
+                "white");
 
         List<StickyNote> stickyNotes = new ArrayList<>();
         stickyNotes.add(stickyNote_1);
@@ -82,18 +84,42 @@ public class ClassifierStickNotesUseCaseTest {
         stickyNotes.add(stickyNote_6);
         stickyNotes.add(stickyNote_7);
         stickyNotes.add(stickyNote_8);
-        List<List<StickyNote>> clusteredStickyNotes =  new ArrayList<>();
+
+        // better not use clustering
+        List<List<StickyNote>> clusteredStickyNotes = new ArrayList<>();
         clusteredStickyNotes.add(stickyNotes);
         ClassifierStickNotesUseCase classifierStickNotesUseCase = new ClassifierStickNotesUseCase(clusteredStickyNotes);
 
         Group group = classifierStickNotesUseCase.getGroups().get(0);
 
-        // UseCase
-        assertEquals(stickyNotes.get(USE_CASE_STICKYNOTE_INDEX).getId(), group.getGroupId());
-        assertEquals(stickyNotes.get(USE_CASE_STICKYNOTE_INDEX).getDescription(), group.getUseCaseName());
+        // UseCase => stickyNote_4
+        assertEquals(stickyNote_4.getId(), group.getGroupId());
+        assertEquals(stickyNote_4.getDescription(), group.getUseCaseName());
 
-        //
+        // input => stickyNote_2
+        List<String> intputDescription = Arrays.asList(stickyNote_2.getDescription().split("\\n"));
+        assertEquals(intputDescription.size(), group.getInput().size());
+        for (int i = 0; i < intputDescription.size(); i++) {
+            assertEquals(intputDescription.get(i), group.getInput().get(i));
+        }
 
+        // aggregate name => stickyNote_1
+        assertEquals(stickyNote_1.getDescription(), group.getAggregateName());
+
+        // user name => stickyNote_3
+        assertEquals(stickyNote_3.getDescription(), group.getUserName());
+
+        // comment => stickyNote_8
+        assertEquals(stickyNote_8.getDescription(), group.getComment().get(0));
+
+        // publishEvents => createStickyNote
+        //      event name => stickyNote_5
+        //      notifier => stickyNote_6
+        //      behavior => stickyNote_7
+        PublishEvent publishEvent = group.getPublishEvents().get(0);
+        assertEquals(stickyNote_5.getDescription(), publishEvent.getEventName());
+        assertEquals(stickyNote_6.getDescription(), publishEvent.getNotifier());
+        assertEquals(stickyNote_7.getDescription(), publishEvent.getBehavior());
 
     }
 
