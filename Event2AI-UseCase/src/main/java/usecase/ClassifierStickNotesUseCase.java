@@ -139,7 +139,7 @@ public class ClassifierStickNotesUseCase {
         for (StickyNote eventName : eventNames){
             String notifierDesc = "";
             String behaviorDesc = "";
-            double mutiple = 1.4;
+            double mutiple = 1.3;
 
             for(StickyNote notifier : notifiers){
                 double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(notifier.getGeo().getX(), notifier.getGeo().getY()));
