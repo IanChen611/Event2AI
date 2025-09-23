@@ -2,9 +2,11 @@ package usecase;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import entity.StickyNote;
 import org.junit.jupiter.api.Assertions;
@@ -347,20 +349,34 @@ public class ClusterStickyNotesUseCaseTest {
         ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
-        int count = 0;
-        for(int i = 0; i < groupAmount; i++) {
-            List<StickyNote> group = clusterStickyNotesUseCase.getGroupByGroupIdx(i);
-            for (StickyNote stickyNote : group) {
-                Assertions.assertEquals(stickyNotes.get(count++).getId(), stickyNote.getId());
-            }
-        }
+        assertTrue(checkClusterStickyNoteList(stickyNotes, clusterStickyNotesUseCase.getGroupByGroupIdx(0)));
     }
 
     private StickyNote createStickyNote(String id, String desc, Point2D pos, Point2D geo, String color) {
         return new StickyNote(id, desc, pos, geo, color);
     }
 
-    private static enum StickyNoteColor {
+    private Boolean checkClusterStickyNoteList(List<StickyNote> stickyNotes, List<StickyNote> clusterStickyNotes) {
+        if(clusterStickyNotes.size() != stickyNotes.size()) {
+            return false;
+        }
+        boolean[] isStickyNoteMatch = new boolean[stickyNotes.size()];
+        Arrays.fill(isStickyNoteMatch, false);
+        for(int i = 0; i < stickyNotes.size(); i++) {
+            for (StickyNote clusterStickyNote : clusterStickyNotes) {
+                if (stickyNotes.get(i).getId().equals(clusterStickyNote.getId())) {
+                    isStickyNoteMatch[i] = true;
+                    break;
+                }
+            }
+            if(!isStickyNoteMatch[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private enum StickyNoteColor {
         LIGHT_YELLOW("#AAAAAA"),
         YELLOW("#FFF59D"),   // Team, User
         GREEN("#A5D6A7"),    // userId, teamId...
