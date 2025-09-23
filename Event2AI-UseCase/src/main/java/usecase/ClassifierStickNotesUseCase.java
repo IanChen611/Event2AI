@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+
 public class ClassifierStickNotesUseCase {
     private List<Group> groups;
     private final List<List<StickyNote>> clusteredStickyNotes;
@@ -96,7 +99,6 @@ public class ClassifierStickNotesUseCase {
                 for(StickyNote stickyNote : stickyNotes){
                     if(stickyNote.getColor().equals("white")){
                         result.add(stickyNote);
-                        break;
                     }
                 }
                 break;
@@ -137,16 +139,26 @@ public class ClassifierStickNotesUseCase {
         for (StickyNote eventName : eventNames){
             String notifierDesc = "";
             String behaviorDesc = "";
-
+            double mutiple = 1.4;
 
             for(StickyNote notifier : notifiers){
-                if(notifier.getPos().getY() > eventName.getPos().getY()){
+                double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(notifier.getGeo().getX(), notifier.getGeo().getY()));
+                double dx = abs(notifier.getPos().getX() - eventName.getPos().getX());
+                double dy = abs(notifier.getPos().getY() - eventName.getPos().getY());
+                double dist = Math.sqrt(dx * dx + dy * dy);
+                // distance < 1.4 geo    and     notifier.y >= eventName.y
+                if(dist / threshold <= mutiple && notifier.getPos().getY() >= eventName.getPos().getY()){
                     notifierDesc =  notifier.getDescription();
                     break;
                 }
             }
             for(StickyNote behavior : behaviors) {
-                if ((behavior.getPos().getY() - eventName.getPos().getY())  <= (eventName.getGeo().getY() * 0.6)) {
+                double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(behavior.getGeo().getX(), behavior.getGeo().getY()));
+                double dx = abs(behavior.getPos().getX() - eventName.getPos().getX());
+                double dy = abs(behavior.getPos().getY() - eventName.getPos().getY());
+                double dist = Math.sqrt(dx * dx + dy * dy);
+                // distance < 1.4 geo    and     behavior.y <= eventName.y
+                if (dist / threshold <= mutiple && behavior.getPos().getY() <= eventName.getPos().getY()) {
                     behaviorDesc = behavior.getDescription();
                     break;
                 }
