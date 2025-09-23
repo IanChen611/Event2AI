@@ -19,6 +19,10 @@ public class ClusterStickyNotesUseCase {
         return this.groupAmount;
     }
 
+    public List<List<StickyNote>> getAllGroup() {
+        return stickyNotesGroup;
+    }
+
     public List<StickyNote> getGroupByGroupIdx(int groupIdx) {
         return stickyNotesGroup.get(groupIdx);
     }

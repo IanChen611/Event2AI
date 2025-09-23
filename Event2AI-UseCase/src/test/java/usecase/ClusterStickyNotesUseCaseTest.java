@@ -349,22 +349,174 @@ public class ClusterStickyNotesUseCaseTest {
         ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
-        assertTrue(checkClusterStickyNoteList(stickyNotes, clusterStickyNotesUseCase.getGroupByGroupIdx(0)));
+        assertTrue(checkClusterStickyNoteGroup(stickyNotes, clusterStickyNotesUseCase.getGroupByGroupIdx(0)));
+    }
+
+    @Test
+    public void fourteen_StickyNote_simulate_real_case_in_event_storming_some_geo_are_different_should_be_two_groups_each_has_seven_members() {
+        StickyNote stickyNote_1 = createStickyNote(
+                "001A",
+                "Team",
+                new Point2D.Double(0, 110),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.LIGHT_YELLOW.getHexCode());
+
+        StickyNote stickyNote_2 = createStickyNote(
+                "001B",
+                "userId\nteamId",
+                new Point2D.Double(-110, 0),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.GREEN.getHexCode());
+
+        StickyNote stickyNote_3 = createStickyNote(
+                "001C",
+                "User",
+                new Point2D.Double(-50, -50),
+                new Point2D.Double(50, 50),
+                StickyNoteColor.YELLOW.getHexCode());
+
+        StickyNote stickyNote_4 = createStickyNote(
+                "001D",
+                "Invite Board Member",
+                new Point2D.Double(0, 0),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.BLUE.getHexCode());
+
+        StickyNote stickyNote_5 = createStickyNote(
+                "001E",
+                "Board Member Joined",
+                new Point2D.Double(110, 0),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.ORANGE.getHexCode());
+
+        StickyNote stickyNote_6 = createStickyNote(
+                "001F",
+                "NotifyBoard",
+                new Point2D.Double(220, 10),
+                new Point2D.Double(100, 50),
+                StickyNoteColor.LIGHT_BLUE.getHexCode());
+
+        StickyNote stickyNote_7 = createStickyNote(
+                "001G",
+                "Add the member to the board in board bounded context",
+                new Point2D.Double(220, -60),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.VIOLET.getHexCode());
+
+        List<StickyNote> stickyNotes1 = new ArrayList<>();
+        stickyNotes1.add(stickyNote_1);
+        stickyNotes1.add(stickyNote_2);
+        stickyNotes1.add(stickyNote_3);
+        stickyNotes1.add(stickyNote_4);
+        stickyNotes1.add(stickyNote_5);
+        stickyNotes1.add(stickyNote_6);
+        stickyNotes1.add(stickyNote_7);
+
+        StickyNote stickyNote_8 = createStickyNote(
+                "001A",
+                "Team",
+                new Point2D.Double(0 + 1000, 110),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.LIGHT_YELLOW.getHexCode());
+
+        StickyNote stickyNote_9 = createStickyNote(
+                "001B",
+                "userId\nteamId",
+                new Point2D.Double(-110 + 1000, 0),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.GREEN.getHexCode());
+
+        StickyNote stickyNote_10 = createStickyNote(
+                "001C",
+                "User",
+                new Point2D.Double(-50 + 1000, -50),
+                new Point2D.Double(50, 50),
+                StickyNoteColor.YELLOW.getHexCode());
+
+        StickyNote stickyNote_11 = createStickyNote(
+                "001D",
+                "Invite Board Member",
+                new Point2D.Double(0 + 1000, 0),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.BLUE.getHexCode());
+
+        StickyNote stickyNote_12 = createStickyNote(
+                "001E",
+                "Board Member Joined",
+                new Point2D.Double(110 + 1000, 0),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.ORANGE.getHexCode());
+
+        StickyNote stickyNote_13 = createStickyNote(
+                "001F",
+                "NotifyBoard",
+                new Point2D.Double(220 + 1000, 10),
+                new Point2D.Double(100, 50),
+                StickyNoteColor.LIGHT_BLUE.getHexCode());
+
+        StickyNote stickyNote_14 = createStickyNote(
+                "001G",
+                "Add the member to the board in board bounded context",
+                new Point2D.Double(220 + 1000, -60),
+                new Point2D.Double(100, 100),
+                StickyNoteColor.VIOLET.getHexCode());
+
+        List<StickyNote> stickyNotes2 = new ArrayList<>();
+        stickyNotes2.add(stickyNote_8);
+        stickyNotes2.add(stickyNote_9);
+        stickyNotes2.add(stickyNote_10);
+        stickyNotes2.add(stickyNote_11);
+        stickyNotes2.add(stickyNote_12);
+        stickyNotes2.add(stickyNote_13);
+        stickyNotes2.add(stickyNote_14);
+
+        List<StickyNote> combined = new ArrayList<>();
+        combined.addAll(stickyNotes1);
+        combined.addAll(stickyNotes2);
+
+        List<List<StickyNote>> expectGroup = new ArrayList<>();
+        expectGroup.add(stickyNotes1);
+        expectGroup.add(stickyNotes2);
+
+        System.out.println(combined); // [A, B, C, D]
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(combined);
+        int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
+        assertEquals(2, groupAmount);
+        assertTrue(checkClusterStickyNoteGroups(expectGroup, clusterStickyNotesUseCase.getAllGroup()));
     }
 
     private StickyNote createStickyNote(String id, String desc, Point2D pos, Point2D geo, String color) {
         return new StickyNote(id, desc, pos, geo, color);
     }
 
-    private Boolean checkClusterStickyNoteList(List<StickyNote> stickyNotes, List<StickyNote> clusterStickyNotes) {
-        if(clusterStickyNotes.size() != stickyNotes.size()) {
+    private Boolean checkClusterStickyNoteGroups(List<List<StickyNote>> stickyNoteGroups, List<List<StickyNote>> clusterStickyNoteGroups){
+        if(clusterStickyNoteGroups.size() != stickyNoteGroups.size()) {
             return false;
         }
-        boolean[] isStickyNoteMatch = new boolean[stickyNotes.size()];
+        boolean[] isStickyNoteGroupMatch = new boolean[stickyNoteGroups.size()];
+        Arrays.fill(isStickyNoteGroupMatch, false);
+        for(int i = 0; i < stickyNoteGroups.size(); i++) {
+            for (List<StickyNote> clusterStickyNote : clusterStickyNoteGroups) {
+                if (checkClusterStickyNoteGroup(stickyNoteGroups.get(i), clusterStickyNote)) {
+                    isStickyNoteGroupMatch[i] = true;
+                    break;
+                }
+            }
+            if(!isStickyNoteGroupMatch[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private Boolean checkClusterStickyNoteGroup(List<StickyNote> stickyNoteGroup, List<StickyNote> clusterStickyNoteGroup) {
+        if(clusterStickyNoteGroup.size() != stickyNoteGroup.size()) {
+            return false;
+        }
+        boolean[] isStickyNoteMatch = new boolean[stickyNoteGroup.size()];
         Arrays.fill(isStickyNoteMatch, false);
-        for(int i = 0; i < stickyNotes.size(); i++) {
-            for (StickyNote clusterStickyNote : clusterStickyNotes) {
-                if (stickyNotes.get(i).getId().equals(clusterStickyNote.getId())) {
+        for(int i = 0; i < stickyNoteGroup.size(); i++) {
+            for (StickyNote clusterStickyNote : clusterStickyNoteGroup) {
+                if (stickyNoteGroup.get(i).getId().equals(clusterStickyNote.getId())) {
                     isStickyNoteMatch[i] = true;
                     break;
                 }
