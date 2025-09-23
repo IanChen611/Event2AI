@@ -9,9 +9,9 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>Event2AI-UseCase</artifactId>
+    <artifactId>Event2AI-Common</artifactId>
     <packaging>jar</packaging>
-    <name>Event2AI-UseCase</name>
+    <name>Event2AI-Common</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,28 +27,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${gson.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>Event2AI</groupId>
-            <artifactId>Event2AI-Entity</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>Event2AI</groupId>
-            <artifactId>Event2AI-Common</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

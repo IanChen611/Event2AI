@@ -12,19 +12,19 @@ import java.util.stream.Collectors;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
-public class ClassifierStickNotesUseCase {
+public class ClassifyStickNotesUseCase {
     private List<Group> groups;
     private final List<List<StickyNote>> clusteredStickyNotes;
 
-    public ClassifierStickNotesUseCase(List<List<StickyNote>> clusteredStickyNotes){
+    public ClassifyStickNotesUseCase(List<List<StickyNote>> clusteredStickyNotes){
         this.clusteredStickyNotes = clusteredStickyNotes;
         this.groups = new ArrayList<>();
         for(List<StickyNote> stickyNotes : this.clusteredStickyNotes){
-            this.groups.add(classifierGroup(stickyNotes));
+            this.groups.add(classifyGroup(stickyNotes));
         }
     }
 
-    private Group classifierGroup(List<StickyNote> stickyNotes){
+    private Group classifyGroup(List<StickyNote> stickyNotes){
         Group group = new Group();
 
         // Process UseCase

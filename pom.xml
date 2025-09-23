@@ -74,5 +74,6 @@
         <module>Event2AI-Adapter</module>
         <module>Event2AI-UseCase</module>
         <module>Event2AI-Entity</module>
+        <module>Event2AI-Common</module>
     </modules>
 </project>

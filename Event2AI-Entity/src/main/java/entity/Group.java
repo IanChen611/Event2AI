@@ -2,7 +2,6 @@ package entity;
 
 import valueobject.PublishEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
