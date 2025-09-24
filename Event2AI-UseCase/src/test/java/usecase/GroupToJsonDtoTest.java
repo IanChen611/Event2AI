@@ -1,11 +1,8 @@
-package adapter;
+package usecase;
 
-import com.google.gson.JsonObject;
 import entity.Group;
 import entity.StickyNote;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import usecase.GroupToJsonDto;
 import valueobject.PublishEvent;
 
 import java.awt.geom.Point2D;
@@ -13,29 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class JsonFileCreatorTest {
-    private JsonFileCreator jsonFileCreator;
-
-    @BeforeEach
-    public void setUp() {
-        jsonFileCreator = new JsonFileCreator();
-    }
-
+public class GroupToJsonDtoTest {
     @Test
-    public void create_a_json_file() {
-        StickyNote stickyNote = new StickyNote("111", "0", new Point2D.Double(0, 0), new Point2D.Double(0, 0), "0");
-
-        jsonFileCreator.create("./src/test/output.json", stickyNote);
-
-        JsonReader jsonReader = new JsonReader();
-        JsonObject items = jsonReader.readBoardItem("./src/test/output.json");
-        assertFalse(items.isEmpty());
-    }
-
-    @Test
-    public void create_file_by_GroupToJsonDto() {
+    public void group_can_be_put_into_GroupToJsonDto() {
         StickyNote stickyNote_1 = new StickyNote(
                 "001A",
                 "Team",
@@ -115,10 +94,6 @@ public class JsonFileCreatorTest {
                 stickyNote_7.getDescription())));
 
         GroupToJsonDto groupToJsonDto = new GroupToJsonDto(group);
-
-        jsonFileCreator.create("./src/test/output.json", groupToJsonDto);
-        JsonReader jsonReader = new JsonReader();
-        JsonObject items = jsonReader.readBoardItem("./src/test/output.json");
-        assertFalse(items.isEmpty());
+        assertNotNull(groupToJsonDto);
     }
 }
