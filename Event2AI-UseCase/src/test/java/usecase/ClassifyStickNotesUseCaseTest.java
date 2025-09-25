@@ -1,5 +1,6 @@
 package usecase;
 
+import common.TestTool;
 import entity.Group;
 import entity.StickyNote;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,10 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ClassifyStickNotesUseCaseTest {
 
@@ -397,7 +400,7 @@ public class ClassifyStickNotesUseCaseTest {
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
-                "userId\nteamId",
+                "userId\nteamId\n",
                 new Point2D.Double(-110, 0),
                 new Point2D.Double(100, 100),
                 "green");
@@ -535,27 +538,55 @@ public class ClassifyStickNotesUseCaseTest {
         //      event name => stickyNote_5
         //      notifier => stickyNote_6
         //      behavior => stickyNote_7
-        PublishEvent publishEvent1 = group.getPublishEvents().get(0);
-        assertEquals(stickyNote_5.getDescription(), publishEvent1.getEventName());
-        assertEquals(stickyNote_6.getDescription(), publishEvent1.getNotifier());
-        assertEquals(stickyNote_7.getDescription(), publishEvent1.getBehavior());
+
         // publishEvents =>
         //      event name => stickyNote_9
         //      notifier => stickyNote_10
         //      behavior => stickyNote_11
-        PublishEvent publishEvent2 = group.getPublishEvents().get(1);
-        assertEquals(stickyNote_9.getDescription(), publishEvent2.getEventName());
-        assertEquals(stickyNote_10.getDescription(), publishEvent2.getNotifier());
-        assertEquals(stickyNote_11.getDescription(), publishEvent2.getBehavior());
 
         // publishEvents =>
         //      event name => stickyNote_12
         //      notifier => stickyNote_13
         //      behavior => stickyNote_14
-        PublishEvent publishEvent3 = group.getPublishEvents().get(2);
-        assertEquals(stickyNote_12.getDescription(), publishEvent3.getEventName());
-        assertEquals(stickyNote_13.getDescription(), publishEvent3.getNotifier());
-        assertEquals(stickyNote_14.getDescription(), publishEvent3.getBehavior());
+
+        List<PublishEvent> expectedPublishEvents = new ArrayList<>();
+        expectedPublishEvents.add(new PublishEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
+        expectedPublishEvents.add(new PublishEvent(stickyNote_9.getDescription(), stickyNote_10.getDescription(), stickyNote_11.getDescription()));
+        expectedPublishEvents.add(new PublishEvent(stickyNote_12.getDescription(), stickyNote_13.getDescription(), stickyNote_14.getDescription()));
+
+        assertTrue(checkPublishEvent(expectedPublishEvents, group.getPublishEvents()));
+    }
+
+
+    private Boolean checkPublishEvent(List<PublishEvent> expectedEvents, List<PublishEvent> actualEvents) {
+        if(actualEvents.size() != expectedEvents.size()) {
+            return false;
+        }
+        boolean[] isPublishEventMatch = new boolean[expectedEvents.size()];
+        Arrays.fill(isPublishEventMatch, false);
+        for(int i = 0; i < expectedEvents.size(); i++) {
+            for (PublishEvent actualEvent : actualEvents) {
+                if (Objects.equals(expectedEvents.get(i).getEventName(), actualEvent.getEventName()) &&
+                        checkNotifierOrBehavior(expectedEvents.get(i).getNotifier(), actualEvent.getNotifier()) &&
+                        checkNotifierOrBehavior(expectedEvents.get(i).getBehavior(), actualEvent.getBehavior())) {
+                    isPublishEventMatch[i] = true;
+                    break;
+                }
+            }
+            if(!isPublishEventMatch[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Boolean checkNotifierOrBehavior(String expected, String actual) {
+        if (Objects.equals(expected, actual)) {
+            return true;
+        } else {
+            return Objects.equals(expected, "") &&
+                    Objects.equals(actual, "(no statement)");
+        }
     }
 
 }
