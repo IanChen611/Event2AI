@@ -5,17 +5,17 @@ import java.util.Objects;
 public class PublishEvent {
     private String eventName;
     private String notifier;
-    private String Behavior;
+    private String behavior;
     public PublishEvent(String eventName, String notifier, String Behavior) {
         if (Objects.equals(notifier, "")){
             this.notifier = "(no statement)";
         }
         if (Objects.equals(Behavior, "")){
-            this.Behavior = "(no statement)";
+            this.behavior = "(no statement)";
         }
         this.eventName = eventName;
         this.notifier = notifier;
-        this.Behavior = Behavior;
+        this.behavior = Behavior;
     }
 
     public String getEventName() {
@@ -35,10 +35,10 @@ public class PublishEvent {
     }
 
     public String getBehavior() {
-        return Behavior;
+        return behavior;
     }
 
     public void setBehavior(String behavior) {
-        Behavior = behavior;
+        this.behavior = behavior;
     }
 }

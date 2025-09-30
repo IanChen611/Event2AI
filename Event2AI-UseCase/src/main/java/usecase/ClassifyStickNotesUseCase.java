@@ -82,7 +82,7 @@ public class ClassifyStickNotesUseCase {
                 break;
             case "aggregate_name":
                 for(StickyNote stickyNote : stickyNotes){
-                    if(stickyNote.getColor().equals("light yellow")){
+                    if(stickyNote.getColor().equals("light_yellow")){
                         result.add(stickyNote);
                         break;
                     }
@@ -98,7 +98,7 @@ public class ClassifyStickNotesUseCase {
                 break;
             case "comment":
                 for(StickyNote stickyNote : stickyNotes){
-                    if(stickyNote.getColor().equals("white")){
+                    if(stickyNote.getColor().equals("gray")){
                         result.add(stickyNote);
                     }
                 }
@@ -106,7 +106,7 @@ public class ClassifyStickNotesUseCase {
             case "publish_event":
                 for(StickyNote stickyNote : stickyNotes){
                     if(stickyNote.getColor().equals("orange") ||
-                            stickyNote.getColor().equals("light blue") ||
+                            stickyNote.getColor().equals("light_blue") ||
                             stickyNote.getColor().equals("violet")){
                         result.add(stickyNote);
                     }
@@ -128,7 +128,7 @@ public class ClassifyStickNotesUseCase {
                 case "orange":
                     eventNames.add(stickyNote);
                     break;
-                case "light blue":
+                case "light_blue":
                     notifiers.add(stickyNote);
                     break;
                 case "violet":
@@ -140,7 +140,7 @@ public class ClassifyStickNotesUseCase {
         for (StickyNote eventName : eventNames){
             String notifierDesc = "";
             String behaviorDesc = "";
-            double mutiple = 1.3;
+            double mutiple = 1.4;
 
             for(StickyNote notifier : notifiers){
                 double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(notifier.getGeo().getX(), notifier.getGeo().getY()));
@@ -148,7 +148,8 @@ public class ClassifyStickNotesUseCase {
                 double dy = abs(notifier.getPos().getY() - eventName.getPos().getY());
                 double dist = Math.sqrt(dx * dx + dy * dy);
                 // distance < 1.4 geo    and     notifier.y >= eventName.y
-                if(dist / threshold <= mutiple && notifier.getPos().getY() >= eventName.getPos().getY()){
+                if(dist / threshold <= mutiple &&
+                        notifier.getPos().getY() <= eventName.getPos().getY()){
                     notifierDesc =  notifier.getDescription();
                     break;
                 }
@@ -159,7 +160,8 @@ public class ClassifyStickNotesUseCase {
                 double dy = abs(behavior.getPos().getY() - eventName.getPos().getY());
                 double dist = Math.sqrt(dx * dx + dy * dy);
                 // distance < 1.4 geo    and     behavior.y <= eventName.y
-                if (dist / threshold <= mutiple && behavior.getPos().getY() <= eventName.getPos().getY()) {
+                if (dist / threshold <= mutiple &&
+                        behavior.getPos().getY() >= eventName.getPos().getY()) {
                     behaviorDesc = behavior.getDescription();
                     break;
                 }

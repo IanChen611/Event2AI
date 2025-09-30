@@ -10,7 +10,7 @@ public class GroupStickyNotesUseCase {
     private List<StickyNote> stickyNotes;
     private List<List<StickyNote>> clusteredStickyNotes;
 
-    GroupStickyNotesUseCase(List<StickyNote> stickyNotes) {
+    public GroupStickyNotesUseCase(List<StickyNote> stickyNotes) {
         this.stickyNotes = stickyNotes;
         ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
         this.clusteredStickyNotes = clusterStickyNotesUseCase.getAllGroup();

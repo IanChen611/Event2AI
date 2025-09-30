@@ -3,20 +3,26 @@ package usecase;
 import entity.Group;
 import valueobject.PublishEvent;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class GroupToJsonDto {
     private String usecase;
-    private ArrayList<String> input;
+    private List<String> input;
     private String aggregate;
     private String user;
-    private ArrayList<PublishEvent> events;
+    private List<PublishEvent> events;
+    private List<String> comments;
 
     public GroupToJsonDto(Group group) {
         this.usecase = group.getUseCaseName();
-        this.input = new ArrayList<>(group.getInput());
+        this.input = group.getInput();
         this.aggregate = group.getAggregateName();
         this.user = group.getUserName();
-        this.events = new ArrayList<>(group.getPublishEvents());
+        this.events = group.getPublishEvents();
+        this.comments = group.getComment();
+    }
+
+    public String getUsecaseName() {
+        return usecase;
     }
 }
