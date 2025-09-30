@@ -23,9 +23,9 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_1 = new StickyNote(
                 "001A",
                 "Team",
-                new Point2D.Double(0, 110),
+                new Point2D.Double(0, -110),
                 new Point2D.Double(100, 100),
-                "light yellow");
+                "light_yellow");
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
@@ -37,7 +37,7 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_3 = new StickyNote(
                 "001C",
                 "User",
-                new Point2D.Double(-50, -50),
+                new Point2D.Double(-50, 50),
                 new Point2D.Double(50, 50),
                 "yellow");
 
@@ -58,23 +58,23 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_6 = new StickyNote(
                 "001F",
                 "NotifyBoard",
-                new Point2D.Double(220, 10),
+                new Point2D.Double(220, -10),
                 new Point2D.Double(100, 50),
-                "light blue");
+                "light_blue");
 
         StickyNote stickyNote_7 = new StickyNote(
                 "001G",
                 "Add the member to the board in board bounded context",
-                new Point2D.Double(220, -60),
+                new Point2D.Double(220, 60),
                 new Point2D.Double(100, 100),
                 "violet");
 
         StickyNote stickyNote_8 = new StickyNote(
                 "001H",
                 "comment",
-                new Point2D.Double(100, 100),
+                new Point2D.Double(100, -100),
                 new Point2D.Double(200, 170),
-                "white");
+                "gray");
 
         List<StickyNote> stickyNotes = new ArrayList<>();
         stickyNotes.add(stickyNote_1);
@@ -130,9 +130,9 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_1 = new StickyNote(
                 "001A",
                 "Team",
-                new Point2D.Double(0, 110),
+                new Point2D.Double(0, -110),
                 new Point2D.Double(100, 100),
-                "light yellow");
+                "light_yellow");
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
@@ -144,7 +144,7 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_3 = new StickyNote(
                 "001C",
                 "User",
-                new Point2D.Double(-50, -50),
+                new Point2D.Double(-50, 50),
                 new Point2D.Double(50, 50),
                 "yellow");
 
@@ -165,37 +165,37 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_6 = new StickyNote(
                 "001F",
                 "NotifyBoard",
-                new Point2D.Double(220, 10),
+                new Point2D.Double(220, -10),
                 new Point2D.Double(100, 50),
-                "light blue");
+                "light_blue");
 
         StickyNote stickyNote_7 = new StickyNote(
                 "001G",
                 "Add the member to the board in board bounded context",
-                new Point2D.Double(220, -60),
+                new Point2D.Double(220, 60),
                 new Point2D.Double(100, 100),
                 "violet");
 
         StickyNote stickyNote_8 = new StickyNote(
                 "001H",
                 "comment0",
-                new Point2D.Double(200, 170),
+                new Point2D.Double(200, -170),
                 new Point2D.Double(100, 100),
-                "white");
+                "gray");
 
         StickyNote stickyNote_9 = new StickyNote(
                 "001I",
                 "comment1",
-                new Point2D.Double(300, 170),
+                new Point2D.Double(300, -170),
                 new Point2D.Double(100, 100),
-                "white");
+                "gray");
 
         StickyNote stickyNote_10 = new StickyNote(
                 "001I",
                 "comment2",
-                new Point2D.Double(400, 170),
+                new Point2D.Double(400, -170),
                 new Point2D.Double(100, 100),
-                "white");
+                "gray");
 
         List<StickyNote> stickyNotes = new ArrayList<>();
         stickyNotes.add(stickyNote_1);
@@ -255,9 +255,9 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_1 = new StickyNote(
                 "001A",
                 "Team",
-                new Point2D.Double(0, 110),
+                new Point2D.Double(0, -110),
                 new Point2D.Double(100, 100),
-                "light yellow");
+                "light_yellow");
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
@@ -269,7 +269,7 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_3 = new StickyNote(
                 "001C",
                 "User",
-                new Point2D.Double(-50, -50),
+                new Point2D.Double(-50, 50),
                 new Point2D.Double(50, 50),
                 "yellow");
 
@@ -290,42 +290,42 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_6 = new StickyNote(
                 "001F",
                 "NotifyBoard",
-                new Point2D.Double(220, 60),
+                new Point2D.Double(220, -60),
                 new Point2D.Double(100, 50),
-                "light blue");
+                "light_blue");
 
         StickyNote stickyNote_7 = new StickyNote(
                 "001G",
                 "Add the member to the board in board bounded context",
-                new Point2D.Double(220, -25),
+                new Point2D.Double(220, 25),
                 new Point2D.Double(100, 100),
                 "violet");
 
         StickyNote stickyNote_8 = new StickyNote(
                 "001H",
                 "comment0",
-                new Point2D.Double(200, 170),
+                new Point2D.Double(200, -170),
                 new Point2D.Double(100, 100),
-                "white");
+                "gray");
 
         StickyNote stickyNote_9 = new StickyNote(
                 "001D",
                 "event2",
-                new Point2D.Double(110, -150),
+                new Point2D.Double(110, 150),
                 new Point2D.Double(100, 100),
                 "orange");
 
         StickyNote stickyNote_10 = new StickyNote(
                 "001E",
                 "notifier2",
-                new Point2D.Double(220, -90),
+                new Point2D.Double(220, 90),
                 new Point2D.Double(100, 50),
-                "light blue");
+                "light_blue");
 
         StickyNote stickyNote_11 = new StickyNote(
                 "001F",
                 "behavior2",
-                new Point2D.Double(220, -175),
+                new Point2D.Double(220, 175),
                 new Point2D.Double(100, 100),
                 "violet");
 
@@ -394,9 +394,9 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_1 = new StickyNote(
                 "001A",
                 "Team",
-                new Point2D.Double(0, 110),
+                new Point2D.Double(0, -110),
                 new Point2D.Double(100, 100),
-                "light yellow");
+                "light_yellow");
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
@@ -408,7 +408,7 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_3 = new StickyNote(
                 "001C",
                 "User",
-                new Point2D.Double(-50, -50),
+                new Point2D.Double(-50, 50),
                 new Point2D.Double(50, 50),
                 "yellow");
 
@@ -429,64 +429,64 @@ public class ClassifyStickNotesUseCaseTest {
         StickyNote stickyNote_6 = new StickyNote(
                 "001F",
                 "NotifyBoard",
-                new Point2D.Double(220, 60),
+                new Point2D.Double(220, -60),
                 new Point2D.Double(100, 50),
-                "light blue");
+                "light_blue");
 
         StickyNote stickyNote_7 = new StickyNote(
                 "001G",
                 "Add the member to the board in board bounded context",
 
-                new Point2D.Double(220, -25),
+                new Point2D.Double(220, 25),
                 new Point2D.Double(100, 100),
                 "violet");
 
         StickyNote stickyNote_8 = new StickyNote(
                 "001H",
                 "comment0",
-                new Point2D.Double(200, 170),
+                new Point2D.Double(200, -170),
                 new Point2D.Double(100, 100),
-                "white");
+                "gray");
 
         StickyNote stickyNote_9 = new StickyNote(
                 "001D",
                 "event2",
-                new Point2D.Double(110, -150),
+                new Point2D.Double(110, 150),
                 new Point2D.Double(100, 100),
                 "orange");
 
         StickyNote stickyNote_10 = new StickyNote(
                 "001E",
                 "notifier2",
-                new Point2D.Double(220, -90),
+                new Point2D.Double(220, 90),
                 new Point2D.Double(100, 50),
-                "light blue");
+                "light_blue");
 
         StickyNote stickyNote_11 = new StickyNote(
                 "001F",
                 "behavior2",
-                new Point2D.Double(220, -175),
+                new Point2D.Double(220, 175),
                 new Point2D.Double(100, 100),
                 "violet");
 
         StickyNote stickyNote_12 = new StickyNote(
                 "001D",
                 "event3",
-                new Point2D.Double(110, -300),
+                new Point2D.Double(110, 300),
                 new Point2D.Double(100, 100),
                 "orange");
 
         StickyNote stickyNote_13 = new StickyNote(
                 "001E",
                 "notifier3",
-                new Point2D.Double(220, -240),
+                new Point2D.Double(220, 240),
                 new Point2D.Double(100, 50),
-                "light blue");
+                "light_blue");
 
         StickyNote stickyNote_14 = new StickyNote(
                 "001F",
                 "behavior3",
-                new Point2D.Double(220, -325),
+                new Point2D.Double(220, 325),
                 new Point2D.Double(100, 100),
                 "violet");
 
