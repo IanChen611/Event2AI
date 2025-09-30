@@ -43,7 +43,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${exec.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>app.Main</mainClass>
+                    <mainClass>dirvers.app.Main</mainClass>
                 </configuration>
             </plugin>
 
@@ -55,7 +55,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>app.Main</mainClass>
+                            <mainClass>dirvers.app.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,9 +1,8 @@
-package app;
+package dirvers.app;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import dirvers.app.Dotenv;
 import dirvers.auth.MiroOAuthClient;
 import dirvers.core.DumpResult;
 import dirvers.core.MiroDumpClient;
