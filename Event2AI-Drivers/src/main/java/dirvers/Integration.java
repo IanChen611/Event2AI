@@ -5,6 +5,7 @@ import adapter.StickyNoteProcessor;
                                                                                                                                                        import dirvers.app.SetMiroApiEnv;
 import dirvers.core.DumpResult;
 import dirvers.core.MiroDumpClient;
+import dirvers.core.RunMiroClient;
 import usecase.GroupToJsonDto;
 
 import java.util.List;
@@ -16,9 +17,8 @@ public class Integration {
     private static List<GroupToJsonDto> groupDtos;
 
     public static void main(String[] args) throws Exception {
-        SetMiroApiEnv setMiroApiEnv = new SetMiroApiEnv();
-        MiroDumpClient client = setMiroApiEnv.getMiroDumpClient();
-        DumpResult result = client.dumpBoard(setMiroApiEnv.getBoardId());
+        RunMiroClient runMiroClient = new RunMiroClient();
+        DumpResult result = runMiroClient.run();
         // ######################################################################
         jsonFileCreator.create(MIRO_JSON_PATH, result.getAiDump());
 
