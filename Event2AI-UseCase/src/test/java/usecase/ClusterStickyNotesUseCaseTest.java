@@ -294,7 +294,7 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_1 = new StickyNote(
                 "001A",
                 "Team",
-                new Point2D.Double(0, 110),
+                new Point2D.Double(0, -110),
                 new Point2D.Double(100, 100),
                 StickyNoteColor.LIGHT_YELLOW.getHexCode());
 
@@ -308,7 +308,7 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_3 = new StickyNote(
                 "001C",
                 "User",
-                new Point2D.Double(-50, -50),
+                new Point2D.Double(-50, 50),
                 new Point2D.Double(50, 50),
                 StickyNoteColor.YELLOW.getHexCode());
 
@@ -329,14 +329,14 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_6 = new StickyNote(
                 "001F",
                 "NotifyBoard",
-                new Point2D.Double(220, 10),
+                new Point2D.Double(220, -10),
                 new Point2D.Double(100, 50),
                 StickyNoteColor.LIGHT_BLUE.getHexCode());
 
         StickyNote stickyNote_7 = new StickyNote(
                 "001G",
                 "Add the member to the board in board bounded context",
-                new Point2D.Double(220, -60),
+                new Point2D.Double(220, 60),
                 new Point2D.Double(100, 100),
                 StickyNoteColor.VIOLET.getHexCode());
 
@@ -361,7 +361,7 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_1 = new StickyNote(
                 "001A",
                 "Team",
-                new Point2D.Double(0, 110),
+                new Point2D.Double(0, -110),
                 new Point2D.Double(100, 100),
                 StickyNoteColor.LIGHT_YELLOW.getHexCode());
 
@@ -375,7 +375,7 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_3 = new StickyNote(
                 "001C",
                 "User",
-                new Point2D.Double(-50, -50),
+                new Point2D.Double(-50, 50),
                 new Point2D.Double(50, 50),
                 StickyNoteColor.YELLOW.getHexCode());
 
@@ -396,14 +396,14 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_6 = new StickyNote(
                 "001F",
                 "NotifyBoard",
-                new Point2D.Double(220, 10),
+                new Point2D.Double(220, -10),
                 new Point2D.Double(100, 50),
                 StickyNoteColor.LIGHT_BLUE.getHexCode());
 
         StickyNote stickyNote_7 = new StickyNote(
                 "001G",
                 "Add the member to the board in board bounded context",
-                new Point2D.Double(220, -60),
+                new Point2D.Double(220, 60),
                 new Point2D.Double(100, 100),
                 StickyNoteColor.VIOLET.getHexCode());
 
@@ -419,7 +419,7 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_8 = new StickyNote(
                 "001A",
                 "Team",
-                new Point2D.Double(0 + 1000, 110),
+                new Point2D.Double(0 + 1000, -110),
                 new Point2D.Double(100, 100),
                 StickyNoteColor.LIGHT_YELLOW.getHexCode());
 
@@ -433,7 +433,7 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_10 = new StickyNote(
                 "001C",
                 "User",
-                new Point2D.Double(-50 + 1000, -50),
+                new Point2D.Double(-50 + 1000, 50),
                 new Point2D.Double(50, 50),
                 StickyNoteColor.YELLOW.getHexCode());
 
@@ -454,14 +454,14 @@ public class ClusterStickyNotesUseCaseTest {
         StickyNote stickyNote_13 = new StickyNote(
                 "001F",
                 "NotifyBoard",
-                new Point2D.Double(220 + 1000, 10),
+                new Point2D.Double(220 + 1000, -10),
                 new Point2D.Double(100, 50),
                 StickyNoteColor.LIGHT_BLUE.getHexCode());
 
         StickyNote stickyNote_14 = new StickyNote(
                 "001G",
                 "Add the member to the board in board bounded context",
-                new Point2D.Double(220 + 1000, -60),
+                new Point2D.Double(220 + 1000, 60),
                 new Point2D.Double(100, 100),
                 StickyNoteColor.VIOLET.getHexCode());
 
