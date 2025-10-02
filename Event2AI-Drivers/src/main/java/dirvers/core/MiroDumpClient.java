@@ -4,7 +4,6 @@ import adapter.dump.DumpComposer;
 import adapter.dump.DumperRegistry;
 import adapter.dump.StickyNoteDump;
 import adapter.dump.TagDump;
-import com.google.gson.JsonObject;
 
 import java.util.List;
 

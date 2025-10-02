@@ -2,10 +2,10 @@ package dirvers.core;
 
 import dirvers.app.SetMiroApiEnv;
 
-public class RunMiroClient {
+public class MiroBoardDumpService {
     private final DumpResult result;
 
-    public RunMiroClient() throws Exception {
+    public MiroBoardDumpService() throws Exception {
         SetMiroApiEnv setMiroApiEnv = new SetMiroApiEnv();
         MiroDumpClient client = setMiroApiEnv.getMiroDumpClient();
         this.result = client.dumpBoard(setMiroApiEnv.getBoardId());
