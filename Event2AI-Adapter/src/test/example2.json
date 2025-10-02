@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "1.0.0",
+  "fetchedAt": "2025-09-30T06:34:03.086852100Z",
+  "stickyNotes": [
+    {
+      "id": "3458764640206555736",
+      "html": "\u003cp\u003eBoard Created\u003c/p\u003e",
+      "text": "Board Created",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1903.7814147890028,
+      "y": -386.40794964363045,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555737",
+      "html": "\u003cp\u003eCreate Board0\u003c/p\u003e",
+      "text": "Create Board0",
+      "color": "blue",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1663.3163248415813,
+      "y": -386.40794964363045,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555738",
+      "html": "\u003cp\u003eteamId\u003c/p\u003e\u003cp\u003eprojectId\u003c/p\u003e\u003cp\u003euserId\u003c/p\u003e\u003cp\u003eboardName\u003c/p\u003e\u003cp\u003eboardTemplate\u003c/p\u003e",
+      "text": "teamIdprojectIduserIdboardNameboardTemplate",
+      "color": "green",
+      "width": 212.930000000004,
+      "height": 243.96000000000458,
+      "x": 1450.3863248415794,
+      "y": -386.40794964362817,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555739",
+      "html": "\u003cp\u003eNotify board in Board BC to create itself\u003c/p\u003e",
+      "text": "Notify board in Board BC to create itself",
+      "color": "violet",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2108.0270455332243,
+      "y": -335.6701966346352,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555740",
+      "html": "\u003cp\u003eUser\u003c/p\u003e",
+      "text": "User",
+      "color": "yellow",
+      "width": 139.64469452032583,
+      "height": 159.99492638509693,
+      "x": 1561.0939837755877,
+      "y": -242.19267604163792,
+      "tags": [
+        {
+          "id": "3458764640206380419",
+          "name": "OK",
+          "color": "black"
+        }
+      ]
+    },
+    {
+      "id": "3458764640206555741",
+      "html": "\u003cp\u003eNotifyBoard0\u003c/p\u003e",
+      "text": "NotifyBoard0",
+      "color": "light_blue",
+      "width": 212.31106995960366,
+      "height": 138.3054970022561,
+      "x": 2108.3365105534226,
+      "y": -479.8653786579318,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555742",
+      "html": "\u003cp\u003eTeam\u003c/p\u003e\u003cp\u003e\u003cbr /\u003e\u003c/p\u003e",
+      "text": "Team",
+      "color": "light_yellow",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1755.779727873568,
+      "y": -579.6301966346352,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555743",
+      "html": "\u003cp\u003eBoard Member Joined\u003c/p\u003e",
+      "text": "Board Member Joined",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1903.7814147890028,
+      "y": -82.32974938572524,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555744",
+      "html": "\u003cp\u003eAdd the user to the board as a board admin and all the team members automatically become member of the created board in Board BC\u003c/p\u003e",
+      "text": "Add the user to the board as a board admin and all the team members automatically become member of the created board in Board BC",
+      "color": "violet",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2095.506240962048,
+      "y": 19.028574392578914,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555745",
+      "html": "\u003cp\u003eNotifyBoard1\u003c/p\u003e",
+      "text": "NotifyBoard1",
+      "color": "light_blue",
+      "width": 212.31106995960366,
+      "height": 138.3054970022561,
+      "x": 2095.8157059822465,
+      "y": -144.53744813350716,
+      "tags": []
+    },
+    {
+      "id": "3458764640206555748",
+      "html": "\u003cp\u003eComment0\u003c/p\u003e",
+      "text": "Comment0",
+      "color": "gray",
+      "width": 244.85423108816022,
+      "height": 280.5365059703544,
+      "x": 1984.6718434176482,
+      "y": -756.8814285248673,
+      "tags": []
+    },
+    {
+      "id": "3458764641309624375",
+      "html": "\u003cp\u003e1. The creator is the  board Admin\u003c/p\u003e\u003cp\u003e2. Add the remaining team members to the created board (team admin, company admin -\u0026gt; board admin;\u003c/p\u003e\u003cp\u003eteam member -\u0026gt; board member)\u003c/p\u003e",
+      "text": "1. The creator is the  board Admin2. Add the remaining team members to the created board (team admin, company admin -\u0026gt; board admin;team member -\u0026gt; board member)",
+      "color": "gray",
+      "width": 244.85423108816022,
+      "height": 280.5365059703544,
+      "x": 2210.881362707724,
+      "y": -756.8814285248671,
+      "tags": []
+    }
+  ],
+  "tags": []
+}
