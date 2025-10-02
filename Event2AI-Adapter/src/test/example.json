@@ -1,23 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "fetchedAt": "2025-09-18T05:26:11.771664700Z",
+  "fetchedAt": "2025-09-30T06:34:03.086852100Z",
   "stickyNotes": [
     {
-      "id": "3458764639701211551",
-      "html": "\u003cp\u003e測試5\u003c/p\u003e",
-      "text": "測試5",
-      "color": "light_yellow",
-      "width": 368.15000000000003,
-      "height": 421.8,
-      "x": 3364.4755148009413,
-      "y": -2124.19073862342,
-      "tags": [
-        {
-          "id": "3458764639777565487",
-          "name": "Done",
-          "color": "red"
-        }
-      ]
+      "id": "3458764640206555736",
+      "html": "\u003cp\u003eBoard Created\u003c/p\u003e",
+      "text": "Board Created",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1903.7814147890028,
+      "y": -386.40794964363045,
+      "tags": []
     }
   ],
   "tags": []
