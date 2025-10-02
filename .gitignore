@@ -32,3 +32,6 @@ miro
 
 # Ignore local environment file
 .env
+
+# Br use
+codex

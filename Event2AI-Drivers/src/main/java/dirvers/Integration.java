@@ -26,13 +26,4 @@ public class Integration {
             jsonFileCreator.create("./ToAIJsonFile/" + groupDto.getUsecaseName().replace(" ", "_").trim() + ".json", groupDto);
         }
     }
-
-
-    private static String firstNonBlank(String... vals) {
-        if (vals == null) return null;
-        for (String v : vals) {
-            if (v != null && !v.isBlank()) return v;
-        }
-        return null;
-    }
 }
