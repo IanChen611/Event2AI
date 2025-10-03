@@ -1,6 +1,5 @@
 package usecase;
 
-import common.TestTool;
 import entity.Group;
 import entity.StickyNote;
 import org.junit.jupiter.api.Test;
@@ -120,7 +119,7 @@ public class ClassifyStickNotesUseCaseTest {
         PublishEvent publishEvent = group.getPublishEvents().get(0);
         assertEquals(stickyNote_5.getDescription(), publishEvent.getEventName());
         assertEquals(stickyNote_6.getDescription(), publishEvent.getNotifier());
-        assertEquals(stickyNote_7.getDescription(), publishEvent.getBehavior());
+        assertEquals(stickyNote_7.getDescription(), publishEvent.getPolicy());
 
     }
 
@@ -245,7 +244,7 @@ public class ClassifyStickNotesUseCaseTest {
         PublishEvent publishEvent = group.getPublishEvents().get(0);
         assertEquals(stickyNote_5.getDescription(), publishEvent.getEventName());
         assertEquals(stickyNote_6.getDescription(), publishEvent.getNotifier());
-        assertEquals(stickyNote_7.getDescription(), publishEvent.getBehavior());
+        assertEquals(stickyNote_7.getDescription(), publishEvent.getPolicy());
 
     }
 
@@ -377,7 +376,7 @@ public class ClassifyStickNotesUseCaseTest {
         PublishEvent publishEvent1 = group.getPublishEvents().get(0);
         assertEquals(stickyNote_5.getDescription(), publishEvent1.getEventName());
         assertEquals(stickyNote_6.getDescription(), publishEvent1.getNotifier());
-        assertEquals(stickyNote_7.getDescription(), publishEvent1.getBehavior());
+        assertEquals(stickyNote_7.getDescription(), publishEvent1.getPolicy());
         // publishEvents =>
         //      event name => stickyNote_9
         //      notifier => stickyNote_10
@@ -385,7 +384,7 @@ public class ClassifyStickNotesUseCaseTest {
         PublishEvent publishEvent2 = group.getPublishEvents().get(1);
         assertEquals(stickyNote_9.getDescription(), publishEvent2.getEventName());
         assertEquals(stickyNote_10.getDescription(), publishEvent2.getNotifier());
-        assertEquals(stickyNote_11.getDescription(), publishEvent2.getBehavior());
+        assertEquals(stickyNote_11.getDescription(), publishEvent2.getPolicy());
     }
 
     @Test
@@ -568,7 +567,7 @@ public class ClassifyStickNotesUseCaseTest {
             for (PublishEvent actualEvent : actualEvents) {
                 if (Objects.equals(expectedEvents.get(i).getEventName(), actualEvent.getEventName()) &&
                         checkNotifierOrBehavior(expectedEvents.get(i).getNotifier(), actualEvent.getNotifier()) &&
-                        checkNotifierOrBehavior(expectedEvents.get(i).getBehavior(), actualEvent.getBehavior())) {
+                        checkNotifierOrBehavior(expectedEvents.get(i).getPolicy(), actualEvent.getPolicy())) {
                     isPublishEventMatch[i] = true;
                     break;
                 }

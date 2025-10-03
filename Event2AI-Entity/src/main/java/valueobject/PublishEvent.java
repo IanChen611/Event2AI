@@ -5,17 +5,17 @@ import java.util.Objects;
 public class PublishEvent {
     private String eventName;
     private String notifier;
-    private String behavior;
-    public PublishEvent(String eventName, String notifier, String Behavior) {
+    private String policy;
+    public PublishEvent(String eventName, String notifier, String policy) {
         if (Objects.equals(notifier, "")){
             this.notifier = "(no statement)";
         }
-        if (Objects.equals(Behavior, "")){
-            this.behavior = "(no statement)";
+        if (Objects.equals(policy, "")){
+            this.policy = "(no statement)";
         }
         this.eventName = eventName;
         this.notifier = notifier;
-        this.behavior = Behavior;
+        this.policy = policy;
     }
 
     public String getEventName() {
@@ -34,11 +34,11 @@ public class PublishEvent {
         this.notifier = notifier;
     }
 
-    public String getBehavior() {
-        return behavior;
+    public String getPolicy() {
+        return policy;
     }
 
-    public void setBehavior(String behavior) {
-        this.behavior = behavior;
+    public void setPolicy(String policy) {
+        this.policy = policy;
     }
 }

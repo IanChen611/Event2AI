@@ -134,7 +134,7 @@ public class GroupStickyNotesUseCaseTest {
             for (PublishEvent actualEvent : actualEvents) {
                 if (Objects.equals(expectedEvents.get(i).getEventName(), actualEvent.getEventName()) &&
                 checkNotifierOrBehavior(expectedEvents.get(i).getNotifier(), actualEvent.getNotifier()) &&
-                checkNotifierOrBehavior(expectedEvents.get(i).getBehavior(), actualEvent.getBehavior())) {
+                checkNotifierOrBehavior(expectedEvents.get(i).getPolicy(), actualEvent.getPolicy())) {
                     isPublishEventMatch[i] = true;
                     break;
                 }
