@@ -23,7 +23,7 @@ public class Integration {
         stickyNoteProcessor = new StickyNoteProcessor(MIRO_JSON_PATH);
         groupDtos = stickyNoteProcessor.getGroupToJsonDtos();
         for (GroupToJsonDto groupDto : groupDtos) {
-            jsonFileCreator.create("./ToAIJsonFile/" + groupDto.getUsecaseName().replace(" ", "_").trim() + ".json", groupDto);
+            jsonFileCreator.create("./ToAIJsonFile/Test/" + groupDto.getUsecaseName().replace(" ", "_").trim() + ".json", groupDto);
         }
     }
 }

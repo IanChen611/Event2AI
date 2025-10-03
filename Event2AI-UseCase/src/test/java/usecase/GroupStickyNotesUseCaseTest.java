@@ -22,7 +22,7 @@ public class GroupStickyNotesUseCaseTest {
                 "Team",
                 new Point2D.Double(0, 110),
                 new Point2D.Double(100, 100),
-                "light yellow");
+                "light_yellow");
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
@@ -55,14 +55,14 @@ public class GroupStickyNotesUseCaseTest {
         StickyNote stickyNote_6 = new StickyNote(
                 "001F",
                 "NotifyBoard",
-                new Point2D.Double(220, 10),
+                new Point2D.Double(220, -10),
                 new Point2D.Double(100, 50),
-                "light blue");
+                "light_blue");
 
         StickyNote stickyNote_7 = new StickyNote(
                 "001G",
                 "Add the member to the board in board bounded context",
-                new Point2D.Double(220, -60),
+                new Point2D.Double(220,  60),
                 new Point2D.Double(100, 100),
                 "violet");
 
@@ -71,7 +71,7 @@ public class GroupStickyNotesUseCaseTest {
                 "comment",
                 new Point2D.Double(100, 100),
                 new Point2D.Double(200, 170),
-                "white");
+                "gray");
 
         List<StickyNote> stickyNotes = new ArrayList<>();
         stickyNotes.add(stickyNote_1);
