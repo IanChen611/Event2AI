@@ -4,17 +4,14 @@ import entity.Group;
 import entity.StickyNote;
 import valueobject.PublishEvent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
 public class ClassifyStickNotesUseCase {
-    private List<Group> groups;
+    private final List<Group> groups;
     private final List<List<StickyNote>> clusteredStickyNotes;
 
     public ClassifyStickNotesUseCase(List<List<StickyNote>> clusteredStickyNotes){
@@ -117,11 +114,10 @@ public class ClassifyStickNotesUseCase {
     }
 
     private List<PublishEvent> StickyNoteToPublishEvent(List<StickyNote> stickyNotes){
-        List<PublishEvent> result = new ArrayList<>();
-
         List<StickyNote> eventNames = new ArrayList<>();
-        List<StickyNote> notifiers = new ArrayList<>();
-        List<StickyNote> behaviors = new ArrayList<>();
+        List<StickyNote> reactors = new ArrayList<>();
+        List<StickyNote> policies = new ArrayList<>();
+        List<PublishEvent> result = new ArrayList<>();
 
         for(StickyNote  stickyNote : stickyNotes){
             switch (stickyNote.getColor()) {
@@ -129,45 +125,66 @@ public class ClassifyStickNotesUseCase {
                     eventNames.add(stickyNote);
                     break;
                 case "light_blue":
-                    notifiers.add(stickyNote);
+                    reactors.add(stickyNote);
                     break;
                 case "violet":
-                    behaviors.add(stickyNote);
+                    policies.add(stickyNote);
                     break;
             }
         }
 
-        for (StickyNote eventName : eventNames){
-            String notifierDesc = "";
-            String behaviorDesc = "";
-            double mutiple = 1.4;
+        class RelativeData {
+            public final String reactorDescription;
+            public final String policyDescription;
+            RelativeData(String reactorDescription, String policyDescription){
+                this.reactorDescription = reactorDescription;
+                this.policyDescription = policyDescription;
+            }
+        }
 
-            for(StickyNote notifier : notifiers){
-                double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(notifier.getGeo().getX(), notifier.getGeo().getY()));
-                double dx = abs(notifier.getPos().getX() - eventName.getPos().getX());
-                double dy = abs(notifier.getPos().getY() - eventName.getPos().getY());
-                double dist = Math.sqrt(dx * dx + dy * dy);
-                // distance < 1.4 geo    and     notifier.y >= eventName.y
-                if(dist / threshold <= mutiple &&
-                        notifier.getPos().getY() <= eventName.getPos().getY()){
-                    notifierDesc =  notifier.getDescription();
-                    break;
+//        List<Map<String, List<RelativeData>>> eventMaps = new ArrayList<>();
+
+        for (int i = 0;i < eventNames.size();i++){
+            StickyNote eventName = eventNames.get(i);
+            double multiple_Y = 0.7;
+            double multiple_X = 0.5;
+            List<StickyNote> thisEventsReactors = new ArrayList<>();
+            List<StickyNote> thisEventsPolicies = new ArrayList<>();
+            // ---------------------------------
+            // Take out the reactors and policies that belong to this eventName and then
+            // put them separately into thisEventsReactors and thisEventsPolicies
+            for(StickyNote reactor : reactors){
+                double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(reactor.getGeo().getX(), reactor.getGeo().getY()));
+                double dy = abs(reactor.getPos().getY() - eventName.getPos().getY());
+                // dy < 0.7 * geo.y    and     reactor.y <= eventName.y
+                if(dy / threshold <= multiple_Y &&
+                        reactor.getPos().getY() <= eventName.getPos().getY()){
+                    thisEventsReactors.add(reactor);
                 }
             }
-            for(StickyNote behavior : behaviors) {
-                double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(behavior.getGeo().getX(), behavior.getGeo().getY()));
-                double dx = abs(behavior.getPos().getX() - eventName.getPos().getX());
-                double dy = abs(behavior.getPos().getY() - eventName.getPos().getY());
-                double dist = Math.sqrt(dx * dx + dy * dy);
-                // distance < 1.4 geo    and     behavior.y <= eventName.y
-                if (dist / threshold <= mutiple &&
-                        behavior.getPos().getY() >= eventName.getPos().getY()) {
-                    behaviorDesc = behavior.getDescription();
-                    break;
+            for(StickyNote policy : policies) {
+                double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(policy.getGeo().getX(), policy.getGeo().getY()));
+                double dy = abs(policy.getPos().getY() - eventName.getPos().getY());
+                // distance < 0.7 * geo.y    and     policy.y >= eventName.y
+                if (dy / threshold <= multiple_Y &&
+                        policy.getPos().getY() >= eventName.getPos().getY()) {
+                    thisEventsPolicies.add(policy);
                 }
             }
-            PublishEvent publishEvent = new PublishEvent(eventName.getDescription(), notifierDesc, behaviorDesc);
-            result.add(publishEvent);
+            // ---------------------------------
+            // Package the extracted reactors and policies that belong to this Event into relativeData, then add it to relativeDatas
+            for(StickyNote reactor : thisEventsReactors){
+                for(StickyNote policy : thisEventsPolicies){
+                    double threshold = max(max(reactor.getGeo().getX(), reactor.getGeo().getY()), max(policy.getGeo().getX(), policy.getGeo().getY()));
+                    double dx =  abs(policy.getPos().getX() - reactor.getPos().getX());
+                    if(dx <= (multiple_X * threshold)){
+                        PublishEvent publishEvent = new PublishEvent(eventName.getDescription(), reactor.getDescription(), policy.getDescription());
+                        result.add(publishEvent);
+                        break;
+                    }
+                }
+            }
+            // ---------------------------------
         }
         return result;
     }
