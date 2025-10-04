@@ -118,7 +118,7 @@ public class ClassifyStickNotesUseCaseTest {
         //      behavior => stickyNote_7
         PublishEvent publishEvent = group.getPublishEvents().get(0);
         assertEquals(stickyNote_5.getDescription(), publishEvent.getEventName());
-        assertEquals(stickyNote_6.getDescription(), publishEvent.getNotifier());
+        assertEquals(stickyNote_6.getDescription(), publishEvent.getReactor());
         assertEquals(stickyNote_7.getDescription(), publishEvent.getPolicy());
 
     }
@@ -243,7 +243,7 @@ public class ClassifyStickNotesUseCaseTest {
         //      behavior => stickyNote_7
         PublishEvent publishEvent = group.getPublishEvents().get(0);
         assertEquals(stickyNote_5.getDescription(), publishEvent.getEventName());
-        assertEquals(stickyNote_6.getDescription(), publishEvent.getNotifier());
+        assertEquals(stickyNote_6.getDescription(), publishEvent.getReactor());
         assertEquals(stickyNote_7.getDescription(), publishEvent.getPolicy());
 
     }
@@ -316,14 +316,14 @@ public class ClassifyStickNotesUseCaseTest {
 
         StickyNote stickyNote_10 = new StickyNote(
                 "001E",
-                "notifier2",
+                "reactor2",
                 new Point2D.Double(220, 90),
                 new Point2D.Double(100, 50),
                 "light_blue");
 
         StickyNote stickyNote_11 = new StickyNote(
                 "001F",
-                "behavior2",
+                "policy2",
                 new Point2D.Double(220, 175),
                 new Point2D.Double(100, 100),
                 "violet");
@@ -375,7 +375,7 @@ public class ClassifyStickNotesUseCaseTest {
         //      behavior => stickyNote_7
         PublishEvent publishEvent1 = group.getPublishEvents().get(0);
         assertEquals(stickyNote_5.getDescription(), publishEvent1.getEventName());
-        assertEquals(stickyNote_6.getDescription(), publishEvent1.getNotifier());
+        assertEquals(stickyNote_6.getDescription(), publishEvent1.getReactor());
         assertEquals(stickyNote_7.getDescription(), publishEvent1.getPolicy());
         // publishEvents =>
         //      event name => stickyNote_9
@@ -383,7 +383,7 @@ public class ClassifyStickNotesUseCaseTest {
         //      behavior => stickyNote_11
         PublishEvent publishEvent2 = group.getPublishEvents().get(1);
         assertEquals(stickyNote_9.getDescription(), publishEvent2.getEventName());
-        assertEquals(stickyNote_10.getDescription(), publishEvent2.getNotifier());
+        assertEquals(stickyNote_10.getDescription(), publishEvent2.getReactor());
         assertEquals(stickyNote_11.getDescription(), publishEvent2.getPolicy());
     }
 
@@ -456,14 +456,14 @@ public class ClassifyStickNotesUseCaseTest {
 
         StickyNote stickyNote_10 = new StickyNote(
                 "001E",
-                "notifier2",
+                "reactor2",
                 new Point2D.Double(220, 90),
                 new Point2D.Double(100, 50),
                 "light_blue");
 
         StickyNote stickyNote_11 = new StickyNote(
                 "001F",
-                "behavior2",
+                "policy2",
                 new Point2D.Double(220, 175),
                 new Point2D.Double(100, 100),
                 "violet");
@@ -477,14 +477,14 @@ public class ClassifyStickNotesUseCaseTest {
 
         StickyNote stickyNote_13 = new StickyNote(
                 "001E",
-                "notifier3",
+                "reactor3",
                 new Point2D.Double(220, 240),
                 new Point2D.Double(100, 50),
                 "light_blue");
 
         StickyNote stickyNote_14 = new StickyNote(
                 "001F",
-                "behavior3",
+                "policy3",
                 new Point2D.Double(220, 325),
                 new Point2D.Double(100, 100),
                 "violet");
@@ -556,6 +556,133 @@ public class ClassifyStickNotesUseCaseTest {
         assertTrue(checkPublishEvent(expectedPublishEvents, group.getPublishEvents()));
     }
 
+    @Test
+    public void a_complete_event_storming_with_an_event_which_has_two_reactors_and_two_policies() {
+
+        StickyNote stickyNote_1 = new StickyNote(
+                "001A",
+                "Team",
+                new Point2D.Double(0, -110),
+                new Point2D.Double(100, 100),
+                "light_yellow");
+
+        StickyNote stickyNote_2 = new StickyNote(
+                "001B",
+                "userId\nteamId\n",
+                new Point2D.Double(-110, 0),
+                new Point2D.Double(100, 100),
+                "green");
+
+        StickyNote stickyNote_3 = new StickyNote(
+                "001C",
+                "User",
+                new Point2D.Double(-50, 50),
+                new Point2D.Double(50, 50),
+                "yellow");
+
+        StickyNote stickyNote_4 = new StickyNote(
+                "001D",
+                "Invite Board Member",
+                new Point2D.Double(0, 0),
+                new Point2D.Double(100, 100),
+                "blue");
+
+        StickyNote stickyNote_5 = new StickyNote(
+                "001E",
+                "BoardMemberJoined",
+                new Point2D.Double(110, 0),
+                new Point2D.Double(100, 100),
+                "orange");
+
+        StickyNote stickyNote_6 = new StickyNote(
+                "001F",
+                "reactor1",
+                new Point2D.Double(220, -60),
+                new Point2D.Double(100, 50),
+                "light_blue");
+
+        StickyNote stickyNote_7 = new StickyNote(
+                "001G",
+                "policy1",
+
+                new Point2D.Double(220, 25),
+                new Point2D.Double(100, 100),
+                "violet");
+
+        StickyNote stickyNote_8 = new StickyNote(
+                "001H",
+                "comment0",
+                new Point2D.Double(200, -170),
+                new Point2D.Double(100, 100),
+                "gray");
+
+        StickyNote stickyNote_9 = new StickyNote(
+                "001E",
+                "reactor2",
+                new Point2D.Double(330, -60),
+                new Point2D.Double(100, 50),
+                "light_blue");
+
+        StickyNote stickyNote_10 = new StickyNote(
+                "001F",
+                "policy2",
+                new Point2D.Double(330, 25),
+                new Point2D.Double(100, 100),
+                "violet");
+        
+
+
+        List<StickyNote> stickyNotes = new ArrayList<>();
+        stickyNotes.add(stickyNote_1);
+        stickyNotes.add(stickyNote_2);
+        stickyNotes.add(stickyNote_3);
+        stickyNotes.add(stickyNote_4);
+        stickyNotes.add(stickyNote_5);
+        stickyNotes.add(stickyNote_6);
+        stickyNotes.add(stickyNote_7);
+        stickyNotes.add(stickyNote_8);
+        stickyNotes.add(stickyNote_9);
+        stickyNotes.add(stickyNote_10);
+
+        // better not use clustering
+        List<List<StickyNote>> clusteredStickyNotes = new ArrayList<>();
+        clusteredStickyNotes.add(stickyNotes);
+        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase(clusteredStickyNotes);
+
+        Group group = classifyStickNotesUseCase.getGroups().get(0);
+
+        // UseCase => stickyNote_4
+        assertEquals(stickyNote_4.getId(), group.getGroupId());
+        assertEquals(stickyNote_4.getDescription(), group.getUseCaseName());
+
+        // input => stickyNote_2
+        List<String> intputDescription = Arrays.asList(stickyNote_2.getDescription().split("\\n"));
+        assertEquals(intputDescription.size(), group.getInput().size());
+        for (int i = 0; i < intputDescription.size(); i++) {
+            assertEquals(intputDescription.get(i), group.getInput().get(i));
+        }
+
+        // aggregate name => stickyNote_1
+        assertEquals(stickyNote_1.getDescription(), group.getAggregateName());
+
+        // user name => stickyNote_3
+        assertEquals(stickyNote_3.getDescription(), group.getUserName());
+
+        // comment => stickyNote_8
+        assertEquals(stickyNote_8.getDescription(), group.getComment().get(0));
+
+        // publishEvents =>
+        //      event name => stickyNote_5
+        //      notifier => stickyNote_6、stickyNote_9
+        //      behavior => stickyNote_7、stickyNote_10
+
+        List<PublishEvent> expectedPublishEvents = new ArrayList<>();
+        expectedPublishEvents.add(new PublishEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
+        expectedPublishEvents.add(new PublishEvent(stickyNote_5.getDescription(), stickyNote_9.getDescription(), stickyNote_10.getDescription()));
+
+        assertTrue(checkPublishEvent(expectedPublishEvents, group.getPublishEvents()));
+    }
+
 
     private Boolean checkPublishEvent(List<PublishEvent> expectedEvents, List<PublishEvent> actualEvents) {
         if(actualEvents.size() != expectedEvents.size()) {
@@ -566,7 +693,7 @@ public class ClassifyStickNotesUseCaseTest {
         for(int i = 0; i < expectedEvents.size(); i++) {
             for (PublishEvent actualEvent : actualEvents) {
                 if (Objects.equals(expectedEvents.get(i).getEventName(), actualEvent.getEventName()) &&
-                        checkNotifierOrBehavior(expectedEvents.get(i).getNotifier(), actualEvent.getNotifier()) &&
+                        checkNotifierOrBehavior(expectedEvents.get(i).getReactor(), actualEvent.getReactor()) &&
                         checkNotifierOrBehavior(expectedEvents.get(i).getPolicy(), actualEvent.getPolicy())) {
                     isPublishEventMatch[i] = true;
                     break;
