@@ -133,16 +133,6 @@ public class ClassifyStickNotesUseCase {
             }
         }
 
-        class RelativeData {
-            public final String reactorDescription;
-            public final String policyDescription;
-            RelativeData(String reactorDescription, String policyDescription){
-                this.reactorDescription = reactorDescription;
-                this.policyDescription = policyDescription;
-            }
-        }
-
-//        List<Map<String, List<RelativeData>>> eventMaps = new ArrayList<>();
 
         for (int i = 0;i < eventNames.size();i++){
             StickyNote eventName = eventNames.get(i);
