@@ -1,21 +1,22 @@
 package valueobject;
 
+import java.util.List;
 import java.util.Objects;
 
 public class PublishEvent {
     private String eventName;
-    private String notifier;
+    private String reactor;
     private String policy;
-    public PublishEvent(String eventName, String notifier, String policy) {
-        if (Objects.equals(notifier, "")){
-            this.notifier = "(no statement)";
+    public PublishEvent(String eventName, String reactor, String policy) {
+        this.eventName = eventName;
+        this.reactor = reactor;
+        this.policy = policy;
+        if (Objects.equals(this.reactor, "")){
+            this.reactor = "(no statement)";
         }
-        if (Objects.equals(policy, "")){
+        if (Objects.equals(this.policy, "")){
             this.policy = "(no statement)";
         }
-        this.eventName = eventName;
-        this.notifier = notifier;
-        this.policy = policy;
     }
 
     public String getEventName() {
@@ -26,13 +27,11 @@ public class PublishEvent {
         this.eventName = eventName;
     }
 
-    public String getNotifier() {
-        return notifier;
+    public String getReactor() {
+        return reactor;
     }
 
-    public void setNotifier(String notifier) {
-        this.notifier = notifier;
-    }
+    public void setReactor(String reactor) {this.reactor = reactor;}
 
     public String getPolicy() {
         return policy;
