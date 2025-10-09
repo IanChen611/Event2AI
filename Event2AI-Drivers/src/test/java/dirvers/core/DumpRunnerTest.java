@@ -1,7 +1,6 @@
 package dirvers.core;
 
-import adapter.dump.DumpComposer;
-import adapter.dump.DumperRegistry;
+import adapter.dump.MiroJsonObjectComposer;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Test;
@@ -40,7 +39,20 @@ class DumpRunnerTest {
         assertEquals("tag-1", tagsByItemId.getAsJsonArray("stick-1").get(0).getAsJsonObject().get("id").getAsString());
         assertFalse(tagsByItemId.has("shape-1"));
 
-        assertSame(composer.output, result.getAiDump());
+        assertSame(composer.lastOutput, result.getAiDump());
+
+        JsonObject aiDump = result.getAiDump();
+        assertFalse(aiDump.has("schemaVersion"));
+        JsonArray stickyNotes = aiDump.getAsJsonArray("stickyNotes");
+        assertEquals(1, stickyNotes.size());
+        JsonObject sticky = stickyNotes.get(0).getAsJsonObject();
+        assertFalse(sticky.has("text"));
+        assertEquals("stick-1", sticky.get("id").getAsString());
+        assertTrue(sticky.has("tags"));
+        assertEquals("tag-1", sticky.getAsJsonArray("tags").get(0).getAsJsonObject().get("id").getAsString());
+
+        JsonArray tags = aiDump.getAsJsonArray("tags");
+        assertEquals(0, tags.size());
     }
 
     private static class StubGateway implements BoardGateway {
@@ -91,19 +103,16 @@ class DumpRunnerTest {
         }
     }
 
-    private static class RecordingComposer extends DumpComposer {
+    private static class RecordingComposer extends MiroJsonObjectComposer {
         private JsonObject capturedRawRoot;
-        private final JsonObject output = new JsonObject();
-
-        RecordingComposer() {
-            super(new DumperRegistry(Collections.emptyList()));
-            output.addProperty("status", "ok");
-        }
+        private JsonObject lastOutput;
 
         @Override
         public JsonObject compose(JsonObject rawRoot) {
             this.capturedRawRoot = rawRoot;
-            return output;
+            this.lastOutput = super.compose(rawRoot);
+            return lastOutput;
         }
     }
 }
+

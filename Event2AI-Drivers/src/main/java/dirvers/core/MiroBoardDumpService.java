@@ -7,7 +7,7 @@ public class MiroBoardDumpService {
 
     public MiroBoardDumpService() throws Exception {
         SetMiroApiEnv setMiroApiEnv = new SetMiroApiEnv();
-        MiroDumpClient client = setMiroApiEnv.getMiroDumpClient();
+        MiroJsonTransformer client = setMiroApiEnv.getMiroDumpClient();
         this.result = client.dumpBoard(setMiroApiEnv.getBoardId());
     }
 

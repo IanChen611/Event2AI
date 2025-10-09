@@ -1,6 +1,6 @@
 package dirvers.core;
 
-import adapter.dump.DumpComposer;
+import adapter.dump.MiroJsonObjectComposer;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,9 +9,9 @@ import java.time.Instant;
 
 public class DumpRunner {
     private final BoardGateway gateway;
-    private final DumpComposer composer;
+    private final MiroJsonObjectComposer composer;
 
-    public DumpRunner(BoardGateway gateway, DumpComposer composer) {
+    public DumpRunner(BoardGateway gateway, MiroJsonObjectComposer composer) {
         this.gateway = gateway;
         this.composer = composer;
     }

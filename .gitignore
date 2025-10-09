@@ -30,6 +30,7 @@ replay_pid*
 # miro's JSON
 miro
 ToAIJsonFile/Test
+docs/
 
 # Ignore local environment file
 .env

@@ -19,6 +19,14 @@ public class MiroBoardGateway implements BoardGateway {
     }
 
     @Override
+    public JsonArray fetchTagsForItem(String boardId, String itemId) throws Exception {
+        String url = "https://api.miro.com/v2/boards/" + boardId + "/items/" + itemId + "/tags";
+        JsonObject obj = safeParseObject(api.get(url));
+        JsonArray arr = extractArray(obj, "tags", "data", "items");
+        return arr != null ? arr : new JsonArray();
+    }
+
+    @Override
     public JsonArray fetchAllItems(String boardId) throws Exception {
         JsonArray all = new JsonArray();
         String url = "https://api.miro.com/v2/boards/" + boardId + "/items?limit=50";
@@ -29,14 +37,6 @@ public class MiroBoardGateway implements BoardGateway {
             url = extractNextUrl(page);
         }
         return all;
-    }
-
-    @Override
-    public JsonArray fetchTagsForItem(String boardId, String itemId) throws Exception {
-        String url = "https://api.miro.com/v2/boards/" + boardId + "/items/" + itemId + "/tags";
-        JsonObject obj = safeParseObject(api.get(url));
-        JsonArray arr = extractArray(obj, "tags", "data", "items");
-        return arr != null ? arr : new JsonArray();
     }
 
     private static JsonObject safeParseObject(String body) {
