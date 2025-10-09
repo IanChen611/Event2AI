@@ -1,4 +1,4 @@
-﻿package dirvers.app;
+package dirvers.app;
 
 import dirvers.auth.MiroOAuthClient;
 import dirvers.core.MiroJsonTransformer;
@@ -35,8 +35,8 @@ public class SetMiroApiEnv {
         return boardId;
     }
 
-    public MiroDumpClient getMiroDumpClient(){
-        return new MiroDumpClient(token.accessToken);
+    public MiroJsonTransformer getMiroDumpClient(){
+        return new MiroJsonTransformer(token.accessToken);
     }
 
     private String firstNonBlank(String... vals) {

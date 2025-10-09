@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import dirvers.auth.MiroOAuthClient;
 import dirvers.core.DumpResult;
-import dirvers.core.MiroDumpClient;
+import dirvers.core.MiroJsonTransformer;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -37,7 +37,7 @@ public class Main {
             System.out.println("Access token acquired");
         }
 
-        MiroDumpClient client = new MiroDumpClient(token.accessToken);
+        MiroJsonTransformer client = new MiroJsonTransformer(token.accessToken);
         DumpResult result = client.dumpBoard(boardId);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
