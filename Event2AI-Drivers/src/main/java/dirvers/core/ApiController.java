@@ -7,11 +7,18 @@ import com.google.gson.JsonObject;
 
 import java.time.Instant;
 
-public class DumpRunner {
+/**
+ * Acts as a thin controller coordinating gateway calls and JSON composition.
+ */
+public class ApiController {
     private final BoardGateway gateway;
     private final MiroJsonObjectComposer composer;
 
-    public DumpRunner(BoardGateway gateway, MiroJsonObjectComposer composer) {
+    public ApiController(String accessToken) {
+        this(new MiroBoardGateway(accessToken), new MiroJsonObjectComposer());
+    }
+
+    ApiController(BoardGateway gateway, MiroJsonObjectComposer composer) {
         this.gateway = gateway;
         this.composer = composer;
     }
@@ -21,12 +28,12 @@ public class DumpRunner {
         JsonArray items = gateway.fetchAllItems(boardId);
 
         JsonObject tagsByItemId = new JsonObject();
-        for (JsonElement e : items) {
-            if (!e.isJsonObject()) continue;
-            JsonObject it = e.getAsJsonObject();
-            String type = it.has("type") && it.get("type").isJsonPrimitive() ? it.get("type").getAsString() : "";
+        for (JsonElement element : items) {
+            if (!element.isJsonObject()) continue;
+            JsonObject item = element.getAsJsonObject();
+            String type = item.has("type") && item.get("type").isJsonPrimitive() ? item.get("type").getAsString() : "";
             if (!"sticky_note".equals(type)) continue;
-            String id = it.has("id") && it.get("id").isJsonPrimitive() ? it.get("id").getAsString() : null;
+            String id = item.has("id") && item.get("id").isJsonPrimitive() ? item.get("id").getAsString() : null;
             if (id == null) continue;
             JsonArray tags = gateway.fetchTagsForItem(boardId, id);
             tagsByItemId.add(id, tags);
@@ -43,3 +50,4 @@ public class DumpRunner {
         return new DumpResult(rawRoot, ai);
     }
 }
+

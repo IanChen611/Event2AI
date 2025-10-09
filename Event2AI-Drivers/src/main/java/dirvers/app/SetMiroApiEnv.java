@@ -1,7 +1,7 @@
-package dirvers.app;
+﻿package dirvers.app;
 
 import dirvers.auth.MiroOAuthClient;
-import dirvers.core.MiroDumpClient;
+import dirvers.core.MiroJsonTransformer;
 
 public class SetMiroApiEnv {
     private final String boardId;

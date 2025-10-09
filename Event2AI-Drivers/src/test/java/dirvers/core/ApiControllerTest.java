@@ -11,16 +11,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DumpRunnerTest {
+class ApiControllerTest {
 
     @Test
     void runConstructsRawDumpAndDelegatesToComposer() throws Exception {
         StubGateway gateway = new StubGateway();
         RecordingComposer composer = new RecordingComposer();
 
-        DumpRunner runner = new DumpRunner(gateway, composer);
+        ApiController controller = new ApiController(gateway, composer);
 
-        DumpResult result = runner.run("board-123");
+        DumpResult result = controller.run("board-123");
 
         assertEquals("board-123", gateway.fetchBoardCall);
         assertEquals("board-123", gateway.fetchItemsCall);

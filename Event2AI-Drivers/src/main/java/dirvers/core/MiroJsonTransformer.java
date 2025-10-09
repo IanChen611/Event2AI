@@ -1,17 +1,13 @@
 package dirvers.core;
 
-import adapter.dump.MiroJsonObjectComposer;
-
 public class MiroJsonTransformer {
-    private final DumpRunner runner;
+    private final ApiController controller;
 
     public MiroJsonTransformer(String accessToken) {
-        BoardGateway gateway = new MiroBoardGateway(accessToken);
-        MiroJsonObjectComposer composer = new MiroJsonObjectComposer();
-        this.runner = new DumpRunner(gateway, composer);
+        this.controller = new ApiController(accessToken);
     }
 
     public DumpResult dumpBoard(String boardId) throws Exception {
-        return runner.run(boardId);
+        return controller.run(boardId);
     }
 }
