@@ -3,7 +3,7 @@ package dirvers.core;
 import dirvers.app.SetMiroApiEnv;
 
 public class MiroBoardDumpService {
-    private final DumpResult result;
+    private final MiroJsonResult result;
 
     public MiroBoardDumpService() throws Exception {
         SetMiroApiEnv setMiroApiEnv = new SetMiroApiEnv();
@@ -11,7 +11,7 @@ public class MiroBoardDumpService {
         this.result = client.dumpBoard(setMiroApiEnv.getBoardId());
     }
 
-    public DumpResult run (){
+    public MiroJsonResult run (){
         return this.result;
     }
 }

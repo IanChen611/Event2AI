@@ -20,7 +20,7 @@ class ApiControllerTest {
 
         ApiController controller = new ApiController(gateway, composer);
 
-        DumpResult result = controller.run("board-123");
+        MiroJsonResult result = controller.run("board-123");
 
         assertEquals("board-123", gateway.fetchBoardCall);
         assertEquals("board-123", gateway.fetchItemsCall);

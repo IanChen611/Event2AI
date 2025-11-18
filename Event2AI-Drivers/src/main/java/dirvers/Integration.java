@@ -2,7 +2,7 @@ package dirvers;
 
 import adapter.JsonFileCreator;
 import adapter.StickyNoteProcessor;
-import dirvers.core.DumpResult;
+import dirvers.core.MiroJsonResult;
 import dirvers.core.MiroBoardDumpService;
 import usecase.GroupToJsonDto;
 
@@ -16,7 +16,7 @@ public class Integration {
 
     public static void main(String[] args) throws Exception {
         MiroBoardDumpService runMiroClient = new MiroBoardDumpService();
-        DumpResult result = runMiroClient.run();
+        MiroJsonResult result = runMiroClient.run();
         // ######################################################################
         jsonFileCreator.create(MIRO_JSON_PATH, result.getAiDump());
 

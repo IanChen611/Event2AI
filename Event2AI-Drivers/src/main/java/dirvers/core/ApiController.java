@@ -23,7 +23,7 @@ public class ApiController {
         this.composer = composer;
     }
 
-    public DumpResult run(String boardId) throws Exception {
+    public MiroJsonResult run(String boardId) throws Exception {
         JsonObject board = gateway.fetchBoard(boardId);
         JsonArray items = gateway.fetchAllItems(boardId);
 
@@ -47,7 +47,7 @@ public class ApiController {
         rawRoot.add("tagsByItemId", tagsByItemId);
 
         JsonObject ai = composer.compose(rawRoot);
-        return new DumpResult(rawRoot, ai);
+        return new MiroJsonResult(rawRoot, ai);
     }
 }
 

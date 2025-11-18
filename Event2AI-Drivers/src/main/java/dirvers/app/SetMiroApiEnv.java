@@ -35,6 +35,8 @@ public class SetMiroApiEnv {
         return boardId;
     }
 
+//    public
+
     public MiroJsonTransformer getMiroDumpClient(){
         return new MiroJsonTransformer(token.accessToken);
     }

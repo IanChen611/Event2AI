@@ -2,11 +2,11 @@ package dirvers.core;
 
 import com.google.gson.JsonObject;
 
-public class DumpResult {
+public class MiroJsonResult {
     private final JsonObject rawRoot;
     private final JsonObject aiDump;
 
-    public DumpResult(JsonObject rawRoot, JsonObject aiDump) {
+    public MiroJsonResult(JsonObject rawRoot, JsonObject aiDump) {
         this.rawRoot = rawRoot;
         this.aiDump = aiDump;
     }
