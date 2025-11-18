@@ -1,0 +1,1 @@
+使用Event2AI-mcp-server 中的 list_usecases tool

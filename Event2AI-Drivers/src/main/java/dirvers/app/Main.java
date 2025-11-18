@@ -34,7 +34,7 @@ public class Main {
         } else {
             MiroOAuthClient oauth = new MiroOAuthClient(clientId, clientSecret, redirectUri, scopes);
             token = oauth.authorizeAndGetToken();
-            System.out.println("Access token acquired");
+            System.out.println("Access token acquired:" + token.Get_Access_token());
         }
 
         MiroJsonTransformer client = new MiroJsonTransformer(token.accessToken);

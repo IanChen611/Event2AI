@@ -35,6 +35,9 @@ docs/
 # Ignore local environment file
 .env
 
+# test claude generate code
+test/*
+
 # Br use
 codex
 

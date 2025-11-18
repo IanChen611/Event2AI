@@ -61,15 +61,15 @@ async def list_tools() -> list[types.Tool]:
                 "required": ["usecase_name"]
             }
         ),
-        types.Tool(
-            name="get_all_usecases",
-            description="Get all usecase contents at once. Returns a map of usecase names to their complete JSON content.",
-            inputSchema={
-                "type": "object",
-                "properties": {},
-                "required": []
-            }
-        ),
+        # types.Tool(
+        #     name="get_all_usecases",
+        #     description="Get all usecase contents at once. Returns a map of usecase names to their complete JSON content.",
+        #     inputSchema={
+        #         "type": "object",
+        #         "properties": {},
+        #         "required": []
+        #     }
+        # ),
     ]
 
 
@@ -86,8 +86,8 @@ async def call_tool(name: str, arguments: Any) -> list[types.TextContent]:
             if not usecase_name:
                 raise ValueError("usecase_name is required")
             result = await get_usecase(usecase_name)
-        elif name == "get_all_usecases":
-            result = await get_all_usecases()
+        # elif name == "get_all_usecases":
+        #     result = await get_all_usecases()
         else:
             raise ValueError(f"Unknown tool: {name}")
 
@@ -101,14 +101,23 @@ async def call_tool(name: str, arguments: Any) -> list[types.TextContent]:
 async def process_miro_board() -> str:
     """Process Miro board by calling Java Integration class."""
     try:
-        # Build classpath
-        drivers_dir = PROJECT_ROOT / "Event2AI-Drivers"
-        jar_file = drivers_dir / "target" / "Event2AI-Drivers-0.1.0.jar"
-        dep_dir = drivers_dir / "target" / "dependency" / "*"
+        # Build classpath with all dependencies from local Maven repository
+        drivers_jar = PROJECT_ROOT / "Event2AI-Drivers" / "target" / "Event2AI-Drivers-0.1.0.jar"
+        m2_repo = Path.home() / ".m2" / "repository"
+
+        # List of all dependency JARs
+        classpath_parts = [
+            str(drivers_jar),
+            str(m2_repo / "Event2AI" / "Event2AI-Adapter" / "0.1.0" / "Event2AI-Adapter-0.1.0.jar"),
+            str(m2_repo / "Event2AI" / "Event2AI-UseCase" / "0.1.0" / "Event2AI-UseCase-0.1.0.jar"),
+            str(m2_repo / "Event2AI" / "Event2AI-Entity" / "0.1.0" / "Event2AI-Entity-0.1.0.jar"),
+            str(m2_repo / "Event2AI" / "Event2AI-Common" / "0.1.0" / "Event2AI-Common-0.1.0.jar"),
+            str(m2_repo / "com" / "google" / "code" / "gson" / "gson" / "2.11.0" / "gson-2.11.0.jar"),
+        ]
 
         # Use ; on Windows, : on Unix-like systems
         sep = ";" if sys.platform == "win32" else ":"
-        classpath = f"{jar_file}{sep}{dep_dir}"
+        classpath = sep.join(classpath_parts)
 
         # Run Java with classpath
         cmd = ["java", "-cp", classpath, "dirvers.Integration"]
@@ -130,6 +139,10 @@ async def process_miro_board() -> str:
 
         result = []
         result.append("✓ Miro board processed successfully\n")
+
+        # Include output from Integration class if any
+        if output.strip():
+            result.append(f"\nOutput:\n{output}\n")
 
         # Count generated files
         test_dir = TOAI_JSON_DIR / "Test"
@@ -238,40 +251,40 @@ async def get_usecase(usecase_name: str) -> str:
         return f"Error reading usecase: {str(e)}"
 
 
-async def get_all_usecases() -> str:
-    """Get all usecase contents."""
-    try:
-        if not TOAI_JSON_DIR.exists():
-            return "Error: ToAIJsonFile directory does not exist"
+# async def get_all_usecases() -> str:
+#     """Get all usecase contents."""
+#     try:
+#         if not TOAI_JSON_DIR.exists():
+#             return "Error: ToAIJsonFile directory does not exist"
 
-        json_files = list(TOAI_JSON_DIR.rglob("*.json"))
+#         json_files = list(TOAI_JSON_DIR.rglob("*.json"))
 
-        if not json_files:
-            return f"No usecase files found in {TOAI_JSON_DIR}"
+#         if not json_files:
+#             return f"No usecase files found in {TOAI_JSON_DIR}"
 
-        result = []
-        result.append(f"Retrieving {len(json_files)} usecase(s):\n")
-        result.append("=" * 80 + "\n\n")
+#         result = []
+#         result.append(f"Retrieving {len(json_files)} usecase(s):\n")
+#         result.append("=" * 80 + "\n\n")
 
-        for json_file in json_files:
-            usecase_name = json_file.stem
-            relative_path = json_file.relative_to(TOAI_JSON_DIR)
+#         for json_file in json_files:
+#             usecase_name = json_file.stem
+#             relative_path = json_file.relative_to(TOAI_JSON_DIR)
 
-            with open(json_file, 'r', encoding='utf-8') as f:
-                content = json.load(f)
+#             with open(json_file, 'r', encoding='utf-8') as f:
+#                 content = json.load(f)
 
-            pretty_json = json.dumps(content, indent=2, ensure_ascii=False)
+#             pretty_json = json.dumps(content, indent=2, ensure_ascii=False)
 
-            result.append(f"Usecase: {usecase_name}\n")
-            result.append(f"Path: {relative_path}\n")
-            result.append("-" * 80 + "\n")
-            result.append(pretty_json + "\n")
-            result.append("=" * 80 + "\n\n")
+#             result.append(f"Usecase: {usecase_name}\n")
+#             result.append(f"Path: {relative_path}\n")
+#             result.append("-" * 80 + "\n")
+#             result.append(pretty_json + "\n")
+#             result.append("=" * 80 + "\n\n")
 
-        return "".join(result)
+#         return "".join(result)
 
-    except Exception as e:
-        return f"Error reading usecases: {str(e)}"
+#     except Exception as e:
+#         return f"Error reading usecases: {str(e)}"
 
 
 async def main():
