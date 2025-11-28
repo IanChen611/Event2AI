@@ -11,7 +11,8 @@
       "mcp__Event2AI-mcp-server__list_usecases",
       "Bash(where:*)",
       "mcp__Event2AI-mcp-server__process_miro_board",
-      "mcp__Event2AI-mcp-server__get_all_usecases"
+      "mcp__Event2AI-mcp-server__get_all_usecases",
+      "mcp__Event2AI-mcp-server__get_usecase"
     ],
     "deny": [],
     "ask": []
