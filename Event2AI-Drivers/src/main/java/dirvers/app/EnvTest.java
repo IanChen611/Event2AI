@@ -10,6 +10,8 @@ import dirvers.core.MiroJsonTransformer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnvTest {
     public static void main(String[] args) throws Exception {
@@ -37,7 +39,13 @@ public class EnvTest {
             MiroOAuthClient oauth = new MiroOAuthClient(clientId, clientSecret, redirectUri, scopes);
             token = oauth.authorizeAndGetToken();
             System.out.println("Access token acquired:" + token.Get_Access_token());
+            
+            // 將 token 寫回 .env 檔案
+            updateEnvFile(token.accessToken, token.refreshToken);
+            System.out.println("[ok] Tokens saved to .env file");
         }
+
+        
 
         MiroJsonTransformer client = new MiroJsonTransformer(token.accessToken);
         MiroJsonResult result = client.dumpBoard(boardId);
@@ -63,5 +71,41 @@ public class EnvTest {
                 return v;
         }
         return null;
+    }
+
+    private static void updateEnvFile(String accessToken, String refreshToken) throws Exception {
+        Path envPath = Path.of(".env");
+        List<String> lines = new ArrayList<>();
+        
+        boolean hasAccessToken = false;
+        boolean hasRefreshToken = false;
+        
+        // 讀取現有的 .env 檔案(如果存在)
+        if (Files.exists(envPath)) {
+            lines = Files.readAllLines(envPath, StandardCharsets.UTF_8);
+            
+            // 更新現有的 token 行
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                if (line.startsWith("MIRO_ACCESS_TOKEN")) {
+                    lines.set(i, "MIRO_ACCESS_TOKEN=" + accessToken);
+                    hasAccessToken = true;
+                } else if (line.startsWith("MIRO_REFRESH_TOKEN")) {
+                    lines.set(i, "MIRO_REFRESH_TOKEN=" + refreshToken);
+                    hasRefreshToken = true;
+                }
+            }
+        }
+        
+        // 如果不存在則新增
+        if (!hasAccessToken) {
+            lines.add("MIRO_ACCESS_TOKEN=" + accessToken);
+        }
+        if (!hasRefreshToken) {
+            lines.add("MIRO_REFRESH_TOKEN=" + refreshToken);
+        }
+        
+        // 寫回檔案
+        Files.write(envPath, lines, StandardCharsets.UTF_8);
     }
 }
