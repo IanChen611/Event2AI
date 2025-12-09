@@ -39,9 +39,9 @@ class ApiControllerTest {
         assertEquals("tag-1", tagsByItemId.getAsJsonArray("stick-1").get(0).getAsJsonObject().get("id").getAsString());
         assertFalse(tagsByItemId.has("shape-1"));
 
-        assertSame(composer.lastOutput, result.getAiDump());
+        assertSame(composer.lastOutput, result.getAiresult());
 
-        JsonObject aiDump = result.getAiDump();
+        JsonObject aiDump = result.getAiresult();
         assertFalse(aiDump.has("schemaVersion"));
         JsonArray stickyNotes = aiDump.getAsJsonArray("stickyNotes");
         assertEquals(1, stickyNotes.size());
