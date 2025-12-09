@@ -1,4 +1,4 @@
-package dirvers.core;
+package drivers.core;
 
 import java.net.URI;
 import java.net.http.HttpClient;

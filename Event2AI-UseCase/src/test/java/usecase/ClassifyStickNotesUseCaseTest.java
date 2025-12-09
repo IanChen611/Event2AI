@@ -88,7 +88,8 @@ public class ClassifyStickNotesUseCaseTest {
         // better not use clustering
         List<List<StickyNote>> clusteredStickyNotes = new ArrayList<>();
         clusteredStickyNotes.add(stickyNotes);
-        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase(clusteredStickyNotes);
+        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase();
+        classifyStickNotesUseCase.classify(clusteredStickyNotes);
 
         Group group = classifyStickNotesUseCase.getGroups().get(0);
 
@@ -211,7 +212,8 @@ public class ClassifyStickNotesUseCaseTest {
         // better not use clustering
         List<List<StickyNote>> clusteredStickyNotes = new ArrayList<>();
         clusteredStickyNotes.add(stickyNotes);
-        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase(clusteredStickyNotes);
+        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase();
+        classifyStickNotesUseCase.classify(clusteredStickyNotes);
 
         Group group = classifyStickNotesUseCase.getGroups().get(0);
 
@@ -345,7 +347,8 @@ public class ClassifyStickNotesUseCaseTest {
         // better not use clustering
         List<List<StickyNote>> clusteredStickyNotes = new ArrayList<>();
         clusteredStickyNotes.add(stickyNotes);
-        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase(clusteredStickyNotes);
+        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase();
+        classifyStickNotesUseCase.classify(clusteredStickyNotes);
 
         Group group = classifyStickNotesUseCase.getGroups().get(0);
 
@@ -509,7 +512,8 @@ public class ClassifyStickNotesUseCaseTest {
         // better not use clustering
         List<List<StickyNote>> clusteredStickyNotes = new ArrayList<>();
         clusteredStickyNotes.add(stickyNotes);
-        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase(clusteredStickyNotes);
+        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase();
+        classifyStickNotesUseCase.classify(clusteredStickyNotes);
 
         Group group = classifyStickNotesUseCase.getGroups().get(0);
 
@@ -647,7 +651,8 @@ public class ClassifyStickNotesUseCaseTest {
         // better not use clustering
         List<List<StickyNote>> clusteredStickyNotes = new ArrayList<>();
         clusteredStickyNotes.add(stickyNotes);
-        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase(clusteredStickyNotes);
+        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase();
+        classifyStickNotesUseCase.classify(clusteredStickyNotes);
 
         Group group = classifyStickNotesUseCase.getGroups().get(0);
 

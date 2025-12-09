@@ -11,13 +11,14 @@ import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
 public class ClassifyStickNotesUseCase {
-    private final List<Group> groups;
-    private final List<List<StickyNote>> clusteredStickyNotes;
+    private final List<Group> groups = new ArrayList<>();
+    private List<List<StickyNote>> clusteredStickyNotes;
 
-    public ClassifyStickNotesUseCase(List<List<StickyNote>> clusteredStickyNotes){
+    public ClassifyStickNotesUseCase(){}
+
+    public void classify(List<List<StickyNote>> clusteredStickyNotes){
         this.clusteredStickyNotes = clusteredStickyNotes;
-        this.groups = new ArrayList<>();
-        for(List<StickyNote> stickyNotes : this.clusteredStickyNotes){
+        for(List<StickyNote> stickyNotes : clusteredStickyNotes){
             this.groups.add(classifyGroup(stickyNotes));
         }
     }

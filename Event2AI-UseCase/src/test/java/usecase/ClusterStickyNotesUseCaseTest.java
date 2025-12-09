@@ -28,7 +28,8 @@ public class ClusterStickyNotesUseCaseTest {
         List<StickyNote> stickyNotes = new ArrayList<>();
         stickyNotes.add(stickyNote);
 
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
         List<StickyNote> group0 = clusterStickyNotesUseCase.getGroupByGroupIdx(0);
@@ -58,7 +59,8 @@ public class ClusterStickyNotesUseCaseTest {
         stickyNotes.add(stickyNote_1);
         stickyNotes.add(stickyNote_2);
 
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
         int count = 0;
@@ -107,7 +109,8 @@ public class ClusterStickyNotesUseCaseTest {
         stickyNotes.add(stickyNote_3);
         stickyNotes.add(stickyNote_4);
 
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(2, groupAmount);
         int count = 0;
@@ -156,7 +159,8 @@ public class ClusterStickyNotesUseCaseTest {
         stickyNotes.add(stickyNote_3);
         stickyNotes.add(stickyNote_4);
 
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
         int count = 0;
@@ -196,7 +200,8 @@ public class ClusterStickyNotesUseCaseTest {
         stickyNotes.add(stickyNote_2);
         stickyNotes.add(stickyNote_3);
 
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
         int count = 0;
@@ -236,7 +241,8 @@ public class ClusterStickyNotesUseCaseTest {
         stickyNotes.add(stickyNote_2);
         stickyNotes.add(stickyNote_3);
 
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
         int count = 0;
@@ -276,7 +282,8 @@ public class ClusterStickyNotesUseCaseTest {
         stickyNotes.add(stickyNote_2);
         stickyNotes.add(stickyNote_3);
 
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
         int count = 0;
@@ -349,7 +356,8 @@ public class ClusterStickyNotesUseCaseTest {
         stickyNotes.add(stickyNote_6);
         stickyNotes.add(stickyNote_7);
 
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(1, groupAmount);
         assertTrue(TestTool.checkListOfObject(stickyNotes, clusterStickyNotesUseCase.getGroupByGroupIdx(0)));
@@ -483,7 +491,9 @@ public class ClusterStickyNotesUseCaseTest {
         expectGroup.add(stickyNotes2);
 
         System.out.println(combined); // [A, B, C, D]
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(combined);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(combined);
+
         int groupAmount = clusterStickyNotesUseCase.getGroupAmount();
         assertEquals(2, groupAmount);
         assertTrue(checkClusterStickyNoteGroups(expectGroup, clusterStickyNotesUseCase.getAllGroup()));

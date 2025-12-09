@@ -10,7 +10,7 @@ public class JsonFileCreator {
     private Gson gson;
 
     public JsonFileCreator() {
-        gson = new GsonBuilder().setPrettyPrinting().create();
+        gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
     }
 
     public void create(String path, Object content){

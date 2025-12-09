@@ -1,4 +1,4 @@
-package dirvers.auth;
+package drivers.auth;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;

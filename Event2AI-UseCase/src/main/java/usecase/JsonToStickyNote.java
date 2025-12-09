@@ -12,7 +12,7 @@ public class JsonToStickyNote {
         if(!jsonItems.isEmpty()){
             for (int i = 0; i < jsonItems.size(); i++) {
                 String text = jsonItems.get(i).getAsJsonObject().get("html").getAsString();
-                text = text.replace("<p><br /></p>", "").replace("<p>","").replace("</p>","\n");
+                text = text.replace("<p><br /></p>", "").replace("<p>","").replace("</p>","\n").replace("&gt;", ">");
 
                 String tag = "";
                 JsonArray tags = jsonItems.get(i).getAsJsonObject().get("tags").getAsJsonArray();

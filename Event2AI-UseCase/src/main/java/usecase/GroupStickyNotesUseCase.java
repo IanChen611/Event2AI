@@ -10,11 +10,16 @@ public class GroupStickyNotesUseCase {
     private List<StickyNote> stickyNotes;
     private List<List<StickyNote>> clusteredStickyNotes;
 
-    public GroupStickyNotesUseCase(List<StickyNote> stickyNotes) {
+    public GroupStickyNotesUseCase() {
+    }
+
+    public void group(List<StickyNote> stickyNotes) {
         this.stickyNotes = stickyNotes;
-        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase(stickyNotes);
+        ClusterStickyNotesUseCase clusterStickyNotesUseCase = new ClusterStickyNotesUseCase();
+        clusterStickyNotesUseCase.cluster(stickyNotes);
         this.clusteredStickyNotes = clusterStickyNotesUseCase.getAllGroup();
-        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase(this.clusteredStickyNotes);
+        ClassifyStickNotesUseCase classifyStickNotesUseCase = new ClassifyStickNotesUseCase();
+        classifyStickNotesUseCase.classify(this.clusteredStickyNotes);
         this.groups = classifyStickNotesUseCase.getGroups();
     }
 

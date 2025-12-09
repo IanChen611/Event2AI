@@ -90,7 +90,8 @@ public class StickyNoteProcessorTest {
         }
 
         public List<Group> processStickyNotesToGroup(List<StickyNote> stickyNotes){
-            GroupStickyNotesUseCase groupStickyNotesUseCase = new GroupStickyNotesUseCase(stickyNotes);
+            GroupStickyNotesUseCase groupStickyNotesUseCase = new GroupStickyNotesUseCase();
+            groupStickyNotesUseCase.group(stickyNotes);
             return groupStickyNotesUseCase.getGroups();
         }
 

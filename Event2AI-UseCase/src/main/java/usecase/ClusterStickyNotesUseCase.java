@@ -11,7 +11,9 @@ public class ClusterStickyNotesUseCase {
     private int groupAmount;
     private List<List<StickyNote>> stickyNotesGroup = new ArrayList<>();
 
-    public ClusterStickyNotesUseCase(List<StickyNote> stickyNotes) {
+    public ClusterStickyNotesUseCase() {}
+
+    public void cluster(List<StickyNote> stickyNotes) {
         this.groupAmount = countGroupAmount(stickyNotes);
     }
 

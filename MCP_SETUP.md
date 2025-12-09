@@ -144,7 +144,7 @@ Event2AI/
 ├── start-mcp-server.sh              # Linux/Mac 啟動腳本
 │
 ├── Event2AI-Drivers/                # Java 程式碼
-│   └── src/main/java/dirvers/
+│   └── src/main/java/drivers/
 │       └── Integration.java         # 處理 Miro board
 │
 ├── ToAIJsonFile/                    # Usecase JSON 檔案
@@ -265,7 +265,7 @@ mvn clean package -DskipTests
 2. 確認網路連線正常
 3. 手動測試 Integration.java：
    ```bash
-   mvn exec:java -Dexec.mainClass=dirvers.Integration
+   mvn exec:java -Dexec.mainClass=drivers.Integration
    ```
 
 ## 進階設定

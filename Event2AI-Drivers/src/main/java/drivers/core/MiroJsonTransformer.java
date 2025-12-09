@@ -1,4 +1,4 @@
-package dirvers.core;
+package drivers.core;
 
 import adapter.dump.MiroJsonObjectComposer;
 import com.google.gson.JsonArray;
@@ -7,23 +7,14 @@ import com.google.gson.JsonObject;
 
 import java.time.Instant;
 
-/**
- * Acts as a thin controller coordinating gateway calls and JSON composition.
- */
-public class ApiController {
+public class MiroJsonTransformer {
     private final BoardGateway gateway;
-    private final MiroJsonObjectComposer composer;
 
-    public ApiController(String accessToken) {
-        this(new MiroBoardGateway(accessToken), new MiroJsonObjectComposer());
+    public MiroJsonTransformer(String accessToken) {
+        this.gateway = new MiroBoardGateway(accessToken);
     }
 
-    ApiController(BoardGateway gateway, MiroJsonObjectComposer composer) {
-        this.gateway = gateway;
-        this.composer = composer;
-    }
-
-    public MiroJsonResult run(String boardId) throws Exception {
+    public JsonObject run(String boardId) throws Exception {
         JsonObject board = gateway.fetchBoard(boardId);
         JsonArray items = gateway.fetchAllItems(boardId);
 
@@ -46,8 +37,7 @@ public class ApiController {
         rawRoot.addProperty("itemCount", items.size());
         rawRoot.add("tagsByItemId", tagsByItemId);
 
-        JsonObject ai = composer.compose(rawRoot);
-        return new MiroJsonResult(rawRoot, ai);
+        return rawRoot;
     }
 }
 

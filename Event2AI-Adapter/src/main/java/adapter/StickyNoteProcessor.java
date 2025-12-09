@@ -12,14 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StickyNoteProcessor {
-    private final List<StickyNote> stickyNotes;
-    private final List<Group> groups;
-    private final List<GroupToJsonDto> groupToJsonDtos;
+    private List<StickyNote> stickyNotes;
+    private List<Group> groups;
+    private List<GroupToJsonDto> groupToJsonDtos;
 
-    public StickyNoteProcessor(String filePath) {
-        stickyNotes = processFile(filePath);
-        groups = processStickyNotesToGroup(stickyNotes);
-        groupToJsonDtos = processGroupToJsonDto(groups);
+    public StickyNoteProcessor(){}
+
+    public void process(String filePath) {
+        this.stickyNotes = processFile(filePath);
+        this.groups = processStickyNotesToGroup(this.stickyNotes);
+        this.groupToJsonDtos = processGroupToJsonDto(this.groups);
     }
 
     private List<StickyNote> processFile(String filePath){
@@ -31,7 +33,8 @@ public class StickyNoteProcessor {
     }
 
     private List<Group> processStickyNotesToGroup(List<StickyNote> stickyNotes){
-        GroupStickyNotesUseCase groupStickyNotesUseCase = new GroupStickyNotesUseCase(stickyNotes);
+        GroupStickyNotesUseCase groupStickyNotesUseCase = new GroupStickyNotesUseCase();
+        groupStickyNotesUseCase.group(stickyNotes);
         return groupStickyNotesUseCase.getGroups();
     }
 

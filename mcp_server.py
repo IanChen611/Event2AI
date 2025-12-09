@@ -120,7 +120,7 @@ async def process_miro_board() -> str:
         classpath = sep.join(classpath_parts)
 
         # Run Java with classpath
-        cmd = ["java", "-cp", classpath, "dirvers.Integration"]
+        cmd = ["java", "-cp", classpath, "drivers.Integration"]
 
         process = await asyncio.create_subprocess_exec(
             *cmd,

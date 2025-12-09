@@ -97,7 +97,9 @@ public class GroupStickyNotesUseCaseTest {
 
         List<Group> expectGroups = new ArrayList<>(List.of(group));
 
-        GroupStickyNotesUseCase groupStickyNotesUseCase = new GroupStickyNotesUseCase(stickyNotes);
+        GroupStickyNotesUseCase groupStickyNotesUseCase = new GroupStickyNotesUseCase();
+        groupStickyNotesUseCase.group(stickyNotes);
+
         List<Group> actualGroups = groupStickyNotesUseCase.getGroups();
         assertTrue(checkGroup(expectGroups.get(0), actualGroups.get(0)));
     }
@@ -250,7 +252,8 @@ public class GroupStickyNotesUseCaseTest {
 
         List<Group> expectGroups = new ArrayList<>(List.of(group));
 
-        GroupStickyNotesUseCase groupStickyNotesUseCase = new GroupStickyNotesUseCase(stickyNotes);
+        GroupStickyNotesUseCase groupStickyNotesUseCase = new GroupStickyNotesUseCase();
+        groupStickyNotesUseCase.group(stickyNotes);
         List<Group> actualGroups = groupStickyNotesUseCase.getGroups();
 
         assertTrue(checkGroup(expectGroups.get(0), actualGroups.get(0)));

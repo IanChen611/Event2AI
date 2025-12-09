@@ -43,7 +43,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${exec.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>dirvers.app.EnvTest</mainClass>
+                    <mainClass>drivers.app.EnvTest</mainClass>
                 </configuration>
             </plugin>
 
@@ -55,7 +55,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>dirvers.app.EnvTest</mainClass>
+                            <mainClass>drivers.app.EnvTest</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
