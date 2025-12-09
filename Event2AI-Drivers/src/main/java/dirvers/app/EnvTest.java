@@ -55,9 +55,9 @@ public class EnvTest {
         Path aiOut = Path.of("target/ai_dump.json");
         Files.createDirectories(rawOut.getParent());
         Files.write(rawOut, gson.toJson(result.getRawRoot()).getBytes(StandardCharsets.UTF_8));
-        Files.write(aiOut, gson.toJson(result.getAiDump()).getBytes(StandardCharsets.UTF_8));
+        Files.write(aiOut, gson.toJson(result.getAiresult()).getBytes(StandardCharsets.UTF_8));
 
-        JsonObject ai = result.getAiDump();
+        JsonObject ai = result.getAiresult();
         System.out.println("[ok] Board dump saved:   " + rawOut.toAbsolutePath());
         System.out.println("[ok] AI dump saved:      " + aiOut.toAbsolutePath());
         System.out.println("[ok] StickyNotes parsed: " + ai.getAsJsonArray("stickyNotes").size());

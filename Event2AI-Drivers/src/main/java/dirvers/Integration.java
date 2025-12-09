@@ -18,7 +18,7 @@ public class Integration {
         MiroBoardService runMiroClient = new MiroBoardService();
         MiroJsonResult result = runMiroClient.run();
         // ######################################################################
-        jsonFileCreator.create(MIRO_JSON_PATH, result.getAiDump());
+        jsonFileCreator.create(MIRO_JSON_PATH, result.getAiresult());
 
         stickyNoteProcessor = new StickyNoteProcessor(MIRO_JSON_PATH);
         groupDtos = stickyNoteProcessor.getGroupToJsonDtos();
