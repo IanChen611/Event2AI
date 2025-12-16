@@ -12,11 +12,11 @@
         
 
 2. 接下來要做的事情
-    - OK tag
     - event storm 的內容需要有x, y軸順序執行
     - 實驗 AI 能生出什麼樣的 code
         - `/generate_code_with_usecase <usecase_name> <file_path>` 可以讀取到正確 Event 的 json 檔，並生成相關的 code
         - 有結果之後，檢視、改善
+    - OK tag
 
 3. 這次開會重點
     - 待複查
@@ -40,7 +40,7 @@
             1. 我們示範用的 policy -> Team 先做 ->(lead) Board CreateBoard
             2. json檔內的名稱是圖上翻譯下來的
                 - 檢查 Teddy Example 內容與我們的差別是什麼
-            3. usecase 名字是 command 
+            3. usecase 名字是 command => Teddy Example中的也叫做 usecase
             4. 弄懂 EzKanban 的 context
 
     - 教授建議接下來可以做：
@@ -49,3 +49,18 @@
         - OK tag 可以用「檢查是否有變更」代替，沒變更的話就是OK
 
     # 進度不錯（？
+
+## 預計2025-12-19(Teddy)
+1. 關於 Event Stroming 的順序問題
+2. 我們專題這個專案是否合適拿來當我們實驗範本
+3. 關於 Input type 的定義，我們需要新增一個功能
+    - 功能描述：miro 的 input 卡片中，對不同的 input 後面增加 `(所限制的type)` 、 `[筆記]` 來對ai說明專案需求的type & note
+4. 我們需要製作 UML 轉成 Json 文件的說明嗎？
+
+我們的 json 缺少的部分
+- aggregateId
+- method
+- repository
+- output
+- constructorPreconditions
+- constructorPostconditions
