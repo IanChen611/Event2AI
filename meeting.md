@@ -54,7 +54,7 @@
 1. 關於 Event Stroming 的順序問題
 2. 我們專題這個專案是否合適拿來當我們實驗範本
 3. 關於 Input type 的定義，我們需要新增一個功能
-    - 功能描述：miro 的 input 卡片中，對不同的 input 後面增加 `(所限制的type)` 、 `[筆記]` 來對ai說明專案需求的type & note
+    - 功能描述：miro 的 input 卡片中，對不同的 input 後面增加 `新功能要用`：`來限制type，例如：`：所限制的type)` 、 `[筆記]` 來對ai說明專案需求的type & note
 4. 我們需要製作 UML 轉成 Json 文件的說明嗎？
 
 我們的 json 缺少的部分
@@ -64,3 +64,18 @@
 - output
 - constructorPreconditions
 - constructorPostconditions
+
+## 2026.01.07 (三)
+1. 關於 json 要改的東西 and 缺的東西
+    - user 要改成 actor
+    - input ： 新功能要用`：`來限制type，例如：`productId：string`代表 productId 的 type 要 string
+    - aggregateId = aggregate + "Id"
+    - domainEvent = XXXEvents.XXXAAAed
+    - repository = `<aggregate>`Repository
+    - output = CqrsOutput with aggregateId
+    - 我們的 comments 要改成 domainModelNotes
+    - method(目前沒有想到要怎麼做) ： if (usecase == 'CreateXXX') => method = "XXX consturctor"()
+    - domainEvents、aggregates：可能有另外的便利貼來負責輸入這兩者的 attributes
+2. 先後順序的表示方式
+    - 先照著位置排序：最左上角為第一，先做完左側才可以做右側，上方下方沒特別順序之分
+    - 實作方式：先利用 aggregate 分資料夾，判斷便條紙的 x, y 座標，
