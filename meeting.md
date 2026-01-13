@@ -85,4 +85,8 @@
 1. domainEvent 這個部分不確定是不是就是我們 json 那樣的格式
 2. repository = aggregateName + Repository (？)
 3. method => 多一張描述此欄位的便利貼
+4. aggregate attribute => 多一張描述此欄位的便利貼
 
+
+## 2026.01.13(二)
+1. 在 event storming 中加入 aggregate 與其 attribute 的卡片，並實作完成可顯示的 json 檔

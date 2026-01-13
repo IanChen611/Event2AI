@@ -1,6 +1,7 @@
 package usecase;
 
 import entity.Group;
+import valueobject.AggregateWithAttribute;
 import valueobject.PublishEvent;
 import valueobject.UsecaseInput;
 
@@ -16,6 +17,7 @@ public class GroupToJsonDto {
     private String actor;
     private List<PublishEvent> events;
     private List<String> domainModelNotes;
+    private List<AggregateWithAttribute> aggregates;
 
     public GroupToJsonDto(Group group) {
         this.usecase = group.getUseCaseName();
@@ -27,6 +29,7 @@ public class GroupToJsonDto {
         this.actor = group.getUserName();
         this.events = group.getPublishEvents();
         this.domainModelNotes = group.getComment();
+        this.aggregates = group.getAggregateWithAttributes();
     }
 
     public String getUsecaseName() {

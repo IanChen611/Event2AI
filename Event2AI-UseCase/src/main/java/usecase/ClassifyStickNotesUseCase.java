@@ -2,6 +2,8 @@ package usecase;
 
 import entity.Group;
 import entity.StickyNote;
+import valueobject.AggregateWithAttribute;
+import valueobject.Attribute;
 import valueobject.PublishEvent;
 import valueobject.UsecaseInput;
 
@@ -15,16 +17,17 @@ public class ClassifyStickNotesUseCase {
     private final List<Group> groups = new ArrayList<>();
     private List<List<StickyNote>> clusteredStickyNotes;
 
-    public ClassifyStickNotesUseCase(){}
+    public ClassifyStickNotesUseCase() {
+    }
 
-    public void classify(List<List<StickyNote>> clusteredStickyNotes){
+    public void classify(List<List<StickyNote>> clusteredStickyNotes) {
         this.clusteredStickyNotes = clusteredStickyNotes;
-        for(List<StickyNote> stickyNotes : clusteredStickyNotes){
+        for (List<StickyNote> stickyNotes : clusteredStickyNotes) {
             this.groups.add(classifyGroup(stickyNotes));
         }
     }
 
-    private Group classifyGroup(List<StickyNote> stickyNotes){
+    private Group classifyGroup(List<StickyNote> stickyNotes) {
         Group group = new Group();
 
         // Process UseCase
@@ -36,7 +39,7 @@ public class ClassifyStickNotesUseCase {
         StickyNote input_stickyNote = findByType("input", stickyNotes).get(0);
         List<String> inputsWithType = Arrays.asList(input_stickyNote.getDescription().split("\\n"));
         List<UsecaseInput> input = new ArrayList<>();
-        for(String inputWithType : inputsWithType){
+        for (String inputWithType : inputsWithType) {
             List<String> nameAndType = Arrays.asList(inputWithType.split(":"));
             UsecaseInput usecaseInput = new UsecaseInput(nameAndType.get(0), nameAndType.get(1));
             input.add(usecaseInput);
@@ -63,56 +66,68 @@ public class ClassifyStickNotesUseCase {
         List<PublishEvent> publishEvents = StickyNoteToPublishEvent(aboutPublishEventStickyNotes);
         group.setPublishEvents(publishEvents);
 
+        // Process "AggregateWithAttributes" =>  name, [{name1, type1, constraint1}, {name2, type2, constraint2}, ...]
+        List<StickyNote> aboutAggregateWithAttributesStickyNotes = findByType("aggregate_with_attribute", stickyNotes);
+        List<AggregateWithAttribute> aggregateWithAttributes = StickyNoteToAggregateWithAttribute(aboutAggregateWithAttributesStickyNotes);
+        group.setAggregateWithAttributes(aggregateWithAttributes);
+
         return group;
     }
 
-    private List<StickyNote> findByType(String type, List<StickyNote> stickyNotes){
+    private List<StickyNote> findByType(String type, List<StickyNote> stickyNotes) {
         List<StickyNote> result = new ArrayList<>();
-        switch(type){
+        switch (type) {
             case "use_case":
-                for(StickyNote stickyNote : stickyNotes){
-                    if(stickyNote.getColor().equals("blue")){
+                for (StickyNote stickyNote : stickyNotes) {
+                    if (stickyNote.getColor().equals("blue")) {
                         result.add(stickyNote);
                         break;
                     }
                 }
                 break;
             case "input":
-                for(StickyNote stickyNote : stickyNotes){
-                    if(stickyNote.getColor().equals("green")){
+                for (StickyNote stickyNote : stickyNotes) {
+                    if (stickyNote.getColor().equals("green")) {
                         result.add(stickyNote);
                         break;
                     }
                 }
                 break;
             case "aggregate_name":
-                for(StickyNote stickyNote : stickyNotes){
-                    if(stickyNote.getColor().equals("light_yellow")){
+                for (StickyNote stickyNote : stickyNotes) {
+                    if (stickyNote.getColor().equals("light_yellow")) {
                         result.add(stickyNote);
                         break;
                     }
                 }
                 break;
             case "user_name":
-                for(StickyNote stickyNote : stickyNotes){
-                    if(stickyNote.getColor().equals("yellow")){
+                for (StickyNote stickyNote : stickyNotes) {
+                    if (stickyNote.getColor().equals("yellow")) {
                         result.add(stickyNote);
                         break;
                     }
                 }
                 break;
             case "comment":
-                for(StickyNote stickyNote : stickyNotes){
-                    if(stickyNote.getColor().equals("gray")){
+                for (StickyNote stickyNote : stickyNotes) {
+                    if (stickyNote.getColor().equals("gray")) {
                         result.add(stickyNote);
                     }
                 }
                 break;
             case "publish_event":
-                for(StickyNote stickyNote : stickyNotes){
-                    if(stickyNote.getColor().equals("orange") ||
+                for (StickyNote stickyNote : stickyNotes) {
+                    if (stickyNote.getColor().equals("orange") ||
                             stickyNote.getColor().equals("light_blue") ||
-                            stickyNote.getColor().equals("violet")){
+                            stickyNote.getColor().equals("violet")) {
+                        result.add(stickyNote);
+                    }
+                }
+                break;
+            case "aggregate_with_attribute":
+                for (StickyNote stickyNote : stickyNotes) {
+                    if (stickyNote.getColor().equals("dark_green")) {
                         result.add(stickyNote);
                     }
                 }
@@ -121,13 +136,13 @@ public class ClassifyStickNotesUseCase {
         return result;
     }
 
-    private List<PublishEvent> StickyNoteToPublishEvent(List<StickyNote> stickyNotes){
+    private List<PublishEvent> StickyNoteToPublishEvent(List<StickyNote> stickyNotes) {
         List<StickyNote> eventNames = new ArrayList<>();
         List<StickyNote> reactors = new ArrayList<>();
         List<StickyNote> policies = new ArrayList<>();
         List<PublishEvent> result = new ArrayList<>();
 
-        for(StickyNote  stickyNote : stickyNotes){
+        for (StickyNote stickyNote : stickyNotes) {
             switch (stickyNote.getColor()) {
                 case "orange":
                     eventNames.add(stickyNote);
@@ -142,7 +157,7 @@ public class ClassifyStickNotesUseCase {
         }
 
 
-        for (int i = 0;i < eventNames.size();i++){
+        for (int i = 0; i < eventNames.size(); i++) {
             StickyNote eventName = eventNames.get(i);
             double multiple_Y = 0.7;
             double multiple_X = 0.5;
@@ -151,16 +166,16 @@ public class ClassifyStickNotesUseCase {
             // ---------------------------------
             // Take out the reactors and policies that belong to this eventName and then
             // put them separately into thisEventsReactors and thisEventsPolicies
-            for(StickyNote reactor : reactors){
+            for (StickyNote reactor : reactors) {
                 double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(reactor.getGeo().getX(), reactor.getGeo().getY()));
                 double dy = abs(reactor.getPos().getY() - eventName.getPos().getY());
                 // dy < 0.7 * geo.y    and     reactor.y <= eventName.y
-                if(dy / threshold <= multiple_Y &&
-                        reactor.getPos().getY() <= eventName.getPos().getY()){
+                if (dy / threshold <= multiple_Y &&
+                        reactor.getPos().getY() <= eventName.getPos().getY()) {
                     thisEventsReactors.add(reactor);
                 }
             }
-            for(StickyNote policy : policies) {
+            for (StickyNote policy : policies) {
                 double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(policy.getGeo().getX(), policy.getGeo().getY()));
                 double dy = abs(policy.getPos().getY() - eventName.getPos().getY());
                 // distance < 0.7 * geo.y    and     policy.y >= eventName.y
@@ -171,14 +186,14 @@ public class ClassifyStickNotesUseCase {
             }
             // ---------------------------------
             // Package the extracted reactors and policies that belong to this Event into relativeData, then add it to relativeDatas
-            for(StickyNote reactor : thisEventsReactors){
-                for(StickyNote policy : thisEventsPolicies){
+            for (StickyNote reactor : thisEventsReactors) {
+                for (StickyNote policy : thisEventsPolicies) {
                     double threshold = max(max(reactor.getGeo().getX(), reactor.getGeo().getY()), max(policy.getGeo().getX(), policy.getGeo().getY()));
-                    double dx =  abs(policy.getPos().getX() - reactor.getPos().getX());
-                    if(dx <= (multiple_X * threshold)){
+                    double dx = abs(policy.getPos().getX() - reactor.getPos().getX());
+                    if (dx <= (multiple_X * threshold)) {
                         PublishEvent publishEvent = new PublishEvent(eventName.getDescription().replace("\n", ""),
-                                                                    reactor.getDescription().replace("\n", ""),
-                                                                    policy.getDescription().replace("\n", ""));
+                                reactor.getDescription().replace("\n", ""),
+                                policy.getDescription().replace("\n", ""));
                         result.add(publishEvent);
                         break;
                     }
@@ -186,6 +201,54 @@ public class ClassifyStickNotesUseCase {
             }
             // ---------------------------------
         }
+        return result;
+    }
+
+    private List<AggregateWithAttribute> StickyNoteToAggregateWithAttribute(List<StickyNote> stickyNotes) {
+        List<AggregateWithAttribute> result = new ArrayList<>();
+
+        List<String> descriptions = stickyNotes.stream()
+                .map(StickyNote::getDescription) // every integer change to String
+                .collect(Collectors.toList());
+
+//        aggregate1{
+//            type1 name1: constrain1,
+//            type2 name2: constrain2,
+//            type3 name3: constrain3,
+//            ...
+//        }
+
+        for (String description : descriptions) {
+            description = description.replace("<!-- -->", "").replace("<br />", "");
+            String aggregateName = description.substring(0, description.indexOf('{')).trim();
+
+            String body = description.substring(
+                    description.indexOf('{') + 1,
+                    description.lastIndexOf('}')
+            ).trim();
+
+            List<Attribute> attributes = new ArrayList<>();
+
+            String[] lines = body.split(",");
+
+            for (String line : lines) {
+                line = line.trim();
+                if (line.isEmpty()) continue;
+
+                // type1 name1: constrain1
+                String[] leftRight = line.split(":");
+                String left = leftRight[0].trim();     // type1 name1
+                String constraint = leftRight[1].trim();
+
+                String[] typeName = left.split("\\s+");
+                String type = typeName[0];
+                String name = typeName[1];
+
+                attributes.add(new Attribute(name, type, constraint));
+            }
+            result.add(new AggregateWithAttribute(aggregateName, attributes));
+        }
+
         return result;
     }
 

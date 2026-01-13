@@ -1,5 +1,6 @@
 package entity;
 
+import valueobject.AggregateWithAttribute;
 import valueobject.PublishEvent;
 import valueobject.UsecaseInput;
 
@@ -14,6 +15,7 @@ public class Group {
     private String userName;
     private List<String> comment;
     private List<PublishEvent> publishEvents;
+    private List<AggregateWithAttribute>  aggregateWithAttributes;
 
     public Group(){
 
@@ -47,6 +49,10 @@ public class Group {
         return publishEvents;
     }
 
+    public List<AggregateWithAttribute> getAggregateWithAttributes() {
+        return aggregateWithAttributes;
+    }
+
     public void setUseCaseName(String useCaseName) {
         this.useCaseName = useCaseName;
     }
@@ -75,4 +81,7 @@ public class Group {
         this.comment = comment;
     }
 
+    public void setAggregateWithAttributes(List<AggregateWithAttribute> aggregateWithAttributes) {
+        this.aggregateWithAttributes = aggregateWithAttributes;
+    }
 }
