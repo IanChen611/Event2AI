@@ -1,6 +1,7 @@
 package entity;
 
 import valueobject.PublishEvent;
+import valueobject.UsecaseInput;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class Group {
     // groupId is the Id of UseCase
     private String groupId;
     private String useCaseName;
-    private List<String> input;
+    private List<UsecaseInput> input;
     private String aggregateName;
     private String userName;
     private List<String> comment;
@@ -26,7 +27,7 @@ public class Group {
         return groupId;
     }
 
-    public List<String> getInput() {
+    public List<UsecaseInput> getInput() {
         return input;
     }
 
@@ -50,7 +51,7 @@ public class Group {
         this.useCaseName = useCaseName;
     }
 
-    public void setInput(List<String> input) {
+    public void setInput(List<UsecaseInput> input) {
         this.input = input;
     }
 

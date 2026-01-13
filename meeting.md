@@ -67,15 +67,22 @@
 
 ## 2026.01.07 (三)
 1. 關於 json 要改的東西 and 缺的東西
-    - user 要改成 actor
-    - input ： 新功能要用`：`來限制type，例如：`productId：string`代表 productId 的 type 要 string
-    - aggregateId = aggregate + "Id"
-    - domainEvent = XXXEvents.XXXAAAed
-    - repository = `<aggregate>`Repository
-    - output = CqrsOutput with aggregateId
-    - 我們的 comments 要改成 domainModelNotes
-    - method(目前沒有想到要怎麼做) ： if (usecase == 'CreateXXX') => method = "XXX consturctor"()
-    - domainEvents、aggregates：可能有另外的便利貼來負責輸入這兩者的 attributes
+    [x] user 要改成 actor
+    [x] input ： 新功能要用`：`來限制type，例如：`productId：String`代表 productId 的 type 要 String
+    [x] aggregateId = aggregate + "Id"
+    [] domainEvent = XXXEvents.XXXAAAed
+    [x] repository = aggregateRepository
+    [x] output = CqrsOutput with aggregateId
+    [x] 我們的 comments 要改成 domainModelNotes
+    [] method(目前沒有想到要怎麼做) ： if (usecase == 'CreateXXX') => method = "XXX consturctor"()
+    [] domainEvents、aggregates：可能有另外的便利貼來負責輸入這兩者的 attributes
 2. 先後順序的表示方式
     - 先照著位置排序：最左上角為第一，先做完左側才可以做右側，上方下方沒特別順序之分
     - 實作方式：先利用 aggregate 分資料夾，判斷便條紙的 x, y 座標，
+
+
+## 2026.01.12 (一)
+1. domainEvent 這個部分不確定是不是就是我們 json 那樣的格式
+2. repository = aggregateName + Repository (？)
+3. method => 多一張描述此欄位的便利貼
+
