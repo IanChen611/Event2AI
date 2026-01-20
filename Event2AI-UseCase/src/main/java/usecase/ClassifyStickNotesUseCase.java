@@ -4,14 +4,13 @@ import entity.Group;
 import entity.StickyNote;
 import valueobject.AggregateWithAttribute;
 import valueobject.Attribute;
-import valueobject.PublishEvent;
+import valueobject.DomainEvent;
 import valueobject.UsecaseInput;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.max;
+import static java.lang.Math.*;
 
 public class ClassifyStickNotesUseCase {
     private final List<Group> groups = new ArrayList<>();
@@ -61,10 +60,10 @@ public class ClassifyStickNotesUseCase {
                 .collect(Collectors.toList());
         group.setComment(commentDescriptions);
 
-        // Process "Publish Events" =>  Event Name + Notifier + Behavior
-        List<StickyNote> aboutPublishEventStickyNotes = findByType("publish_event", stickyNotes);
-        List<PublishEvent> publishEvents = StickyNoteToPublishEvent(aboutPublishEventStickyNotes);
-        group.setPublishEvents(publishEvents);
+        // Process "DomainEvnets" =>  Event Name + Notifier + Behavior + Attributes
+        List<StickyNote> aboutDomainEventStickyNotes = findByType("domain_event", stickyNotes);
+        List<DomainEvent> domainEvents = StickyNoteToDomainEvent(aboutDomainEventStickyNotes);
+        group.setDomainEvents(domainEvents);
 
         // Process "AggregateWithAttributes" =>  name, [{name1, type1, constraint1}, {name2, type2, constraint2}, ...]
         List<StickyNote> aboutAggregateWithAttributesStickyNotes = findByType("aggregate_with_attribute", stickyNotes);
@@ -116,11 +115,12 @@ public class ClassifyStickNotesUseCase {
                     }
                 }
                 break;
-            case "publish_event":
+            case "domain_event":
                 for (StickyNote stickyNote : stickyNotes) {
                     if (stickyNote.getColor().equals("orange") ||
                             stickyNote.getColor().equals("light_blue") ||
-                            stickyNote.getColor().equals("violet")) {
+                            stickyNote.getColor().equals("violet") ||
+                            stickyNote.getColor().equals("light_green")) {
                         result.add(stickyNote);
                     }
                 }
@@ -136,11 +136,12 @@ public class ClassifyStickNotesUseCase {
         return result;
     }
 
-    private List<PublishEvent> StickyNoteToPublishEvent(List<StickyNote> stickyNotes) {
+    private List<DomainEvent> StickyNoteToDomainEvent(List<StickyNote> stickyNotes) {
         List<StickyNote> eventNames = new ArrayList<>();
         List<StickyNote> reactors = new ArrayList<>();
         List<StickyNote> policies = new ArrayList<>();
-        List<PublishEvent> result = new ArrayList<>();
+        List<StickyNote> attributes = new ArrayList<>();
+        List<DomainEvent> result = new ArrayList<>();
 
         for (StickyNote stickyNote : stickyNotes) {
             switch (stickyNote.getColor()) {
@@ -153,6 +154,9 @@ public class ClassifyStickNotesUseCase {
                 case "violet":
                     policies.add(stickyNote);
                     break;
+                case "light_green":
+                    attributes.add(stickyNote);
+                    break;
             }
         }
 
@@ -160,9 +164,22 @@ public class ClassifyStickNotesUseCase {
         for (int i = 0; i < eventNames.size(); i++) {
             StickyNote eventName = eventNames.get(i);
             double multiple_Y = 0.7;
-            double multiple_X = 0.5;
+            double multiple_X = 1.2;
+            StickyNote thisEventsAttribute = null;
             List<StickyNote> thisEventsReactors = new ArrayList<>();
             List<StickyNote> thisEventsPolicies = new ArrayList<>();
+            // -----------attribute------------
+            for (StickyNote attribute : attributes){
+                double threshold = max(max(eventName.getGeo().getX(), eventName.getGeo().getY()), max(attribute.getGeo().getX(), attribute.getGeo().getY()));
+                double dy = abs(attribute.getPos().getY() - eventName.getPos().getY());
+                double dx = abs(attribute.getPos().getX() - eventName.getPos().getX());
+                // dy < 0.7 * geo.y    and     dx < 1.2 * geo.x
+                if (dy / threshold <= multiple_Y &&
+                    dx /  threshold <= multiple_X) {
+                    thisEventsAttribute = attribute;
+                    break;
+                }
+            }
             // ---------------------------------
             // Take out the reactors and policies that belong to this eventName and then
             // put them separately into thisEventsReactors and thisEventsPolicies
@@ -186,15 +203,22 @@ public class ClassifyStickNotesUseCase {
             }
             // ---------------------------------
             // Package the extracted reactors and policies that belong to this Event into relativeData, then add it to relativeDatas
+            List<Attribute> attrs = new ArrayList<>();
+            if (thisEventsAttribute != null) {
+                // 安全使用
+                attrs = StickyNoteToAttribute(thisEventsAttribute);
+            }
+
             for (StickyNote reactor : thisEventsReactors) {
                 for (StickyNote policy : thisEventsPolicies) {
                     double threshold = max(max(reactor.getGeo().getX(), reactor.getGeo().getY()), max(policy.getGeo().getX(), policy.getGeo().getY()));
                     double dx = abs(policy.getPos().getX() - reactor.getPos().getX());
                     if (dx <= (multiple_X * threshold)) {
-                        PublishEvent publishEvent = new PublishEvent(eventName.getDescription().replace("\n", ""),
+                        DomainEvent domainEvent = new DomainEvent(eventName.getDescription().replace("\n", ""),
                                 reactor.getDescription().replace("\n", ""),
-                                policy.getDescription().replace("\n", ""));
-                        result.add(publishEvent);
+                                policy.getDescription().replace("\n", ""),
+                                attrs);
+                        result.add(domainEvent);
                         break;
                     }
                 }
@@ -249,6 +273,32 @@ public class ClassifyStickNotesUseCase {
             result.add(new AggregateWithAttribute(aggregateName, attributes));
         }
 
+        return result;
+    }
+
+    private List<Attribute> StickyNoteToAttribute(StickyNote attribute) {
+        List<Attribute> result = new ArrayList<>();
+        String description = attribute.getDescription().replace("<!-- -->", "");
+
+        String[] lines = description.replace("\n", "<br />").split(",<br />");
+
+        for (String line : lines) {
+            line = line.trim();
+            if (line.isEmpty()) continue;
+
+            System.out.println("line:" + line);
+
+            // type1 name1: constrain1
+            String[] typeWithVarNameAndConstraint = line.split(":");
+            String typeWithVarName = typeWithVarNameAndConstraint[0].trim();     // type1 name1
+            String constraint = typeWithVarNameAndConstraint[1].trim();
+
+            String[] typeName = typeWithVarName.split("\\s+");
+            String type = typeName[0];
+            String name = typeName[1];
+
+            result.add(new Attribute(name, type, constraint));
+        }
         return result;
     }
 

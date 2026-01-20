@@ -3,7 +3,7 @@ package usecase;
 import entity.Group;
 import entity.StickyNote;
 import org.junit.jupiter.api.Test;
-import valueobject.PublishEvent;
+import valueobject.DomainEvent;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -117,10 +117,10 @@ public class ClassifyStickNotesUseCaseTest {
         //      event name => stickyNote_5
         //      notifier => stickyNote_6
         //      behavior => stickyNote_7
-        PublishEvent publishEvent = group.getPublishEvents().get(0);
-        assertEquals(stickyNote_5.getDescription(), publishEvent.getEventName());
-        assertEquals(stickyNote_6.getDescription(), publishEvent.getReactor());
-        assertEquals(stickyNote_7.getDescription(), publishEvent.getPolicy());
+        DomainEvent domainEvent = group.getPublishEvents().get(0);
+        assertEquals(stickyNote_5.getDescription(), domainEvent.getEventName());
+        assertEquals(stickyNote_6.getDescription(), domainEvent.getReactor());
+        assertEquals(stickyNote_7.getDescription(), domainEvent.getPolicy());
 
     }
 
@@ -243,10 +243,10 @@ public class ClassifyStickNotesUseCaseTest {
         //      event name => stickyNote_5
         //      notifier => stickyNote_6
         //      behavior => stickyNote_7
-        PublishEvent publishEvent = group.getPublishEvents().get(0);
-        assertEquals(stickyNote_5.getDescription(), publishEvent.getEventName());
-        assertEquals(stickyNote_6.getDescription(), publishEvent.getReactor());
-        assertEquals(stickyNote_7.getDescription(), publishEvent.getPolicy());
+        DomainEvent domainEvent = group.getPublishEvents().get(0);
+        assertEquals(stickyNote_5.getDescription(), domainEvent.getEventName());
+        assertEquals(stickyNote_6.getDescription(), domainEvent.getReactor());
+        assertEquals(stickyNote_7.getDescription(), domainEvent.getPolicy());
 
     }
 
@@ -376,18 +376,18 @@ public class ClassifyStickNotesUseCaseTest {
         //      event name => stickyNote_5
         //      notifier => stickyNote_6
         //      behavior => stickyNote_7
-        PublishEvent publishEvent1 = group.getPublishEvents().get(0);
-        assertEquals(stickyNote_5.getDescription(), publishEvent1.getEventName());
-        assertEquals(stickyNote_6.getDescription(), publishEvent1.getReactor());
-        assertEquals(stickyNote_7.getDescription(), publishEvent1.getPolicy());
+        DomainEvent domainEvent1 = group.getPublishEvents().get(0);
+        assertEquals(stickyNote_5.getDescription(), domainEvent1.getEventName());
+        assertEquals(stickyNote_6.getDescription(), domainEvent1.getReactor());
+        assertEquals(stickyNote_7.getDescription(), domainEvent1.getPolicy());
         // publishEvents =>
         //      event name => stickyNote_9
         //      notifier => stickyNote_10
         //      behavior => stickyNote_11
-        PublishEvent publishEvent2 = group.getPublishEvents().get(1);
-        assertEquals(stickyNote_9.getDescription(), publishEvent2.getEventName());
-        assertEquals(stickyNote_10.getDescription(), publishEvent2.getReactor());
-        assertEquals(stickyNote_11.getDescription(), publishEvent2.getPolicy());
+        DomainEvent domainEvent2 = group.getPublishEvents().get(1);
+        assertEquals(stickyNote_9.getDescription(), domainEvent2.getEventName());
+        assertEquals(stickyNote_10.getDescription(), domainEvent2.getReactor());
+        assertEquals(stickyNote_11.getDescription(), domainEvent2.getPolicy());
     }
 
     @Test
@@ -552,12 +552,12 @@ public class ClassifyStickNotesUseCaseTest {
         //      notifier => stickyNote_13
         //      behavior => stickyNote_14
 
-        List<PublishEvent> expectedPublishEvents = new ArrayList<>();
-        expectedPublishEvents.add(new PublishEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
-        expectedPublishEvents.add(new PublishEvent(stickyNote_9.getDescription(), stickyNote_10.getDescription(), stickyNote_11.getDescription()));
-        expectedPublishEvents.add(new PublishEvent(stickyNote_12.getDescription(), stickyNote_13.getDescription(), stickyNote_14.getDescription()));
+        List<DomainEvent> expectedDomainEvents = new ArrayList<>();
+        expectedDomainEvents.add(new DomainEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
+        expectedDomainEvents.add(new DomainEvent(stickyNote_9.getDescription(), stickyNote_10.getDescription(), stickyNote_11.getDescription()));
+        expectedDomainEvents.add(new DomainEvent(stickyNote_12.getDescription(), stickyNote_13.getDescription(), stickyNote_14.getDescription()));
 
-        assertTrue(checkPublishEvent(expectedPublishEvents, group.getPublishEvents()));
+        assertTrue(checkPublishEvent(expectedDomainEvents, group.getPublishEvents()));
     }
 
     @Test
@@ -681,22 +681,22 @@ public class ClassifyStickNotesUseCaseTest {
         //      notifier => stickyNote_6、stickyNote_9
         //      behavior => stickyNote_7、stickyNote_10
 
-        List<PublishEvent> expectedPublishEvents = new ArrayList<>();
-        expectedPublishEvents.add(new PublishEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
-        expectedPublishEvents.add(new PublishEvent(stickyNote_5.getDescription(), stickyNote_9.getDescription(), stickyNote_10.getDescription()));
+        List<DomainEvent> expectedDomainEvents = new ArrayList<>();
+        expectedDomainEvents.add(new DomainEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
+        expectedDomainEvents.add(new DomainEvent(stickyNote_5.getDescription(), stickyNote_9.getDescription(), stickyNote_10.getDescription()));
 
-        assertTrue(checkPublishEvent(expectedPublishEvents, group.getPublishEvents()));
+        assertTrue(checkPublishEvent(expectedDomainEvents, group.getPublishEvents()));
     }
 
 
-    private Boolean checkPublishEvent(List<PublishEvent> expectedEvents, List<PublishEvent> actualEvents) {
+    private Boolean checkPublishEvent(List<DomainEvent> expectedEvents, List<DomainEvent> actualEvents) {
         if(actualEvents.size() != expectedEvents.size()) {
             return false;
         }
         boolean[] isPublishEventMatch = new boolean[expectedEvents.size()];
         Arrays.fill(isPublishEventMatch, false);
         for(int i = 0; i < expectedEvents.size(); i++) {
-            for (PublishEvent actualEvent : actualEvents) {
+            for (DomainEvent actualEvent : actualEvents) {
                 if (Objects.equals(expectedEvents.get(i).getEventName(), actualEvent.getEventName()) &&
                         checkNotifierOrBehavior(expectedEvents.get(i).getReactor(), actualEvent.getReactor()) &&
                         checkNotifierOrBehavior(expectedEvents.get(i).getPolicy(), actualEvent.getPolicy())) {

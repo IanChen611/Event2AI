@@ -6,7 +6,7 @@ import entity.StickyNote;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import usecase.GroupToJsonDto;
-import valueobject.PublishEvent;
+import valueobject.DomainEvent;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -109,7 +109,7 @@ public class JsonFileCreatorTest {
         group.setAggregateName(stickyNote_1.getDescription());
         group.setUserName(stickyNote_3.getDescription());
         group.setComment(List.of(stickyNote_8.getDescription()));
-        group.setPublishEvents(List.of(new PublishEvent(
+        group.setDomainEvents(List.of(new DomainEvent(
                 stickyNote_5.getDescription(),
                 stickyNote_6.getDescription(),
                 stickyNote_7.getDescription())));

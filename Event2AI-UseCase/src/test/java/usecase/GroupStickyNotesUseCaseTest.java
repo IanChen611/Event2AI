@@ -4,7 +4,7 @@ import common.TestTool;
 import entity.Group;
 import entity.StickyNote;
 import org.junit.jupiter.api.Test;
-import valueobject.PublishEvent;
+import valueobject.DomainEvent;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -90,7 +90,7 @@ public class GroupStickyNotesUseCaseTest {
         group.setAggregateName(stickyNote_1.getDescription());
         group.setUserName(stickyNote_3.getDescription());
         group.setComment(List.of(stickyNote_8.getDescription()));
-        group.setPublishEvents(List.of(new PublishEvent(
+        group.setDomainEvents(List.of(new DomainEvent(
                 stickyNote_5.getDescription(),
                 stickyNote_6.getDescription(),
                 stickyNote_7.getDescription())));
@@ -235,20 +235,20 @@ public class GroupStickyNotesUseCaseTest {
         group.setAggregateName(stickyNote_1.getDescription());
         group.setUserName(stickyNote_3.getDescription());
         group.setComment(List.of(stickyNote_8.getDescription()));
-        List<PublishEvent> publishEvents = new ArrayList<>();
+        List<DomainEvent> domainEvents = new ArrayList<>();
         // event1 => stickyNote_5
         // reactor1-1、1-2 => stickyNote_6、stickyNote_9
         // policy1-1、1-2 => stickyNote_7、stickyNote_10
-        publishEvents.add(new PublishEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
-        publishEvents.add(new PublishEvent(stickyNote_5.getDescription(), stickyNote_9.getDescription(), stickyNote_10.getDescription()));
+        domainEvents.add(new DomainEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
+        domainEvents.add(new DomainEvent(stickyNote_5.getDescription(), stickyNote_9.getDescription(), stickyNote_10.getDescription()));
 
         // event2 => stickyNote_11
         // reactor2-1、2-2 => stickyNote_12、stickyNote_14
         // policy2-1、2-2 => stickyNote_13、stickyNote_15
-        publishEvents.add(new PublishEvent(stickyNote_11.getDescription(), stickyNote_12.getDescription(), stickyNote_13.getDescription()));
-        publishEvents.add(new PublishEvent(stickyNote_11.getDescription(), stickyNote_14.getDescription(), stickyNote_15.getDescription()));
+        domainEvents.add(new DomainEvent(stickyNote_11.getDescription(), stickyNote_12.getDescription(), stickyNote_13.getDescription()));
+        domainEvents.add(new DomainEvent(stickyNote_11.getDescription(), stickyNote_14.getDescription(), stickyNote_15.getDescription()));
 
-        group.setPublishEvents(publishEvents);
+        group.setDomainEvents(domainEvents);
 
         List<Group> expectGroups = new ArrayList<>(List.of(group));
 
@@ -281,14 +281,14 @@ public class GroupStickyNotesUseCaseTest {
         return checkPublishEvent(expectedGroup.getPublishEvents(), actualGroup.getPublishEvents());
     }
 
-    private Boolean checkPublishEvent(List<PublishEvent> expectedEvents, List<PublishEvent> actualEvents) {
+    private Boolean checkPublishEvent(List<DomainEvent> expectedEvents, List<DomainEvent> actualEvents) {
         if(actualEvents.size() != expectedEvents.size()) {
             return false;
         }
         boolean[] isPublishEventMatch = new boolean[expectedEvents.size()];
         Arrays.fill(isPublishEventMatch, false);
         for(int i = 0; i < expectedEvents.size(); i++) {
-            for (PublishEvent actualEvent : actualEvents) {
+            for (DomainEvent actualEvent : actualEvents) {
                 if (Objects.equals(expectedEvents.get(i).getEventName(), actualEvent.getEventName()) &&
                 checkNotifierOrBehavior(expectedEvents.get(i).getReactor(), actualEvent.getReactor()) &&
                 checkNotifierOrBehavior(expectedEvents.get(i).getPolicy(), actualEvent.getPolicy())) {

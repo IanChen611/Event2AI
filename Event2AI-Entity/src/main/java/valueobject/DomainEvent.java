@@ -1,12 +1,15 @@
 package valueobject;
 
+import java.util.List;
 import java.util.Objects;
 
-public class PublishEvent {
+public class DomainEvent {
     private String eventName;
     private String reactor;
     private String policy;
-    public PublishEvent(String eventName, String reactor, String policy) {
+    private List<Attribute> attributes;
+
+    public DomainEvent(String eventName, String reactor, String policy, List<Attribute> attributes) {
         this.eventName = eventName;
         this.reactor = reactor;
         this.policy = policy;
@@ -16,27 +19,22 @@ public class PublishEvent {
         if (Objects.equals(this.policy, "")){
             this.policy = "(no statement)";
         }
+        this.attributes = attributes;
     }
 
     public String getEventName() {
         return eventName;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
     public String getReactor() {
         return reactor;
     }
-
-    public void setReactor(String reactor) {this.reactor = reactor;}
 
     public String getPolicy() {
         return policy;
     }
 
-    public void setPolicy(String policy) {
-        this.policy = policy;
+    public List<Attribute> getAttributes() {
+        return attributes;
     }
 }

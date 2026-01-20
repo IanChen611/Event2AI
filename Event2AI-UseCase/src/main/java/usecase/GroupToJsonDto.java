@@ -2,7 +2,7 @@ package usecase;
 
 import entity.Group;
 import valueobject.AggregateWithAttribute;
-import valueobject.PublishEvent;
+import valueobject.DomainEvent;
 import valueobject.UsecaseInput;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class GroupToJsonDto {
     private String repository;
     private String output;
     private String actor;
-    private List<PublishEvent> events;
+    private List<DomainEvent> domainEvents;
     private List<String> domainModelNotes;
     private List<AggregateWithAttribute> aggregates;
 
@@ -27,7 +27,7 @@ public class GroupToJsonDto {
         this.repository = this.aggregate + "Repository";
         this.output = "CqrsOutput with " + this.aggregateId;
         this.actor = group.getUserName();
-        this.events = group.getPublishEvents();
+        this.domainEvents = group.getPublishEvents();
         this.domainModelNotes = group.getComment();
         this.aggregates = group.getAggregateWithAttributes();
     }

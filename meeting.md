@@ -70,7 +70,7 @@
     [x] user 要改成 actor
     [x] input ： 新功能要用`：`來限制type，例如：`productId：String`代表 productId 的 type 要 String
     [x] aggregateId = aggregate + "Id"
-    [] domainEvent = XXXEvents.XXXAAAed
+    [] domainEvent = XXXEvents.XXXAAAed => 2026.01.14(三)已討論
     [x] repository = aggregateRepository
     [x] output = CqrsOutput with aggregateId
     [x] 我們的 comments 要改成 domainModelNotes
@@ -83,10 +83,29 @@
 
 ## 2026.01.12 (一)
 1. domainEvent 這個部分不確定是不是就是我們 json 那樣的格式
-2. repository = aggregateName + Repository (？)
+2. repository = aggregateName + Repository![688786066e2134da3f2e10b9_software-design-example.png](../../AppData/Local/Temp/688786066e2134da3f2e10b9_software-design-example.png)
 3. method => 多一張描述此欄位的便利貼
 4. aggregate attribute => 多一張描述此欄位的便利貼
 
 
 ## 2026.01.13(二)
 1. 在 event storming 中加入 aggregate 與其 attribute 的卡片，並實作完成可顯示的 json 檔
+
+
+## 2026.01.14(三)
+1. event -> domain event
+2. 多新增 json 的欄位：
+    - domain event
+    - domain events
+3. 多一張卡片：method
+
+## 2026.01.20(二)
+1. 先製作關於event's attributes
+2. 遇到的問題：
+    - domainEvent 的 attribute不知道要不要 constraints(目前沒有加在範例中，但我們先空著)
+3. 國科會文獻：可以各找一兩篇來讀，把有關此專題的主題的論文或是架構性的patterns。
+4. event's attributes 已完成
+5. 下次代辦清單：
+    - Aggregate 的 attribute 要補完整 (綠色卡片要多Team)
+    - method 卡片製作
+    - domain event json 欄位

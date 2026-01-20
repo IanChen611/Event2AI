@@ -1,7 +1,7 @@
 package entity;
 
 import valueobject.AggregateWithAttribute;
-import valueobject.PublishEvent;
+import valueobject.DomainEvent;
 import valueobject.UsecaseInput;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class Group {
     private String aggregateName;
     private String userName;
     private List<String> comment;
-    private List<PublishEvent> publishEvents;
+    private List<DomainEvent> domainEvents;
     private List<AggregateWithAttribute>  aggregateWithAttributes;
 
     public Group(){
@@ -45,8 +45,8 @@ public class Group {
         return comment;
     }
 
-    public List<PublishEvent> getPublishEvents() {
-        return publishEvents;
+    public List<DomainEvent> getPublishEvents() {
+        return domainEvents;
     }
 
     public List<AggregateWithAttribute> getAggregateWithAttributes() {
@@ -73,8 +73,8 @@ public class Group {
         this.userName = userName;
     }
 
-    public void setPublishEvents(List<PublishEvent> publishEvents) {
-        this.publishEvents = publishEvents;
+    public void setDomainEvents(List<DomainEvent> domainEvents) {
+        this.domainEvents = domainEvents;
     }
 
     public void setComment(List<String> comment) {
