@@ -109,3 +109,15 @@
     - Aggregate 的 attribute 要補完整 (綠色卡片要多Team)
     - method 卡片製作
     - domain event json 欄位
+    - 修測試
+    - 用 aggregate 分資料夾
+      - sort Group By Aggregate
+      - return Map or Set<String, List<Group>>
+    - x, y 軸
+      - sort Group By XY Use Case
+      - return List<List<Group>>
+    - 
+
+## 天馬行空
+1. 可以一個自己的 miro
+2. 
