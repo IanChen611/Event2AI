@@ -4,6 +4,7 @@ import entity.Group;
 import entity.StickyNote;
 import org.junit.jupiter.api.Test;
 import valueobject.DomainEvent;
+import valueobject.Attribute;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -390,6 +391,7 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(stickyNote_11.getDescription(), domainEvent2.getPolicy());
     }
 
+    // editing
     @Test
     public void a_complete_event_storming_with_three_publish_event() {
 
@@ -492,6 +494,30 @@ public class ClassifyStickNotesUseCaseTest {
                 new Point2D.Double(100, 100),
                 "violet");
 
+        StickyNote stickyNote_15 = new StickyNote(
+                "001G",
+                "String attribute1_1: non-null, \n" +
+                        "int attribute1_2: default = 1",
+                new Point2D.Double(220, 325),
+                new Point2D.Double(100, 100),
+                "light_green");
+
+        StickyNote stickyNote_16 = new StickyNote(
+                "001H",
+                "String attribute2_1: non-null, \n" +
+                        "int attribute2_2: default = 1",
+                new Point2D.Double(220, 325),
+                new Point2D.Double(100, 100),
+                "light_green");
+
+        StickyNote stickyNote_17 = new StickyNote(
+                "001I",
+                "String attribute3_1: non-null, \n" +
+                        "int attribute3_2: default = 1",
+                new Point2D.Double(220, 325),
+                new Point2D.Double(100, 100),
+                "light_green");
+
 
         List<StickyNote> stickyNotes = new ArrayList<>();
         stickyNotes.add(stickyNote_1);
@@ -508,6 +534,9 @@ public class ClassifyStickNotesUseCaseTest {
         stickyNotes.add(stickyNote_12);
         stickyNotes.add(stickyNote_13);
         stickyNotes.add(stickyNote_14);
+        stickyNotes.add(stickyNote_15);
+        stickyNotes.add(stickyNote_16);
+        stickyNotes.add(stickyNote_17);
 
         // better not use clustering
         List<List<StickyNote>> clusteredStickyNotes = new ArrayList<>();
@@ -541,21 +570,27 @@ public class ClassifyStickNotesUseCaseTest {
         //      event name => stickyNote_5
         //      notifier => stickyNote_6
         //      behavior => stickyNote_7
+        //      evnet's attribute => stickyNote_15
 
         // publishEvents =>
         //      event name => stickyNote_9
         //      notifier => stickyNote_10
         //      behavior => stickyNote_11
+        //      evnet's attribute => stickyNote_16
 
         // publishEvents =>
         //      event name => stickyNote_12
         //      notifier => stickyNote_13
         //      behavior => stickyNote_14
+        //      evnet's attribute => stickyNote_17
 
         List<DomainEvent> expectedDomainEvents = new ArrayList<>();
-        expectedDomainEvents.add(new DomainEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription()));
-        expectedDomainEvents.add(new DomainEvent(stickyNote_9.getDescription(), stickyNote_10.getDescription(), stickyNote_11.getDescription()));
-        expectedDomainEvents.add(new DomainEvent(stickyNote_12.getDescription(), stickyNote_13.getDescription(), stickyNote_14.getDescription()));
+        List<Attribute> attributes1 = StickyNoteToAttribute(stickyNote_15);
+        List<Attribute> attributes2 = StickyNoteToAttribute(stickyNote_16);
+        List<Attribute> attributes3 = StickyNoteToAttribute(stickyNote_17);
+        expectedDomainEvents.add(new DomainEvent(stickyNote_5.getDescription(), stickyNote_6.getDescription(), stickyNote_7.getDescription(), attributes1));
+        expectedDomainEvents.add(new DomainEvent(stickyNote_9.getDescription(), stickyNote_10.getDescription(), stickyNote_11.getDescription(), attributes2));
+        expectedDomainEvents.add(new DomainEvent(stickyNote_12.getDescription(), stickyNote_13.getDescription(), stickyNote_14.getDescription(), attributes3));
 
         assertTrue(checkPublishEvent(expectedDomainEvents, group.getPublishEvents()));
     }
@@ -720,4 +755,29 @@ public class ClassifyStickNotesUseCaseTest {
         }
     }
 
+    private List<Attribute> StickyNoteToAttribute(StickyNote attribute) {
+        List<Attribute> result = new ArrayList<>();
+        String description = attribute.getDescription().replace("<!-- -->", "");
+
+        String[] lines = description.replace("\n", "<br />").split(",<br />");
+
+        for (String line : lines) {
+            line = line.trim();
+            if (line.isEmpty()) continue;
+
+            System.out.println("line:" + line);
+
+            // type1 name1: constrain1
+            String[] typeWithVarNameAndConstraint = line.split(":");
+            String typeWithVarName = typeWithVarNameAndConstraint[0].trim();     // type1 name1
+            String constraint = typeWithVarNameAndConstraint[1].trim();
+
+            String[] typeName = typeWithVarName.split("\\s+");
+            String type = typeName[0];
+            String name = typeName[1];
+
+            result.add(new Attribute(name, type, constraint));
+        }
+        return result;
+    }
 }
