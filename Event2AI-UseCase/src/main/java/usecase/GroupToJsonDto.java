@@ -18,12 +18,14 @@ public class GroupToJsonDto {
     private List<DomainEvent> domainEvents;
     private List<String> domainModelNotes;
     private List<AggregateWithAttribute> aggregates;
+    private String method;
 
     public GroupToJsonDto(Group group) {
         this.usecase = group.getUseCaseName();
         this.input = group.getInput();
         this.aggregate = group.getAggregateName();
         this.aggregateId = this.aggregate + "Id";
+        this.method = group.getMethod();
         this.repository = this.aggregate + "Repository";
         this.output = "CqrsOutput with " + this.aggregateId;
         this.actor = group.getUserName();

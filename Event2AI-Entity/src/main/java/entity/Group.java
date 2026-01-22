@@ -16,6 +16,7 @@ public class Group {
     private List<String> comment;
     private List<DomainEvent> domainEvents;
     private List<AggregateWithAttribute>  aggregateWithAttributes;
+    private String method;
 
     public Group(){
 
@@ -53,6 +54,8 @@ public class Group {
         return aggregateWithAttributes;
     }
 
+    public String getMethod() {return method;}
+
     public void setUseCaseName(String useCaseName) {
         this.useCaseName = useCaseName;
     }
@@ -84,4 +87,6 @@ public class Group {
     public void setAggregateWithAttributes(List<AggregateWithAttribute> aggregateWithAttributes) {
         this.aggregateWithAttributes = aggregateWithAttributes;
     }
+
+    public void setMethod(String method) { this.method = method; }
 }

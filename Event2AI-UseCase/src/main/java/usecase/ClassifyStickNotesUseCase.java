@@ -70,6 +70,10 @@ public class ClassifyStickNotesUseCase {
         List<AggregateWithAttribute> aggregateWithAttributes = StickyNoteToAggregateWithAttribute(aboutAggregateWithAttributesStickyNotes);
         group.setAggregateWithAttributes(aggregateWithAttributes);
 
+        // Process "method"
+        StickyNote method_stickyNote = findByType("method", stickyNotes).get(0);
+        group.setMethod(aggregateName_stickyNote.getDescription().replace("\n", "") + " " + method_stickyNote.getDescription().replace("\n", ""));
+
         return group;
     }
 
@@ -128,6 +132,13 @@ public class ClassifyStickNotesUseCase {
             case "aggregate_with_attribute":
                 for (StickyNote stickyNote : stickyNotes) {
                     if (stickyNote.getColor().equals("dark_green")) {
+                        result.add(stickyNote);
+                    }
+                }
+                break;
+            case "method":
+                for (StickyNote stickyNote : stickyNotes) {
+                    if (stickyNote.getColor().equals("pink")) {
                         result.add(stickyNote);
                     }
                 }
@@ -286,7 +297,7 @@ public class ClassifyStickNotesUseCase {
             line = line.trim();
             if (line.isEmpty()) continue;
 
-            System.out.println("line:" + line);
+//            System.out.println("line:" + line);
 
             // type1 name1: constrain1
             String[] typeWithVarNameAndConstraint = line.split(":");
