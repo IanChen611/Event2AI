@@ -7,6 +7,7 @@ import valueobject.Attribute;
 import valueobject.DomainEvent;
 import valueobject.UsecaseInput;
 
+import java.awt.geom.Point2D;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,10 +30,34 @@ public class ClassifyStickNotesUseCase {
     private Group classifyGroup(List<StickyNote> stickyNotes) {
         Group group = new Group();
 
+        // set the geo of this eventStorming
+        double maxY = stickyNotes.get(0).getPos().getY() + stickyNotes.get(0).getGeo().getY() * 0.5;
+        double minY = stickyNotes.get(0).getPos().getY() - stickyNotes.get(0).getGeo().getY() * 0.5;
+        double maxX = stickyNotes.get(0).getPos().getX() + stickyNotes.get(0).getGeo().getX() * 0.5;
+        double minX = stickyNotes.get(0).getPos().getX() - stickyNotes.get(0).getGeo().getX() * 0.5;
+        for(int i = 1; i < stickyNotes.size(); i++) {
+            StickyNote stickyNote = stickyNotes.get(i);
+            if(maxY < (stickyNote.getPos().getY() + stickyNote.getGeo().getY() * 0.5)) {
+                maxY = stickyNote.getPos().getY() + stickyNote.getGeo().getY() * 0.5;
+            }
+            if(minY > (stickyNote.getPos().getY() - stickyNote.getGeo().getY() * 0.5)) {
+                minY = stickyNote.getPos().getY() - stickyNote.getGeo().getY() * 0.5;
+            }
+            if(maxX < (stickyNote.getPos().getX() + stickyNote.getGeo().getX() * 0.5)) {
+                maxX = stickyNote.getPos().getX() + stickyNote.getGeo().getX() * 0.5;
+            }
+            if(minX > (stickyNote.getPos().getX() - stickyNote.getGeo().getX() * 0.5)) {
+                minX = stickyNote.getPos().getX() - stickyNote.getGeo().getX() * 0.5;
+            }
+        }
+        group.setEventStormingGeo(new Point2D.Double(maxX - minX, maxY - minY));
+
         // Process UseCase
         StickyNote useCase_stickyNote = findByType("use_case", stickyNotes).get(0);
         group.setGroupId(useCase_stickyNote.getId());
         group.setUseCaseName(useCase_stickyNote.getDescription().replace("\n", ""));
+        // set the position of useCase
+        group.setUseCasePos(useCase_stickyNote.getPos());
 
         // Process input
         StickyNote input_stickyNote = findByType("input", stickyNotes).get(0);

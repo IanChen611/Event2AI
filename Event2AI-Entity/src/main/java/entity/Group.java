@@ -4,6 +4,7 @@ import valueobject.AggregateWithAttribute;
 import valueobject.DomainEvent;
 import valueobject.UsecaseInput;
 
+import java.awt.geom.Point2D;
 import java.util.List;
 
 public class Group {
@@ -17,6 +18,8 @@ public class Group {
     private List<DomainEvent> domainEvents;
     private List<AggregateWithAttribute>  aggregateWithAttributes;
     private String method;
+    private Point2D useCasePos;
+    private Point2D EventStormingGeo;
 
     public Group(){
 
@@ -56,6 +59,10 @@ public class Group {
 
     public String getMethod() {return method;}
 
+    public Point2D getEventStormingGeo() { return EventStormingGeo;}
+
+    public Point2D getUseCasePos() {return useCasePos;}
+
     public void setUseCaseName(String useCaseName) {
         this.useCaseName = useCaseName;
     }
@@ -89,4 +96,10 @@ public class Group {
     }
 
     public void setMethod(String method) { this.method = method; }
+
+    public void setEventStormingGeo(Point2D eventStormingGeo) {
+        this.EventStormingGeo = eventStormingGeo;
+    }
+
+    public void setUseCasePos(Point2D useCasePos) { this.useCasePos = useCasePos; }
 }

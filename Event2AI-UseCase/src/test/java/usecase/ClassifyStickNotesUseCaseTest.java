@@ -117,6 +117,16 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(stickyNote_4.getId(), group.getGroupId());
         assertEquals(stickyNote_4.getDescription(), group.getUseCaseName());
 
+        // useCasePos => stickyNote_4's position
+        assertEquals(stickyNote_4.getPos().getX(), group.getUseCasePos().getX());
+        assertEquals(stickyNote_4.getPos().getY(), group.getUseCasePos().getY());
+
+        // eventStormingGeo => hardcoded expected value
+        // Geo.X => 270 - (-160) = 430
+        // Geo.Y => 135 - (-185) = 320
+        assertEquals(430.0, group.getEventStormingGeo().getX(), 0.01);
+        assertEquals(320.0, group.getEventStormingGeo().getY(), 0.01);
+
         // input => stickyNote_2
         List<String> inputsWithType = Arrays.asList(stickyNote_2.getDescription().split("\\n"));
         List<UsecaseInput> usecaseInputs = new ArrayList<>();
@@ -265,6 +275,15 @@ public class ClassifyStickNotesUseCaseTest {
         // UseCase => stickyNote_4
         assertEquals(stickyNote_4.getId(), group.getGroupId());
         assertEquals(stickyNote_4.getDescription(), group.getUseCaseName());
+
+        // useCasePos => stickyNote_4's position
+        assertEquals(stickyNote_4.getPos().getX(), group.getUseCasePos().getX());
+        assertEquals(stickyNote_4.getPos().getY(), group.getUseCasePos().getY());
+
+        // eventStormingGeo => hardcoded expected value
+        // maxX=450, minX=-160, maxY=135, minY=-220 => geo.x = 610, geo.y = 355
+        assertEquals(610.0, group.getEventStormingGeo().getX(), 0.01);
+        assertEquals(355.0, group.getEventStormingGeo().getY(), 0.01);
 
         // input => stickyNote_2
         assertTrue(isInputSame(
@@ -433,6 +452,15 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(stickyNote_4.getId(), group.getGroupId());
         assertEquals(stickyNote_4.getDescription(), group.getUseCaseName());
 
+        // useCasePos => stickyNote_4's position
+        assertEquals(stickyNote_4.getPos().getX(), group.getUseCasePos().getX());
+        assertEquals(stickyNote_4.getPos().getY(), group.getUseCasePos().getY());
+
+        // eventStormingGeo => hardcoded expected value
+        // maxX=380, minX=-160, maxY=300, minY=-220 => geo.x = 540, geo.y = 520
+        assertEquals(540.0, group.getEventStormingGeo().getX(), 0.01);
+        assertEquals(520.0, group.getEventStormingGeo().getY(), 0.01);
+
         // input => stickyNote_2
         assertTrue(isInputSame(
                 Arrays.asList(
@@ -473,7 +501,6 @@ public class ClassifyStickNotesUseCaseTest {
         assertTrue(checkPublishedEvent(expectedDomainEvents, group.getPublishEvents()));
     }
 
-    // editing
     @Test
     public void a_complete_event_storming_with_three_publish_event() {
 
@@ -639,6 +666,15 @@ public class ClassifyStickNotesUseCaseTest {
         // UseCase => stickyNote_4
         assertEquals(stickyNote_4.getId(), group.getGroupId());
         assertEquals(stickyNote_4.getDescription(), group.getUseCaseName());
+
+        // useCasePos => stickyNote_4's position
+        assertEquals(stickyNote_4.getPos().getX(), group.getUseCasePos().getX());
+        assertEquals(stickyNote_4.getPos().getY(), group.getUseCasePos().getY());
+
+        // eventStormingGeo => hardcoded expected value
+        // maxX=380, minX=-160, maxY=500, minY=-220 => geo.x = 540, geo.y = 720
+        assertEquals(540.0, group.getEventStormingGeo().getX(), 0.01);
+        assertEquals(720.0, group.getEventStormingGeo().getY(), 0.01);
 
         // input => stickyNote_2
         String[] inputLines = stickyNote_2.getDescription().split("\\n");
