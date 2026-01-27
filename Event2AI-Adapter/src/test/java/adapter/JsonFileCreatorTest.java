@@ -1,16 +1,12 @@
 package adapter;
 
 import com.google.gson.JsonObject;
-import entity.Group;
 import entity.StickyNote;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import usecase.GroupToJsonDto;
-import valueobject.DomainEvent;
 
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
