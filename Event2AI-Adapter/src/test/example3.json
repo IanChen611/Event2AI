@@ -1,0 +1,486 @@
+{
+  "fetchedAt": "2026-01-26T07:09:20.041791600Z",
+  "stickyNotes": [
+    {
+      "id": "3458764656354017963",
+      "html": "<p>Board Created</p>",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1931.5727569593373,
+      "y": 1125.2114277383425,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017964",
+      "html": "<p>Create Board3</p>",
+      "color": "blue",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1605.5958449493476,
+      "y": 1133.7626099445993,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017965",
+      "html": "<p>teamId:String</p><p>projectId:String</p><p>userId:String</p><p>boardName:String</p><p>boardTemplate:String</p>",
+      "color": "green",
+      "width": 212.930000000004,
+      "height": 243.96000000000458,
+      "x": 1392.6658449493455,
+      "y": 1133.7626099446015,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017966",
+      "html": "<p>Notify board in Board BC to create itself</p>",
+      "color": "violet",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2325.5073186809454,
+      "y": 1159.166102304425,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017967",
+      "html": "<p>User</p>",
+      "color": "yellow",
+      "width": 139.64469452032583,
+      "height": 159.99492638509693,
+      "x": 1501.6622109767152,
+      "y": 1275.4110094657838,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017968",
+      "html": "<p>NotifyBoard</p>",
+      "color": "light_blue",
+      "width": 212.31106995960366,
+      "height": 138.3054970022561,
+      "x": 2325.816783701144,
+      "y": 1014.9709202811283,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017969",
+      "html": "<p>Board</p>",
+      "color": "light_yellow",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1755.779727873568,
+      "y": 929.8513851957734,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017970",
+      "html": "<p>Board Member Joined</p>",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1931.5727569593373,
+      "y": 1429.2896279962476,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017971",
+      "html": "<p>Add the user to the board as a board admin and all the team members automatically become member of the created board in Board BC</p>",
+      "color": "violet",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2337.0348741242883,
+      "y": 1503.663541104238,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017972",
+      "html": "<p>NotifyBoard</p>",
+      "color": "light_blue",
+      "width": 212.31106995960366,
+      "height": 138.3054970022561,
+      "x": 2337.3443391444866,
+      "y": 1340.097518578152,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017973",
+      "html": "<p>1. The creator is the  board Admin</p><p>2. Add the remaining team members to the created board (team admin, company admin -&gt; board admin;</p><p>team member -&gt; board member)</p>",
+      "color": "gray",
+      "width": 244.85423108816022,
+      "height": 280.5365059703544,
+      "x": 1984.6718434176482,
+      "y": 752.6001533055417,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017974",
+      "html": "<p>board{<!-- --></p><p>BoardId boardId: not-nul,</p><p>BoardName boardName: not-nul</p><p>}</p>",
+      "color": "dark_green",
+      "width": 374.5,
+      "height": 243.96,
+      "x": 1259.5544325775022,
+      "y": 728.9691747190398,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017975",
+      "html": "<p>TeamId teamId:requireNonNull,</p><p>ProjectId projectId:requireNonNull,<br />BoardId boardId:requireNonNull,<br />String boardName:requireNonNull,<br />BoardTemplate boardTemplate:requireNonNull,<br />UUID id:requireNonNull,<br />Instant occurredOn:requireNonNull,<br />Map&lt;String, String&gt; metadata: default &#61; new HashMap&lt;&gt;()</p>",
+      "color": "light_green",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2124.104874124289,
+      "y": 1125.2114277383425,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017976",
+      "html": "<p>TeamId teamId:requireNonNull,<br />BoardId boardId:requireNonNull,</p><p>String userId: requireNonNull,<br />BoardRole role:requireNonNull,</p><p>UUID id:requireNonNull,<br />Instant occurredOn:requireNonNull,<br />Map&lt;String, String&gt; metadata: default &#61; new HashMap&lt;&gt;()</p>",
+      "color": "light_green",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2124.104874124288,
+      "y": 1429.2896279962476,
+      "tags": []
+    },
+    {
+      "id": "3458764656354017977",
+      "html": "<p>board{<!-- --></p><p>BoardId boardId: not-nul,</p><p>BoardName boardName: not-nul</p><p>}</p>",
+      "color": "dark_green",
+      "width": 374.5,
+      "height": 243.96,
+      "x": 1674.994727873568,
+      "y": 728.9691747190398,
+      "tags": []
+    },
+    {
+      "id": "3458764656491328861",
+      "html": "<p>method</p>",
+      "color": "pink",
+      "width": 212.9300000000004,
+      "height": 243.96000000000046,
+      "x": 1755.7797278735682,
+      "y": 1275.4110094657838,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089675",
+      "html": "<p>Board Created</p>",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1927.2971658562092,
+      "y": -239.26948606784345,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089676",
+      "html": "<p>Create Board</p>",
+      "color": "blue",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1620.560413810297,
+      "y": -239.26948606784345,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089677",
+      "html": "<p>teamId:String</p><p>projectId:String</p><p>userId:String</p><p>boardName:String</p><p>boardTemplate:String</p>",
+      "color": "green",
+      "width": 212.930000000004,
+      "height": 243.96000000000458,
+      "x": 1407.630413810295,
+      "y": -239.26948606784117,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089678",
+      "html": "<p>Notify board in Board BC to create itself</p>",
+      "color": "violet",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2321.2317275778178,
+      "y": -205.31481150176091,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089679",
+      "html": "<p>User</p>",
+      "color": "yellow",
+      "width": 139.64469452032583,
+      "height": 159.99492638509693,
+      "x": 1516.626779837665,
+      "y": -97.62108654665894,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089680",
+      "html": "<p>NotifyBoard</p>",
+      "color": "light_blue",
+      "width": 212.31106995960366,
+      "height": 138.3054970022561,
+      "x": 2321.541192598016,
+      "y": -349.50999352505755,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089681",
+      "html": "<p>Team</p>",
+      "color": "light_yellow",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1755.779727873568,
+      "y": -434.6295286104123,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089682",
+      "html": "<p>Board Member Joined</p>",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 1927.2971658562092,
+      "y": 64.80871419006189,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089683",
+      "html": "<p>Add the user to the board as a board admin and all the team members automatically become member of the created board in Board BC</p>",
+      "color": "violet",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2332.7592830211606,
+      "y": 139.182627298052,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089684",
+      "html": "<p>NotifyBoard</p>",
+      "color": "light_blue",
+      "width": 212.31106995960366,
+      "height": 138.3054970022561,
+      "x": 2333.068748041359,
+      "y": -24.383395228034033,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089685",
+      "html": "<p>1. The creator is the  board Admin</p><p>2. Add the remaining team members to the created board (team admin, company admin -&gt; board admin;</p><p>team member -&gt; board member)</p>",
+      "color": "gray",
+      "width": 244.85423108816022,
+      "height": 280.5365059703544,
+      "x": 1984.6718434176482,
+      "y": -611.8807605006443,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089686",
+      "html": "<p>board{<!-- --></p><p>BoardId boardId: not-nul,</p><p>BoardName boardName: not-nul</p><p>}</p>",
+      "color": "dark_green",
+      "width": 374.5,
+      "height": 243.96,
+      "x": 1269.8908602972117,
+      "y": -635.5117390871462,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089687",
+      "html": "<p>TeamId teamId:requireNonNull,</p><p>ProjectId projectId:requireNonNull,<br />BoardId boardId:requireNonNull,<br />String boardName:requireNonNull,<br />BoardTemplate boardTemplate:requireNonNull,<br />UUID id:requireNonNull,<br />Instant occurredOn:requireNonNull,<br />Map&lt;String, String&gt; metadata: default &#61; new HashMap&lt;&gt;()</p>",
+      "color": "light_green",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2119.829283021161,
+      "y": -239.26948606784345,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089688",
+      "html": "<p>TeamId teamId:requireNonNull,<br />BoardId boardId:requireNonNull,</p><p>String userId: requireNonNull,<br />BoardRole role:requireNonNull,</p><p>UUID id:requireNonNull,<br />Instant occurredOn:requireNonNull,<br />Map&lt;String, String&gt; metadata: default &#61; new HashMap&lt;&gt;()</p>",
+      "color": "light_green",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 2119.8292830211603,
+      "y": 64.80871419006189,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089689",
+      "html": "<p>Team{<!-- --></p><p>TeamId teamId : not-null</p><p>}</p>",
+      "color": "dark_green",
+      "width": 374.5,
+      "height": 243.96,
+      "x": 1674.994727873568,
+      "y": -635.5117390871462,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089690",
+      "html": "<p>Board Created</p>",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 3961.705534419643,
+      "y": -233.58110956848623,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089691",
+      "html": "<p>Create Board2</p>",
+      "color": "blue",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 3721.240444472221,
+      "y": -233.58110956848623,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089692",
+      "html": "<p>teamId:String</p><p>projectId:String</p><p>userId:String</p><p>boardName:String</p><p>boardTemplate:String</p>",
+      "color": "green",
+      "width": 212.930000000004,
+      "height": 243.96000000000458,
+      "x": 3508.310444472219,
+      "y": -233.58110956848395,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089693",
+      "html": "<p>Notify board in Board BC to create itself</p>",
+      "color": "violet",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 4355.64009614125,
+      "y": -199.62643500240347,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089694",
+      "html": "<p>User</p>",
+      "color": "yellow",
+      "width": 139.64469452032583,
+      "height": 159.99492638509693,
+      "x": 3617.3068104995887,
+      "y": -91.9327100473015,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089695",
+      "html": "<p>NotifyBoard</p>",
+      "color": "light_blue",
+      "width": 212.31106995960366,
+      "height": 138.3054970022561,
+      "x": 4355.949561161448,
+      "y": -343.8216170257001,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089696",
+      "html": "<p>Team1</p>",
+      "color": "light_yellow",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 3813.7038475042077,
+      "y": -426.803356559491,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089697",
+      "html": "<p>Board Member Joined</p>",
+      "color": "orange",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 3961.705534419643,
+      "y": 70.49709068941911,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089698",
+      "html": "<p>Add the user to the board as a board admin and all the team members automatically become member of the created board in Board BC</p>",
+      "color": "violet",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 4367.167651584593,
+      "y": 144.87100379740923,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089699",
+      "html": "<p>NotifyBoard</p>",
+      "color": "light_blue",
+      "width": 212.31106995960366,
+      "height": 138.3054970022561,
+      "x": 4367.477116604791,
+      "y": -18.695018728676814,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089700",
+      "html": "<p>1. The creator is the  board Admin</p><p>2. Add the remaining team members to the created board (team admin, company admin -&gt; board admin;</p><p>team member -&gt; board member)</p>",
+      "color": "gray",
+      "width": 244.85423108816022,
+      "height": 280.5365059703544,
+      "x": 4042.595963048288,
+      "y": -604.0545884497228,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089701",
+      "html": "<p>board{<!-- --></p><p>BoardId boardId: not-nul,</p><p>BoardName boardName: not-nul</p><p>}</p>",
+      "color": "dark_green",
+      "width": 374.5,
+      "height": 243.96,
+      "x": 3369.4483351521926,
+      "y": -627.6855670362247,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089702",
+      "html": "<p>TeamId teamId:requireNonNull,</p><p>ProjectId projectId:requireNonNull,<br />BoardId boardId:requireNonNull,<br />String boardName:requireNonNull,<br />BoardTemplate boardTemplate:requireNonNull,<br />UUID id:requireNonNull,<br />Instant occurredOn:requireNonNull,<br />Map&lt;String, String&gt; metadata: default &#61; new HashMap&lt;&gt;()</p>",
+      "color": "light_green",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 4154.2376515845945,
+      "y": -233.58110956848623,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089703",
+      "html": "<p>TeamId teamId:requireNonNull,<br />BoardId boardId:requireNonNull,</p><p>String userId: requireNonNull,<br />BoardRole role:requireNonNull,</p><p>UUID id:requireNonNull,<br />Instant occurredOn:requireNonNull,<br />Map&lt;String, String&gt; metadata: default &#61; new HashMap&lt;&gt;()</p>",
+      "color": "light_green",
+      "width": 212.93,
+      "height": 243.96,
+      "x": 4154.237651584593,
+      "y": 70.49709068941911,
+      "tags": []
+    },
+    {
+      "id": "3458764656497089704",
+      "html": "<p>board{<!-- --></p><p>BoardId boardId: not-nul,</p><p>BoardName boardName: not-nul</p><p>}</p>",
+      "color": "dark_green",
+      "width": 374.5,
+      "height": 243.96,
+      "x": 3732.918847504208,
+      "y": -627.6855670362247,
+      "tags": []
+    },
+    {
+      "id": "3458764656497375883",
+      "html": "<p>method</p>",
+      "color": "pink",
+      "width": 212.9300000000004,
+      "height": 243.96000000000046,
+      "x": 1782.9387408436248,
+      "y": -97.62108654665897,
+      "tags": []
+    },
+    {
+      "id": "3458764656497375902",
+      "html": "<p>method</p>",
+      "color": "pink",
+      "width": 212.9300000000004,
+      "height": 243.96000000000046,
+      "x": 3813.7038475042077,
+      "y": -91.93271004730155,
+      "tags": []
+    }
+  ],
+  "tags": []
+}

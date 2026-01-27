@@ -1,0 +1,157 @@
+{
+  "usecase": "Create Board3",
+  "input": [
+    {
+      "name": "teamId",
+      "type": "String"
+    },
+    {
+      "name": "projectId",
+      "type": "String"
+    },
+    {
+      "name": "userId",
+      "type": "String"
+    },
+    {
+      "name": "boardName",
+      "type": "String"
+    },
+    {
+      "name": "boardTemplate",
+      "type": "String"
+    }
+  ],
+  "aggregate": "Board",
+  "aggregateId": "BoardId",
+  "repository": "BoardRepository",
+  "output": "CqrsOutput with BoardId",
+  "actor": "User",
+  "domainEvents": [
+    {
+      "eventName": "Board Created",
+      "reactor": "NotifyBoard",
+      "policy": "Notify board in Board BC to create itself",
+      "attributes": [
+        {
+          "name": "teamId",
+          "type": "TeamId",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "projectId",
+          "type": "ProjectId",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "boardId",
+          "type": "BoardId",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "boardName",
+          "type": "String",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "boardTemplate",
+          "type": "BoardTemplate",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "id",
+          "type": "UUID",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "occurredOn",
+          "type": "Instant",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "String>",
+          "type": "Map&lt;String,",
+          "constraint": "default &#61; new HashMap&lt;>()<br />"
+        }
+      ]
+    },
+    {
+      "eventName": "Board Member Joined",
+      "reactor": "NotifyBoard",
+      "policy": "Add the user to the board as a board admin and all the team members automatically become member of the created board in Board BC",
+      "attributes": [
+        {
+          "name": "teamId",
+          "type": "TeamId",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "boardId",
+          "type": "BoardId",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "role",
+          "type": "BoardRole",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "id",
+          "type": "UUID",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "occurredOn",
+          "type": "Instant",
+          "constraint": "requireNonNull"
+        },
+        {
+          "name": "String>",
+          "type": "Map&lt;String,",
+          "constraint": "default &#61; new HashMap&lt;>()<br />"
+        }
+      ]
+    }
+  ],
+  "domainModelNotes": [
+    "1. The creator is the  board Admin\n2. Add the remaining team members to the created board (team admin, company admin -> board admin;\nteam member -> board member)\n"
+  ],
+  "aggregates": [
+    {
+      "name": "board",
+      "attributes": [
+        {
+          "name": "boardId",
+          "type": "BoardId",
+          "constraint": "not-nul"
+        },
+        {
+          "name": "boardName",
+          "type": "BoardName",
+          "constraint": "not-nul"
+        }
+      ]
+    },
+    {
+      "name": "board",
+      "attributes": [
+        {
+          "name": "boardId",
+          "type": "BoardId",
+          "constraint": "not-nul"
+        },
+        {
+          "name": "boardName",
+          "type": "BoardName",
+          "constraint": "not-nul"
+        }
+      ]
+    }
+  ],
+  "method": "Board method"
+}
