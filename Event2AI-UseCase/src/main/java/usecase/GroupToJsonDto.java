@@ -9,16 +9,17 @@ import java.util.List;
 
 public class GroupToJsonDto {
     private String usecase;
+    private String actor;
     private List<UsecaseInput> input;
     private String aggregate;
     private String aggregateId;
+    private String method;
+    private String domainEvent;
     private String repository;
     private String output;
-    private String actor;
+    private List<AggregateWithAttribute> aggregates;
     private List<DomainEvent> domainEvents;
     private List<String> domainModelNotes;
-    private List<AggregateWithAttribute> aggregates;
-    private String method;
 
     public GroupToJsonDto(Group group) {
         this.usecase = group.getUseCaseName();
