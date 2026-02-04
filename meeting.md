@@ -118,6 +118,17 @@
       - return List<List<Group>>
     - 
 
+## 2026.02.04(三)
+1. 執行 SortByAggregateIntegration.java 可以呈現以 Aggregate 分類資料夾
+2. Group 保留 method，若使用者沒有放置此張卡片，則 spec.json 中的 method 為空字串
+3. 把主函式整合成可以： => 決定用參數的方式決定
+    - 用參數決定
+    - 純執行不同類型的主函式
+4. 想要做一個網頁 => 再討論
+    - 這個網頁是一個類似 miro 的網頁
+    - 串聯他自己的 miro，並且可以匯入 miro 上的便利貼，在我們的網站小幅度修改
+5. 把 EventStorming 用完整 (有一整個大範例) => 用 EzKanban 當例子
+
 ## 天馬行空
 1. 可以一個自己的 miro
 2. 
