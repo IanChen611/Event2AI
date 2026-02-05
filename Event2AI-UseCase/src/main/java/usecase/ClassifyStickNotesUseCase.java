@@ -61,11 +61,11 @@ public class ClassifyStickNotesUseCase {
 
         // Process input
         StickyNote input_stickyNote = findByType("input", stickyNotes).get(0);
-        List<String> inputsWithType = Arrays.asList(input_stickyNote.getDescription().split("\\n"));
+        List<String> inputsWithType = Arrays.asList(input_stickyNote.getDescription().replace(",", "").split("\\n"));
         List<UsecaseInput> input = new ArrayList<>();
         for (String inputWithType : inputsWithType) {
-            List<String> nameAndType = Arrays.asList(inputWithType.split(":"));
-            UsecaseInput usecaseInput = new UsecaseInput(nameAndType.get(0), nameAndType.get(1));
+            List<String> nameAndType = Arrays.asList(inputWithType.split(" "));
+            UsecaseInput usecaseInput = new UsecaseInput(nameAndType.get(1), nameAndType.get(0));
             input.add(usecaseInput);
         }
         group.setInput(input);

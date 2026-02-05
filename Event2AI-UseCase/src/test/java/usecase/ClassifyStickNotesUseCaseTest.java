@@ -30,7 +30,7 @@ public class ClassifyStickNotesUseCaseTest {
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
-                "userId:String\nteamId:String",
+                "String userId,\nString teamId",
                 new Point2D.Double(-110, 0),
                 new Point2D.Double(100, 100),
                 "green");
@@ -128,14 +128,13 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(320.0, group.getEventStormingGeo().getY(), 0.01);
 
         // input => stickyNote_2
-        List<String> inputsWithType = Arrays.asList(stickyNote_2.getDescription().split("\\n"));
-        List<UsecaseInput> usecaseInputs = new ArrayList<>();
-        for (String inputWithType : inputsWithType) {
-            List<String> nameAndType = Arrays.asList(inputWithType.split(":"));
-            UsecaseInput usecaseInput = new UsecaseInput(nameAndType.get(0), nameAndType.get(1));
-            usecaseInputs.add(usecaseInput);
-        }
-        assertTrue(isInputSame(usecaseInputs, group.getInput()));
+        assertTrue(isInputSame(
+                Arrays.asList(
+                        new UsecaseInput("userId", "String"),
+                        new UsecaseInput("teamId", "String")
+                ),
+                group.getInput()
+        ));
 
         // aggregate name => stickyNote_1
         assertEquals(stickyNote_1.getDescription(), group.getAggregateName());
@@ -174,7 +173,7 @@ public class ClassifyStickNotesUseCaseTest {
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
-                "userId:String\nteamId:String",
+                "String userId,\nString teamId",
                 new Point2D.Double(-110, 0),
                 new Point2D.Double(100, 100),
                 "green");
@@ -333,7 +332,7 @@ public class ClassifyStickNotesUseCaseTest {
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
-                "userId:String\nteamId:String",
+                "String userId,\nString teamId",
                 new Point2D.Double(-110, 0),
                 new Point2D.Double(100, 100),
                 "green");
@@ -513,7 +512,7 @@ public class ClassifyStickNotesUseCaseTest {
 
         StickyNote stickyNote_2 = new StickyNote(
                 "001B",
-                "userId:String\nteamId:String",
+                "String userId,\nString teamId",
                 new Point2D.Double(-110, 0),
                 new Point2D.Double(100, 100),
                 "green");
@@ -677,13 +676,13 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(720.0, group.getEventStormingGeo().getY(), 0.01);
 
         // input => stickyNote_2
-        String[] inputLines = stickyNote_2.getDescription().split("\\n");
-        assertEquals(inputLines.length, group.getInput().size());
-        for (int i = 0; i < inputLines.length; i++) {
-            String[] nameAndType = inputLines[i].split(":");
-            assertEquals(nameAndType[0], group.getInput().get(i).getName());
-            assertEquals(nameAndType[1], group.getInput().get(i).getType());
-        }
+        assertTrue(isInputSame(
+                Arrays.asList(
+                        new UsecaseInput("userId", "String"),
+                        new UsecaseInput("teamId", "String")
+                ),
+                group.getInput()
+        ));
 
         // aggregate name => stickyNote_1
         assertEquals(stickyNote_1.getDescription(), group.getAggregateName());
@@ -768,6 +767,14 @@ public class ClassifyStickNotesUseCaseTest {
     }
 
     private boolean isInputSame(List<UsecaseInput> expected, List<UsecaseInput> actual) {
+//        for (UsecaseInput expectedInput : expected) {
+//            System.out.println("In expected, expectedInput.getName =  " + expectedInput.getName());
+//            System.out.println("In expected, expectedInput.getType =  " + expectedInput.getType());
+//        }
+//        for (UsecaseInput actualInput : actual) {
+//            System.out.println("In expected, actualInput.getName =  " + actualInput.getName());
+//            System.out.println("In expected, actualInput.getType =  " + actualInput.getType());
+//        }
         if(expected.size() != actual.size()) return false;
         for(int i = 0; i < expected.size(); i++) {
             if(!expected.get(i).getName().equals(actual.get(i).getName()) ||
