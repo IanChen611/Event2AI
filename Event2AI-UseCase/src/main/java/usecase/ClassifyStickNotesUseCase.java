@@ -76,7 +76,7 @@ public class ClassifyStickNotesUseCase {
 
         // Process actor's name
         StickyNote userName_stickyNote = findByType("user_name", stickyNotes).get(0);
-        group.setUserName(userName_stickyNote.getDescription().replace("\n", ""));
+        group.setActor(userName_stickyNote.getDescription().replace("\n", ""));
 
         // Process comments
         List<StickyNote> comment_stickyNotes = findByType("comment", stickyNotes);

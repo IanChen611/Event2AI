@@ -140,7 +140,7 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(stickyNote_1.getDescription(), group.getAggregateName());
 
         // user name => stickyNote_3
-        assertEquals(stickyNote_3.getDescription(), group.getUserName());
+        assertEquals(stickyNote_3.getDescription(), group.getActor());
 
         // comment => stickyNote_8
         assertEquals(stickyNote_8.getDescription(), group.getComment().get(0));
@@ -297,7 +297,7 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(stickyNote_1.getDescription(), group.getAggregateName());
 
         // user name => stickyNote_3
-        assertEquals(stickyNote_3.getDescription(), group.getUserName());
+        assertEquals(stickyNote_3.getDescription(), group.getActor());
 
         // comment => stickyNote_8, stickyNote_9, stickyNote_10
         assertEquals(3, group.getComment().size());
@@ -473,7 +473,7 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(stickyNote_1.getDescription(), group.getAggregateName());
 
         // user name => stickyNote_3
-        assertEquals(stickyNote_3.getDescription(), group.getUserName());
+        assertEquals(stickyNote_3.getDescription(), group.getActor());
 
         // comment => stickyNote_8
         assertEquals(stickyNote_8.getDescription(), group.getComment().get(0));
@@ -688,7 +688,7 @@ public class ClassifyStickNotesUseCaseTest {
         assertEquals(stickyNote_1.getDescription(), group.getAggregateName());
 
         // user name => stickyNote_3
-        assertEquals(stickyNote_3.getDescription(), group.getUserName());
+        assertEquals(stickyNote_3.getDescription(), group.getActor());
 
         // comment => stickyNote_8
         assertEquals(stickyNote_8.getDescription(), group.getComment().get(0));

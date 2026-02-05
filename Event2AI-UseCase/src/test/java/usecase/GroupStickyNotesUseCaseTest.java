@@ -2,12 +2,9 @@ package usecase;
 
 import common.TestTool;
 import entity.Group;
-import entity.StickyNote;
 import org.junit.jupiter.api.Test;
 import valueobject.DomainEvent;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -272,7 +269,7 @@ public class GroupStickyNotesUseCaseTest {
         if (!Objects.equals(expectedGroup.getAggregateName(), actualGroup.getAggregateName())) {
             return false;
         }
-        if (!Objects.equals(expectedGroup.getUserName(), actualGroup.getUserName())) {
+        if (!Objects.equals(expectedGroup.getActor(), actualGroup.getActor())) {
             return false;
         }
         if (!TestTool.checkListOfObject(expectedGroup.getComment(), actualGroup.getComment())) {
