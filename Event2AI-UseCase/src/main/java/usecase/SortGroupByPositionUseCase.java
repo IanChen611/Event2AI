@@ -5,12 +5,14 @@ import entity.Group;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SortGroupByPositionUseCase {
+    private List<List<Group>> sortedGroups;
 
-    SortGroupByPositionUseCase() {}
+    public SortGroupByPositionUseCase() {}
 
-    public List<List<Group>> sortGroupByPosition(List<Group> groups) {
+    public List<List<Group>> sort(List<Group> groups) {
         // compute threshold
         double thresholdX = groups.stream()
                 .map(Group::getEventStormingGeo)
@@ -21,14 +23,14 @@ public class SortGroupByPositionUseCase {
         double multiple = 0.5;
         double distanceThreshold = multiple * thresholdX;
 
-        List<List<Group>> result = new ArrayList<>();
+        sortedGroups = new ArrayList<>();
 
         for (Group group : groups) {
             Point2D currentPos = group.getUseCasePos();
             boolean addedToExistingGroup = false;
 
             // Check if you can join an existing group.
-            for (List<Group> existingGroup : result) {
+            for (List<Group> existingGroup : sortedGroups) {
                 // Use the position of the first group in the group as the representative.
                 Point2D groupPos = existingGroup.get(0).getUseCasePos();
                 double distance = currentPos.distance(groupPos);
@@ -44,10 +46,14 @@ public class SortGroupByPositionUseCase {
             if (!addedToExistingGroup) {
                 List<Group> newGroup = new ArrayList<>();
                 newGroup.add(group);
-                result.add(newGroup);
+                sortedGroups.add(newGroup);
             }
         }
 
-        return result;
+        return sortedGroups;
+    }
+
+    public List<List<Group>> getSortedGroups() {
+        return sortedGroups;
     }
 }
