@@ -4,6 +4,7 @@ import entity.Group;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,9 @@ public class SortGroupByPositionUseCase {
     public SortGroupByPositionUseCase() {}
 
     public List<List<Group>> sort(List<Group> groups) {
+        // First sort groups by Pos.X
+        groups.sort(Comparator.comparingDouble(g -> g.getUseCasePos().getX()));
+
         // compute threshold
         double thresholdX = groups.stream()
                 .map(Group::getEventStormingGeo)
@@ -33,7 +37,7 @@ public class SortGroupByPositionUseCase {
             for (List<Group> existingGroup : sortedGroups) {
                 // Use the position of the first group in the group as the representative.
                 Point2D groupPos = existingGroup.get(0).getUseCasePos();
-                double distance = currentPos.distance(groupPos);
+                double distance = Math.abs(groupPos.getX() - currentPos.getX());
 
                 if (distance < distanceThreshold) {
                     existingGroup.add(group);
@@ -48,6 +52,12 @@ public class SortGroupByPositionUseCase {
                 newGroup.add(group);
                 sortedGroups.add(newGroup);
             }
+        }
+
+        // Sort within each List<Group> by Y coordinate (ascending)
+        // 在每組內部按照 Y 座標排序（由小到大）
+        for (List<Group> groupList : sortedGroups) {
+            groupList.sort(Comparator.comparingDouble(g -> g.getUseCasePos().getY()));
         }
 
         return sortedGroups;

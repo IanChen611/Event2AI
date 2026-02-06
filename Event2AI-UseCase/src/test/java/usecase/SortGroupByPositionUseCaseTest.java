@@ -15,8 +15,8 @@ public class SortGroupByPositionUseCaseTest {
     public void groups_with_close_usecase_pos_should_be_in_same_group() {
         // Arrange: 3 groups with close useCasePos, should be grouped together
         Group group1 = createGroup("001", new Point2D.Double(0, 0), new Point2D.Double(100, 100));
-        Group group2 = createGroup("002", new Point2D.Double(10, 10), new Point2D.Double(100, 100));
-        Group group3 = createGroup("003", new Point2D.Double(20, 20), new Point2D.Double(100, 100));
+        Group group2 = createGroup("002", new Point2D.Double(10, 110), new Point2D.Double(100, 100));
+        Group group3 = createGroup("003", new Point2D.Double(-10, 220), new Point2D.Double(100, 100));
 
         List<Group> groups = new ArrayList<>();
         groups.add(group1);
@@ -30,6 +30,12 @@ public class SortGroupByPositionUseCaseTest {
         // Assert: all groups should be in one group (distance < 0.5 * 100 = 50)
         assertEquals(1, result.size());
         assertEquals(3, result.get(0).size());
+
+        // They have to be sorted by Pos.Y ascending
+        assertEquals("001", result.get(0).get(0).getGroupId());
+        assertEquals("002", result.get(0).get(1).getGroupId());
+        assertEquals("003", result.get(0).get(2).getGroupId());
+
     }
 
     @Test
@@ -50,15 +56,20 @@ public class SortGroupByPositionUseCaseTest {
 
         // Assert: each group should be in its own group (distance > 0.5 * 100 = 50)
         assertEquals(3, result.size());
+
+        // They have to be sorted by Pos.Y ascending
+        assertEquals("001", result.get(0).get(0).getGroupId());
+        assertEquals("002", result.get(1).get(0).getGroupId());
+        assertEquals("003", result.get(2).get(0).getGroupId());
     }
 
     @Test
     public void groups_with_mixed_distances_should_be_grouped_correctly() {
         // Arrange: 4 groups, 2 close pairs
         Group group1 = createGroup("001", new Point2D.Double(0, 0), new Point2D.Double(200, 100));
-        Group group2 = createGroup("002", new Point2D.Double(10, 10), new Point2D.Double(200, 100));
-        Group group3 = createGroup("003", new Point2D.Double(500, 500), new Point2D.Double(200, 100));
-        Group group4 = createGroup("004", new Point2D.Double(510, 510), new Point2D.Double(200, 100));
+        Group group2 = createGroup("002", new Point2D.Double(50, 120), new Point2D.Double(200, 100));
+        Group group3 = createGroup("003", new Point2D.Double(300, 0), new Point2D.Double(200, 100));
+        Group group4 = createGroup("004", new Point2D.Double(320, 120), new Point2D.Double(200, 100));
 
         List<Group> groups = new ArrayList<>();
         groups.add(group1);
@@ -75,6 +86,12 @@ public class SortGroupByPositionUseCaseTest {
         assertEquals(2, result.size());
         assertEquals(2, result.get(0).size());
         assertEquals(2, result.get(1).size());
+
+        // They have to be sorted by Pos.Y ascending
+        assertEquals("001", result.get(0).get(0).getGroupId());
+        assertEquals("002", result.get(0).get(1).getGroupId());
+        assertEquals("003", result.get(1).get(0).getGroupId());
+        assertEquals("004", result.get(1).get(1).getGroupId());
     }
 
     @Test
@@ -92,6 +109,7 @@ public class SortGroupByPositionUseCaseTest {
         // Assert
         assertEquals(1, result.size());
         assertEquals(1, result.get(0).size());
+        assertEquals("001", result.get(0).get(0).getGroupId());
     }
 
     @Test
