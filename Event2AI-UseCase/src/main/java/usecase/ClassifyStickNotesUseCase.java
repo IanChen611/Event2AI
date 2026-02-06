@@ -96,8 +96,14 @@ public class ClassifyStickNotesUseCase {
         group.setAggregateWithAttributes(aggregateWithAttributes);
 
         // Process "method"
-        StickyNote method_stickyNote = findByType("method", stickyNotes).get(0);
-        group.setMethod(aggregateName_stickyNote.getDescription().replace("\n", "") + " " + method_stickyNote.getDescription().replace("\n", ""));
+        if (findByType("method", stickyNotes).get(0) != null) {
+            StickyNote method_stickyNote = findByType("method", stickyNotes).get(0);
+            group.setMethod(aggregateName_stickyNote.getDescription().replace("\n", "") + " " + method_stickyNote.getDescription().replace("\n", ""));
+        }
+        else {
+            group.setMethod("");
+        }
+
 
         return group;
     }
