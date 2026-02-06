@@ -75,8 +75,8 @@ public class ClassifyStickNotesUseCase {
         group.setAggregateName(aggregateName_stickyNote.getDescription().replace("\n", ""));
 
         // Process actor's name
-        StickyNote userName_stickyNote = findByType("user_name", stickyNotes).get(0);
-        group.setActor(userName_stickyNote.getDescription().replace("\n", ""));
+        List<StickyNote> userName_stickyNotes = findByType("actor_name", stickyNotes);
+        group.setActor(replaceActorNames(userName_stickyNotes));
 
         // Process comments
         List<StickyNote> comment_stickyNotes = findByType("comment", stickyNotes);
@@ -96,7 +96,7 @@ public class ClassifyStickNotesUseCase {
         group.setAggregateWithAttributes(aggregateWithAttributes);
 
         // Process "method"
-        if (findByType("method", stickyNotes).get(0) != null) {
+        if (!findByType("method", stickyNotes).isEmpty()) {
             StickyNote method_stickyNote = findByType("method", stickyNotes).get(0);
             group.setMethod(aggregateName_stickyNote.getDescription().replace("\n", "") + " " + method_stickyNote.getDescription().replace("\n", ""));
         }
@@ -135,11 +135,11 @@ public class ClassifyStickNotesUseCase {
                     }
                 }
                 break;
-            case "user_name":
+            case "actor_name":
                 for (StickyNote stickyNote : stickyNotes) {
                     if (stickyNote.getColor().equals("yellow")) {
                         result.add(stickyNote);
-                        break;
+//                        break;
                     }
                 }
                 break;
@@ -342,6 +342,14 @@ public class ClassifyStickNotesUseCase {
             result.add(new Attribute(name, type, constraint));
         }
         return result;
+    }
+
+    private List<String> replaceActorNames(List<StickyNote> stickyNotes) {
+        List<String> result = new ArrayList<>();
+        for (StickyNote stickyNote : stickyNotes) {
+            result.add(stickyNote.getDescription().replace("\n", ""));
+        }
+        return  result;
     }
 
     public List<List<StickyNote>> getClusteredStickyNotes() {

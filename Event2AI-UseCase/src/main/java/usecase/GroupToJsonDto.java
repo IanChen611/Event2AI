@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GroupToJsonDto {
     private String usecase;
-    private String actor;
+    private List<String> actor;
     private List<UsecaseInput> input;
     private String aggregate;
     private String aggregateId;

@@ -13,7 +13,7 @@ public class Group {
     private String useCaseName;
     private List<UsecaseInput> input;
     private String aggregateName;
-    private String actor;
+    private List<String> actor;
     private List<String> comment;
     private List<DomainEvent> domainEvents;
     private List<AggregateWithAttribute>  aggregateWithAttributes;
@@ -41,7 +41,7 @@ public class Group {
         return aggregateName;
     }
 
-    public String getActor() {
+    public List<String> getActor() {
         return actor;
     }
 
@@ -79,7 +79,7 @@ public class Group {
         this.aggregateName = aggregateName;
     }
 
-    public void setActor(String actor) {
+    public void setActor(List<String> actor) {
         this.actor = actor;
     }
 
