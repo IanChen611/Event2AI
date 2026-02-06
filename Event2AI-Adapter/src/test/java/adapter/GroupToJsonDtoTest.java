@@ -11,7 +11,7 @@ public class GroupToJsonDtoTest {
     @Test
     public void group_can_be_put_into_GroupToJsonDto() {
         StickyNoteProcessor stickyNoteProcessor = new StickyNoteProcessor();
-        stickyNoteProcessor.process("./src/test/example3.json");
+        stickyNoteProcessor.normalProcess("./src/test/example3.json");
         List<GroupToJsonDto> groupDtos = stickyNoteProcessor.getGroupToJsonDtos();
         for (GroupToJsonDto groupDto : groupDtos) {
             assertNotNull(groupDto);

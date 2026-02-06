@@ -25,7 +25,7 @@ public class SortGroupByPositionUseCaseTest {
 
         // Act
         SortGroupByPositionUseCase useCase = new SortGroupByPositionUseCase();
-        List<List<Group>> result = useCase.sortGroupByPosition(groups);
+        List<List<Group>> result = useCase.sort(groups);
 
         // Assert: all groups should be in one group (distance < 0.5 * 100 = 50)
         assertEquals(1, result.size());
@@ -46,7 +46,7 @@ public class SortGroupByPositionUseCaseTest {
 
         // Act
         SortGroupByPositionUseCase useCase = new SortGroupByPositionUseCase();
-        List<List<Group>> result = useCase.sortGroupByPosition(groups);
+        List<List<Group>> result = useCase.sort(groups);
 
         // Assert: each group should be in its own group (distance > 0.5 * 100 = 50)
         assertEquals(3, result.size());
@@ -68,7 +68,7 @@ public class SortGroupByPositionUseCaseTest {
 
         // Act
         SortGroupByPositionUseCase useCase = new SortGroupByPositionUseCase();
-        List<List<Group>> result = useCase.sortGroupByPosition(groups);
+        List<List<Group>> result = useCase.sort(groups);
 
         // Assert: should have 2 groups, each with 2 members
         // threshold = 0.5 * 200 = 100, distance between close pairs < 100
@@ -87,7 +87,7 @@ public class SortGroupByPositionUseCaseTest {
 
         // Act
         SortGroupByPositionUseCase useCase = new SortGroupByPositionUseCase();
-        List<List<Group>> result = useCase.sortGroupByPosition(groups);
+        List<List<Group>> result = useCase.sort(groups);
 
         // Assert
         assertEquals(1, result.size());
@@ -101,7 +101,7 @@ public class SortGroupByPositionUseCaseTest {
 
         // Act
         SortGroupByPositionUseCase useCase = new SortGroupByPositionUseCase();
-        List<List<Group>> result = useCase.sortGroupByPosition(groups);
+        List<List<Group>> result = useCase.sort(groups);
 
         // Assert
         assertEquals(0, result.size());

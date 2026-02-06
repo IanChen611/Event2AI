@@ -33,7 +33,7 @@ public class JsonFileCreatorTest {
     @Test
     public void create_file_by_GroupToJsonDto() {
         StickyNoteProcessor stickyNoteProcessor = new StickyNoteProcessor();
-        stickyNoteProcessor.process("./src/test/example3.json");
+        stickyNoteProcessor.normalProcess("./src/test/example3.json");
         List<GroupToJsonDto> groupDtos = stickyNoteProcessor.getGroupToJsonDtos();
         for (GroupToJsonDto groupDto : groupDtos) {
             jsonFileCreator.create("./src/test/" + groupDto.getUsecaseName().replace(" ", "_").trim() + ".json", groupDto);
