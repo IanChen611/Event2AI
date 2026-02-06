@@ -61,11 +61,11 @@ public class ClassifyStickNotesUseCase {
 
         // Process input
         StickyNote input_stickyNote = findByType("input", stickyNotes).get(0);
-        List<String> inputsWithType = Arrays.asList(input_stickyNote.getDescription().split("\\n"));
+        List<String> inputsWithType = Arrays.asList(input_stickyNote.getDescription().replace(",", "").split("\\n"));
         List<UsecaseInput> input = new ArrayList<>();
         for (String inputWithType : inputsWithType) {
-            List<String> nameAndType = Arrays.asList(inputWithType.split(":"));
-            UsecaseInput usecaseInput = new UsecaseInput(nameAndType.get(0), nameAndType.get(1));
+            List<String> nameAndType = Arrays.asList(inputWithType.split(" "));
+            UsecaseInput usecaseInput = new UsecaseInput(nameAndType.get(1), nameAndType.get(0));
             input.add(usecaseInput);
         }
         group.setInput(input);
@@ -76,7 +76,7 @@ public class ClassifyStickNotesUseCase {
 
         // Process actor's name
         StickyNote userName_stickyNote = findByType("user_name", stickyNotes).get(0);
-        group.setUserName(userName_stickyNote.getDescription().replace("\n", ""));
+        group.setActor(userName_stickyNote.getDescription().replace("\n", ""));
 
         // Process comments
         List<StickyNote> comment_stickyNotes = findByType("comment", stickyNotes);

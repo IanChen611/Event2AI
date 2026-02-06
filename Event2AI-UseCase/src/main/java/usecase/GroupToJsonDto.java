@@ -29,7 +29,7 @@ public class GroupToJsonDto {
         this.method = group.getMethod();
         this.repository = this.aggregate + "Repository";
         this.output = "CqrsOutput with " + this.aggregateId;
-        this.actor = group.getUserName();
+        this.actor = group.getActor();
         this.domainEvents = group.getPublishEvents();
         this.domainModelNotes = group.getComment();
         this.aggregates = group.getAggregateWithAttributes();
