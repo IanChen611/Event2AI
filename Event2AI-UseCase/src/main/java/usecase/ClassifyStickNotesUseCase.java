@@ -320,7 +320,7 @@ public class ClassifyStickNotesUseCase {
 
     private List<Attribute> StickyNoteToAttribute(StickyNote attribute) {
         List<Attribute> result = new ArrayList<>();
-        String description = attribute.getDescription().replace("<!-- -->", "");
+        String description = attribute.getDescription().replace("<!-- -->", "").replace("\u00A0", " ");
 
         String[] lines = description.replace("\n", "<br />").split(",<br />");
 
@@ -333,7 +333,10 @@ public class ClassifyStickNotesUseCase {
             // type1 name1: constrain1
             String[] typeWithVarNameAndConstraint = line.split(":");
             String typeWithVarName = typeWithVarNameAndConstraint[0].trim();     // type1 name1
-            String constraint = typeWithVarNameAndConstraint[1].trim();
+            String constraint = typeWithVarNameAndConstraint.length > 1
+                    ? typeWithVarNameAndConstraint[1].trim()
+                    : "";
+
 
             String[] typeName = typeWithVarName.split("\\s+");
             String type = typeName[0];
